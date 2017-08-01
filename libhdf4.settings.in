@@ -1,0 +1,20 @@
+	    SUMMARY OF THE HDF4 CONFIGURATION
+	    =================================
+
+General Information:
+-------------------
+		   HDF4 Version: @H4_VERSION@
+		  Configured on: @CONFIG_DATE@
+		    Host system: @host_cpu@-@host_vendor@-@host_os@
+              Uname information: @UNAME_INFO@
+	     Installation point: @prefix@
+
+Compiling Options:
+------------------
+                     C compiler: @CC_VERSION@
+                         CFLAGS: @CFLAGS@
+                       CPPFLAGS: @CPPFLAGS@
+               Shared Libraries: @enable_shared@
+               Static Libraries: @enable_static@
+                        LDFLAGS: @LDFLAGS@
+
