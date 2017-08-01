@@ -1,4 +1,4 @@
-export LDFLAGS="-L/usr/local/lib -lz -ljpeg"
+export LDFLAGS="-L/usr/lib -lz -ljpeg"
 export CFLAGS="-g -O0"
 ./configure --prefix=/usr/local --disable-static --enable-shared
 
