@@ -1,0 +1,6 @@
+add_subdirectory(xdr)
+add_subdirectory(libsrc)
+add_subdirectory(dumper)
+add_subdirectory(hdfimport)
+add_subdirectory(hdiff)
+add_subdirectory(hrepack)

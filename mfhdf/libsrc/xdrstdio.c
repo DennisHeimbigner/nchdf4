@@ -246,13 +246,13 @@ xdrNCstdio_setpos(xdrs, pos)
 
 /********/
 
+#ifdef HAVE_UNISTD_H
 #include <unistd.h> /* access(), F_OK */
+#endif
+
 #ifndef F_OK
 #define F_OK    0
 #endif
-
-#include "netcdf.h" /* NC_ */
-#include "local_nc.h" /* prototypes for NCadvis, nc_error */
 
 #ifndef USE_BFLAG 	/* Doesn't Understand the "b" (binary flag to fopen) */
 #define CREAT_FOPENFLAGS "w+"

@@ -123,7 +123,9 @@ Please check your Makefile.
 #endif
 #define GOT_MACHINE
 
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>                 /* for some file I/O stuff */
+#endif
 #include <sys/time.h>
 #include <sys/file.h>               /* for unbuffered i/o stuff */
 #include <sys/stat.h>
@@ -190,7 +192,9 @@ Please check your Makefile.
 #ifndef __GNUC__
 #include <memory.h>
 #endif /* __GNUC__ */
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif
 #include <sys/file.h>               /* for unbuffered i/o stuff */
 #include <sys/stat.h>
 #define DF_MT             DFMT_SUN

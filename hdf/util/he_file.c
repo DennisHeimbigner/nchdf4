@@ -20,7 +20,7 @@
 #if defined SUN | defined HP9000 | defined IRIX | defined UNIX386
 #include <sys/wait.h>
 #endif /* SUN | HP9000 */
-#if defined _POSIX_SOURCE | defined IRIX
+#if HAVE_UNISTD_H
 #include <unistd.h>
 #endif
 

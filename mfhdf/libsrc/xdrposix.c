@@ -26,16 +26,20 @@
 typedef NETLONG     netlong;
 #undef  NETLONG
 
-#   if defined __MINGW32__
-#       include <stdint.h>
-#   endif
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
 
-#   if defined MSDOS || defined WINNT || defined _WIN32 || defined __MINGW32__
-#       include <io.h>
-#   else
-#       include <unistd.h>
-#   endif
-#   include <fcntl.h>
+#ifdef HAVE_STDINT_H
+#include <stdint.h>
+#endif
+
+#ifdef HAVE_FCNTL_H
+#include <fcntl.h>
+#endif
+
+#ifdef _MSC_VER
+#include <io.h>
 
 #include <sys/types.h>
 
@@ -43,7 +47,6 @@ typedef NETLONG     netlong;
 #include "local_nc.h" /* prototypes for NCadvis, nc_error */
 		      /* also obtains <stdio.h>, <rpc/types.h>, &
 		       * <rpc/xdr.h> */
-/*EIP #include "netcdf.h" */ 
 #include "mfhdf.h"
 
 #if !(defined DOS_FS) 

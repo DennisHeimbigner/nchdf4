@@ -26,4 +26,9 @@ LDADD = $(LIBMFHDF) $(LIBHDF) @LIBS@
 
 bin_PROGRAMS = hdfimport
 
+hdfimport_SOURCES = hdfimport.c crtSDSfloats.c gen_sds_floats.c
+
+hdfimport_LDADD = $(LIBMFHDF) $(LIBHDF) @LIBS@
+hdfimport_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF)
+
 include $(top_srcdir)/config/conclude.am
