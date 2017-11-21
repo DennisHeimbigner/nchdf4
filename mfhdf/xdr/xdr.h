@@ -247,8 +247,6 @@ XDRLIBAPI bool_t xdrrec_eof();		/* true if no more input */
 }
 #endif
 
-#ifdef HDF
 #include "hdf.h"
-#endif /* HDF */
 
 #endif /* !__XDR_HEADER__ */

@@ -167,7 +167,7 @@ typedef int               hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 #define HAVE_STDC
@@ -222,7 +222,7 @@ typedef int               hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -283,7 +283,7 @@ typedef int               hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -347,7 +347,7 @@ typedef int               hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -408,17 +408,11 @@ typedef long               hdf_pint_t;   /* an integer the same size as a pointe
 #define FNAME_POST_UNDERSCORE
 #define _fcdtocp(desc) (desc)
 #define FILELIB UNIXBUFIO
-/*
-#ifdef IRIX64
-#define BIG_LONGS
-#endif
-*/
-
 
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -483,7 +477,7 @@ typedef int               hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 #define RIGHT_SHIFT_IS_UNSIGNED
@@ -545,7 +539,7 @@ typedef long            hdf_pint_t;   /* an integer the same size as a pointer *
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -556,62 +550,40 @@ typedef long            hdf_pint_t;   /* an integer the same size as a pointer *
 /* Metrowerks Mac compiler defines some PC stuff so need to exclude this on the Mac */
 #if !(defined (__APPLE__))
 
-#if defined _M_ALPHA || defined _M_X64 || defined _M_IA64 || defined _M_IX86 || defined INTEL86 || defined M_I86 || defined M_I386 || defined DOS386 || defined __i386 || defined UNIX386 || defined i386
-#ifndef INTEL86
-#define INTEL86
-#endif /* INTEL86 */
-
-#if !defined UNIX386 && (defined unix || defined __unix)
-#define UNIX386
-#endif /* UNIX386 */
-
-#if !defined DOS386 && defined M_I386
-#define DOS386
-#endif /* M_I386 && !DOS386 */
-
-#if defined _WINDOWS || defined _WIN32
-#define WIN386
-#endif  /* _WINDOWS | _WIN32 */
-
-#if defined WIN386 || defined DOS386 || defined UNIX386
-#define INTEL386
-#endif /* WIN386 | DOS386 | UNIX386 */
-
-#ifdef GOT_MACHINE
-If you get an error on this line more than one machine type has been defined.
-Please check your Makefile.
+#if defined _M_ALPHA || defined _M_X64 || defined _M_IA64 || defined _M_IX86 || defined INTEL86 || defined M_I86 || defined M_I386 || defined __i386 || defined UNIX386 || defined i386
 #endif
-#define GOT_MACHINE 1
 
-#if defined _WINDOWS || defined _WIN32
+#ifdef _MSC_VER
 #pragma comment( lib, "oldnames" )
 #endif
 
-#include <fcntl.h>
-#ifdef UNIX386
-#include <sys/types.h>      /* for unbuffered file I/O */
-#include <sys/stat.h>
-#include <unistd.h>
-#else /* !UNIX386 */
-#include <sys\types.h>      /* for unbuffered file I/O */
-#include <sys\stat.h>
-#include <io.h>
+#ifdef HAVE_CONIO_H
 #include <conio.h>          /* for debugging getch() calls */
-#include <malloc.h>
-#endif /* UNIX386 */
-#include <ctype.h>          /* for character macros */
-#ifdef __WATCOMC__
-#include <stddef.h>         /* for the 'fortran' pragma */
 #endif
+#include <malloc.h>
+#include <ctype.h>          /* for character macros */
+#include <stddef.h>         /* for the 'fortran' pragma */
 
+#ifdef HAVE_FCNTL_H
+#include <fcntl.h>
+#endif
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>      /* for unbuffered file I/O */
+#endif
+#ifdef HAVE_SYS_STAT_H
+#include <sys/stat.h>
+#endif
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+#ifdef HAVE_IO_H
+#include <io.h>
+#eendif
 
-#if defined WIN386
-#ifndef GMEM_MOVEABLE       /* check if windows header is already included */
+#ifdef _MSC_VER
 #include <windows.h>        /* include the windows headers */
 #include <winnt.h>
-#define HAVE_BOOLEAN
-#endif /* GMEM_MOVEABLE */
-#endif /* WIN386 */
+#endif /* _MSC_VER */
 
 #define DF_MT             DFMT_PC
 
@@ -650,8 +622,6 @@ typedef int               hdf_pint_t;   /* 4-byte pointer */
 #else
 #define FNAME_POST_UNDERSCORE
 #endif
-#elif defined INTEL386
-#define DF_CAPFNAMES
 #endif
 #define _fcdtocp(desc) (desc)
 
@@ -660,7 +630,7 @@ typedef int               hdf_pint_t;   /* 4-byte pointer */
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 #define HAVE_STDC
@@ -713,7 +683,7 @@ typedef int               hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -765,7 +735,7 @@ typedef int               hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -813,7 +783,7 @@ typedef long              hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -865,7 +835,7 @@ typedef int               hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -913,7 +883,7 @@ typedef int               hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -959,7 +929,7 @@ typedef long              hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -1006,7 +976,7 @@ typedef long              hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -1055,7 +1025,7 @@ typedef long              hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -1104,7 +1074,7 @@ typedef long              hdf_pint_t;   /* an integer the same size as a pointer
 /* JPEG #define's - Look in the JPEG docs before changing - (Q) */
 
 /* Determine the memory manager we are going to use. Valid values are: */
-/*  MEM_DOS, MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
+/*  MEM_ANSI, MEM_NAME, MEM_NOBS.  See the JPEG docs for details on */
 /*  what each does */
 #define JMEMSYS         MEM_ANSI
 
@@ -1120,6 +1090,8 @@ No machine type has been defined.  Your Makefile needs to have someing like
 -DSUN or -DUNICOS in order for the HDF internal structures to be defined
 correctly.
 #endif
+
+
 
 /*-----------------------------------------------------*/
 /*              encode and decode macros               */

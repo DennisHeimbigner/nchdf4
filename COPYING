@@ -54,4 +54,14 @@ and Digital Equipment Corporation (DEC).
 
 ---------------------------------------------------------------------------
 
+This code distribution is derived from HDF4 version 4.2.13.
+It was developed by Dennis Heimbigner while employed by the
+University Corporation for Atmospheric Research (UCAR), Unidata division.
+
+Date of first change: 8/1/2017.
+
+See https://github.com/DennisHeimbigner for Author Information.
+See https://github.com/Unidata/nhdf4 for gihub software repository.
+The applicable Unidata/UCAR Copyright can be found here:
+  https://github.com/Unidata/netcdf-c/blob/master/COPYRIGHT for
 

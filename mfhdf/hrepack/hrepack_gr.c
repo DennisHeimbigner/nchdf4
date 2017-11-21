@@ -182,7 +182,7 @@ int  copy_gr(int32 infile_id,
     case COMP_CODE_SZIP:
 #ifdef H4_GR_SZIP
         info  = c_info_in.szip.pixels_per_block;
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
         if (c_info_in.szip.options_mask & SZ_EC_OPTION_MASK) {
             szip_mode = EC_MODE;
         } else if (c_info_in.szip.options_mask & SZ_NN_OPTION_MASK) {

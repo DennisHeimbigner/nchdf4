@@ -51,7 +51,7 @@ parse_dumpvd_opts(dump_info_t *dumpvd_opts,
    char       *tempPtr, *ptr;
 
    /* traverse the command and process each option */
-#if defined(WIN386) || defined(DOS386)
+#ifdef _MSC_VER
    while ((*curr_arg < argc) && ((argv[*curr_arg][0] == '-') ||
                                  (argv[*curr_arg][0] == '/')))
 #else

@@ -41,9 +41,7 @@ const void *values ;
 	ret->data = NC_new_array(type, count, values) ;
 	if( ret->data == NULL)
 		goto alloc_err ;
-#ifdef HDF
     ret->HDFtype = hdf_map_type(type);
-#endif
 	return(ret) ;
 alloc_err :
 	nc_serror("NC_new_attr") ;
@@ -259,9 +257,7 @@ const void *values ;
 			return(-1) ;
 		}
 		/* else */
-#ifdef HDF
                 (*atp)->HDFtype = hdf_map_type(datatype);
-#endif
 		if(handle->flags & NC_HSYNC)
 		{
 			handle->xdrs->x_op = XDR_ENCODE ;
@@ -347,11 +343,7 @@ char *name ;
 
 	attr = (NC_attr **) (*ap)->values ;
 	attr += attnum ;
-#ifdef HDF
 	(void)memcpy( name, (*attr)->name->values, (*attr)->name->len) ;
-#else
-	(void)strncpy( name, (*attr)->name->values, (*attr)->name->len) ;
-#endif
 	name[(*attr)->name->len] = 0 ;
 
 	return(attnum) ;
@@ -559,9 +551,7 @@ xdr_NC_attr(xdrs, app)
 	if( !xdr_NC_string(xdrs, &((*app)->name)))
 		return(FALSE) ;
 	ret_value = xdr_NC_array(xdrs, &((*app)->data)) ;
-#ifdef HDF
         (*app)->HDFtype = hdf_map_type(((*app)->data)->type);
-#endif
 	return ret_value;
 }
 

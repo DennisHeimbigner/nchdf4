@@ -20,7 +20,7 @@
 #include <math.h>
 #endif /* MIPSEL */
 
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
 #include "szlib.h"
 intn have_szip = 1;
 #else
@@ -60,7 +60,7 @@ intn parse_dumpsds_opts(dump_info_t *dumpsds_opts,
    intn ret_value = SUCCEED;
 
    /* traverse the command and process each option */
-#if defined(WIN386) || defined(DOS386)
+#ifdef _MSC_VER
    while ((*curr_arg < argc) && ((argv[*curr_arg][0] == '-') ||
                                  (argv[*curr_arg][0] == '/')))
 #else

@@ -19,7 +19,7 @@
 #include "hrepack.h"
 #include "hrepack_parse.h"
 
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
 #include "szlib.h"
 #endif
 
@@ -232,7 +232,7 @@ obj_list_t* parse_comp(const char *str,
             }
             else if (HDstrcmp(scomp,"SZIP")==0)
             {
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
                 if (SZ_encoder_enabled()) {
                     comp->type=COMP_CODE_SZIP;
                     if (no_param) { /*no more parameters, SZIP must have parameter */
@@ -290,7 +290,7 @@ obj_list_t* parse_comp(const char *str,
        }
        break;
    case COMP_CODE_SZIP:
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
        if ( (comp->info<=1 || comp->info > SZ_MAX_PIXELS_PER_BLOCK) || 
            (comp->info%2!=0)  ){
            printf("Input Error: Invalid compression parameter in <%s>. \

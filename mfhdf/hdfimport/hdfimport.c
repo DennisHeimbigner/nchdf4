@@ -201,15 +201,17 @@
 #include "hdf.h"
 #include "hfile.h"
 #include <stdio.h>
-#ifndef MIPSEL
+#ifdef HAVE_MATH_H
 #include <math.h>
-#endif /* MIPSEL */
+#endif
 #include <string.h>
 #include <ctype.h>
 #include <mfhdf.h>
 
-#ifdef _WIN32
+#ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
+#endif
+#ifdef HAVE_FCNTL_H
 #include <fcntl.h>
 #endif
 

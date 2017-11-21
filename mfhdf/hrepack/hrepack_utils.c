@@ -458,7 +458,7 @@ int set_szip( int   pixels_per_block, /*in */
               int   compression_mode, /* in */
               comp_info *c_info/*out*/)
 {
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
     
     int   ppb=pixels_per_block;
     

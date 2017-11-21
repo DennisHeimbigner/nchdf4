@@ -27,8 +27,8 @@ libmfhdf_la_LIBADD = $(top_builddir)/mfhdf/xdr/libxdr.la \
 			$(top_builddir)/hdf/src/libdf.la
 libmfhdf_la_LDFLAGS = -no-undefined
 
-include_HEADERS = local_nc.h mfhdf.h mfhdfi.h mfdatainfo.h
 # mfdatainfo.h should be added conditionally only; should local_nc.h even be here? -BMR
+include_HEADERS = local_nc.h mfhdf.h mfhdfi.h mfdatainfo.h
 
 #############################################################################
 ##                          And the cleanup                                ##

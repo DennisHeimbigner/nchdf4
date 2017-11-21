@@ -199,7 +199,7 @@ int copy_sds(int32 sd_in,
                 chunk_def_in.comp.cinfo.deflate          = c_info_in.deflate;
                 break;
             case COMP_CODE_SZIP:
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
                 chunk_def_in.comp.comp_type              = COMP_CODE_SZIP;
                 chunk_def_in.comp.cinfo.szip             = c_info_in.szip;
 #else
@@ -235,7 +235,7 @@ int copy_sds(int32 sd_in,
         case COMP_CODE_RLE:
             break;
         case COMP_CODE_SZIP:
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
             info      = c_info_in.szip.pixels_per_block;
             if (c_info_in.szip.options_mask & SZ_EC_OPTION_MASK) {
                 szip_mode = EC_MODE;
@@ -291,7 +291,7 @@ int copy_sds(int32 sd_in,
                 chunk_def.comp.cinfo.deflate          = c_info_in.deflate;
                 break;
             case COMP_CODE_SZIP:
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
                 chunk_def.comp.comp_type              = COMP_CODE_SZIP;
                 chunk_def.comp.cinfo.szip             = c_info_in.szip;
 #else

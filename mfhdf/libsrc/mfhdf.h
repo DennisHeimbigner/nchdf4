@@ -16,16 +16,19 @@
 #ifndef _MFSD_H_
 #define _MFSD_H_
 
-#ifndef HDF
-#define HDF 1
-#endif
-
 #include "H4api_adpt.h"
 
 /* change this back if it causes problems on other machines than the Alhpa-QAK */
 /* Reverse back to the previous way. AKC */
 #include "hdf.h"
+#ifdef HAVE_NETCDF
+#include "netcdf.h"
+#else
 #include "hdf4_netcdf.h"
+#endif
+#ifdef OLD_WAY
+#include "local_nc.h"
+#endif /* OLD_WAY */
 
 #include "mfhdfi.h"
 #include "mfdatainfo.h"

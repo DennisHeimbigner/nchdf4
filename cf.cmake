@@ -1,7 +1,8 @@
 # Visual Studio
-VS=1
+#VS=1
 
-CFG="Release"
+#CFG="RelWithDebInfo"
+CFG=Release
 
 FLAGS="$FLAGS -DCMAKE_INSTALL_PREFIX=`pwd`/ignore"
 

@@ -172,5 +172,4 @@
 #  define HDFTOOLSAPI extern
 #endif /*H4_BUILT_AS_DYNAMIC_LIB  */
 
-
 #endif /* H4API_ADPT_H */

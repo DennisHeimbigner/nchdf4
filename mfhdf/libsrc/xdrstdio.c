@@ -1,7 +1,3 @@
-#if !defined(lint)
-static char rcsid[] = "$Id$";
-#endif
-
 /*
  * xdr_stdio.c, XDR implementation on standard i/o file.
  *
@@ -26,7 +22,7 @@ static char rcsid[] = "$Id$";
 #include "local_nc.h" /* prototypes for NCadvis, nc_error */
 		      /* also obtains <stdio.h>, <rpc/types.h>, &
 		       * <rpc/xdr.h> */
-#ifdef DOS_FS
+#ifdef _MSC_VER
 #include    <fcntl.h>   /* O_BINARY */
 #define USE_BFLAG
 #endif
@@ -249,10 +245,12 @@ xdrNCstdio_setpos(xdrs, pos)
 #ifdef HAVE_UNISTD_H
 #include <unistd.h> /* access(), F_OK */
 #endif
-
 #ifndef F_OK
 #define F_OK    0
 #endif
+
+#include "netcdf.h" /* NC_ */
+#include "local_nc.h" /* prototypes for NCadvis, nc_error */
 
 #ifndef USE_BFLAG 	/* Doesn't Understand the "b" (binary flag to fopen) */
 #define CREAT_FOPENFLAGS "w+"
@@ -313,7 +311,7 @@ int ncmode ;
 		return(-1) ;
 	}
 
-#ifdef DOS_FS
+#ifdef _MSC_VER
 	/*
  	 * set default mode to binary to suppress the expansion of
 	 * 0x0f into CRLF

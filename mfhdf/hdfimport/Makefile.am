@@ -25,8 +25,9 @@ LDADD = $(LIBMFHDF) $(LIBHDF) @LIBS@
 #############################################################################
 
 bin_PROGRAMS = hdfimport
+#gen_sds_floats crtSDSfloats
 
-hdfimport_SOURCES = hdfimport.c crtSDSfloats.c gen_sds_floats.c
+hdfimport_SOURCES = hdfimport.c
 
 hdfimport_LDADD = $(LIBMFHDF) $(LIBHDF) @LIBS@
 hdfimport_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF)

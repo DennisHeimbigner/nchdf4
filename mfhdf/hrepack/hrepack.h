@@ -17,7 +17,7 @@
 
 #include "hrepack_lsttable.h"
 
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
 #include "szlib.h"
 #endif
 #define NN_MODE 0

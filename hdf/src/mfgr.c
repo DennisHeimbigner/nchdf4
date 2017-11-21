@@ -167,7 +167,7 @@ MODIFICATION HISTORY
 #include "hdf.h"
 #include "hlimits.h"
 
-#ifdef H4_HAVE_LIBSZ          /* we have the library */
+#ifdef HAVE_LIBSZ          /* we have the library */
 #include "szlib.h"
 #endif
 
@@ -4299,7 +4299,7 @@ done:
 } /* end GRsetaccesstype() */
 
 
-#ifdef H4_HAVE_LIBSZ          /* we have the library */
+#ifdef HAVE_LIBSZ          /* we have the library */
 /*--------------------------------------------------------------------------
  NAME
     GRsetup_szip_parms( ri_info_t *ri_ptr, comp_info *c_info, int32 *cdims)
@@ -4416,7 +4416,7 @@ intn GRsetcompress(int32 riid,comp_coder_t comp_type,comp_info *cinfo)
     }
 
     if (comp_type==COMP_CODE_SZIP) 
-#ifndef H4_HAVE_LIBSZ
+#ifndef HAVE_LIBSZ
         HGOTO_ERROR(DFE_NOSZLIB, FAIL);
 #else
     {
@@ -5672,7 +5672,7 @@ GRsetchunk(int32 riid,              /* IN: raster access id */
               chunk[0].cinfo = &cdef->comp.cinfo; 
     }
     else
-#ifdef H4_HAVE_LIBSZ          /* we have the library */
+#ifdef HAVE_LIBSZ          /* we have the library */
           {
             HDmemcpy(&cinfo,&(cdef->comp.cinfo),sizeof(comp_info));
         if (GRsetup_szip_parms(ri_ptr, &cinfo, cdims) == FAIL) 
@@ -5683,7 +5683,7 @@ GRsetchunk(int32 riid,              /* IN: raster access id */
           {
         HGOTO_ERROR(DFE_NOSZLIB, FAIL);
           }
-#endif /* H4_HAVE_LIBSZ */
+#endif /* HAVE_LIBSZ */
           break;
       case (HDF_CHUNK | HDF_NBIT): /* don't support NBIT for GRs */
     HGOTO_ERROR(DFE_UNSUPPORTED, FAIL);

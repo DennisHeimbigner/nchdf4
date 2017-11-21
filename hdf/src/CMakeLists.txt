@@ -14,4 +14,8 @@ SET(df_SOURCES
     vgp.c vhi.c vio.c vparse.c vrw.c vsfld.c
 )
 
-add_library(libdf ${df_SOURCES})
+add_library(df ${df_SOURCES})
+
+target_link_libraries(df ${ZLIB_LIBRARY})
+target_link_libraries(df ${JPEG_LIBRARY})
+

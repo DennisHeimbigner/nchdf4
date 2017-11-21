@@ -16,7 +16,7 @@
 #include "hcomp.h"
 #include "pal_rgb.h"
 
-#if defined (H4_HAVE_LIBSZ)
+#if defined (HAVE_LIBSZ)
 #include "szlib.h"
 #endif
 
@@ -331,7 +331,7 @@ void set_chunk_def( comp_coder_t comp_type,
         break;
         
     case COMP_CODE_SZIP:
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
         if (SZ_encoder_enabled()) {
             chunk_def->comp.cinfo.szip.pixels_per_block = 2;
             chunk_def->comp.cinfo.szip.options_mask = SZ_EC_OPTION_MASK;
@@ -1124,7 +1124,7 @@ int add_gr(const char* gr_name,     /* gr name */
     case COMP_CODE_SZIP:
 #ifdef H4_GR_SZIP
         /* not supported for GR */
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
         if (SZ_encoder_enabled()) {
             comp_info->szip.pixels_per_block = 2;
             comp_info->szip.options_mask = SZ_EC_OPTION_MASK;
@@ -1182,7 +1182,7 @@ int add_gr(const char* gr_name,     /* gr name */
             
         case COMP_CODE_SZIP:
 #ifdef H4_GR_SZIP
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
             if (SZ_encoder_enabled()) {
                 chunk_def.comp.cinfo.szip.pixels_per_block = 2;
                 chunk_def.comp.cinfo.szip.options_mask = SZ_EC_OPTION_MASK;
@@ -1527,7 +1527,7 @@ int add_sd(const char *fname,       /* file name */
         break;
         
     case COMP_CODE_SZIP:
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
         if (SZ_encoder_enabled()) {
             comp_info->szip.pixels_per_block = 2;
             comp_info->szip.options_mask = SZ_EC_OPTION_MASK;
@@ -2276,7 +2276,7 @@ int add_sd_szip(const char *fname,       /* file name */
     edges[0]=dim[0]; 
     edges[1]=dim[1];
     
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
     if (SZ_encoder_enabled()) {
         comp_type = COMP_CODE_SZIP;
         comp_info.szip.pixels_per_block = 2;
@@ -2572,7 +2572,7 @@ int do_file_all(char* fname)
     if (add_sd(fname,file_id,sd_id,"dset_huff",0,chunk_flags,comp_type,&comp_info)<0)
         goto out;
     
-#if defined (H4_HAVE_LIBSZ)
+#if defined (HAVE_LIBSZ)
    /*-------------------------------------------------------------------------
     * SZIP
     *-------------------------------------------------------------------------
@@ -2656,7 +2656,7 @@ int do_file_all(char* fname)
     *-------------------------------------------------------------------------
     */ 
     
-#if defined (H4_HAVE_LIBSZ)
+#if defined (HAVE_LIBSZ)
     
     if (SZ_encoder_enabled()) 
     {

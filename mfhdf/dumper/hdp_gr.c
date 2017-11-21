@@ -71,7 +71,7 @@ parse_dumpgr_opts(dump_info_t *dumpgr_opts,
    intn ret_value = SUCCEED;
 
    /* traverse the command and process each option */
-#if defined(WIN386) || defined(DOS386)
+#ifdef _MSC_VER
    while ((*curr_arg < argc) && ((argv[*curr_arg][0] == '-') ||
 				 (argv[*curr_arg][0] == '/')))
 #else

@@ -20,16 +20,16 @@
  ) we need to rename all the relevant function names 
    In this version we exclude renaming the netCDF fortran API so 
    the MFHDF side must be compilied without fortran support. */
-#ifndef H4_HAVE_NETCDF
+#ifndef HAVE_NETCDF
 #define  HNAME(x)  sd_##x     /* pre-append 'sd_' to all netCDF fcn names */
-#else /* !H4_HAVE_NETCDF i.e NOT USING HDF NETCDF */
+#else /* !HAVE_NETCDF i.e NOT USING HDF NETCDF */
 #define  HNAME(x)   x
-#endif /* H4_HAVE_NETCDF i.e. USING HDF NETCDF */
+#endif /* HAVE_NETCDF i.e. USING HDF NETCDF */
 
 /* If using the real netCDF library and API (use --disable-netcdf configure flag))
    need to mangle the HDF versions of netCDF API function names 
    to not conflict w/ oriinal netCDF ones */
-#ifndef H4_HAVE_NETCDF
+#ifndef HAVE_NETCDF
 #define ncerr     HNAME(ncerr)
 #define ncopts    HNAME(ncopts)
 #define nccreate  HNAME(nccreate)
@@ -70,4 +70,4 @@
 #define ncrecput  HNAME(ncrecput)
 #define ncnobuf   HNAME(ncnobuf) /* no prototype for this one */
 
-#endif /* !H4_HAVE_NETCDF i.e NOT USING HDF version of netCDF API */ 
+#endif /* !HAVE_NETCDF i.e NOT USING HDF version of netCDF API */ 

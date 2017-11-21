@@ -53,7 +53,6 @@ const int *dims ;
 	ret->szof = NC_typelen(type) ;
 	ret->begin = 0 ;
 
-#ifdef HDF
         ret->vgid = 0;
         ret->data_ref = 0;
         ret->data_tag = DATA_TAG;  /* Assume normal data unless set   */
@@ -68,7 +67,6 @@ const int *dims ;
         ret->is_ragged = FALSE;
         ret->created = FALSE;      /* This is set in SDcreate() if it's a new SDS */
         ret->set_length = FALSE;   /* This is set in SDwritedata() if the data needs its length set */
-#endif
 
 	return(ret) ;
 alloc_err :
@@ -129,9 +127,6 @@ done:
  * 'compile' the shape and len of a variable
  *  return -1 on error
  */
-#ifndef HDF
-static 
-#endif
 int NC_var_shape(var, dims)
 NC_var *var ;
 NC_array *dims;
@@ -143,11 +138,7 @@ NC_array *dims;
 	NC_dim **dp ;
 	size_t xszof ;
 
-#ifdef HDF
 	xszof = var->HDFsize ; 
-#else
-	xszof = NC_xtypelen(var->type) ;
-#endif
 
 	/* Fixed memory leaks reported in bug# 418. BMR - Apr 8, 01 */
 
@@ -233,10 +224,7 @@ NC_array *dims;
 	}
 
 out :
-/* don't round-up for HDF-encoded files */
-#ifdef HDF
 	if (var->cdf->file_type != HDF_FILE)
-#endif
  
 	switch(var->type) {
 	case NC_BYTE :
@@ -336,18 +324,14 @@ const int dims[] ;
             if( NC_incr_array(handle->vars, (Void *)var) == NULL)
                 return(-1) ;
         }
-#ifdef HDF
     (*var)->cdf = handle; /* for NC_var_shape */
-#endif
 	if( NC_var_shape(*var, handle->dims) != -1)
       {
-#ifdef HDF
 #ifdef NOT_YET
           (*var)->ndg_ref = Htagnewref(handle->hdf_file,DFTAG_NDG);
 #else /* NOT_YET */
           (*var)->ndg_ref = Hnewref(handle->hdf_file);
 #endif /* NOT_YET */
-#endif            
           return(handle->vars->count -1) ;
       }
     /* unwind */
@@ -378,9 +362,7 @@ NC *handle ;
          vpp < &vbase[handle->vars->count] ;
          vpp ++)
       {
-#ifdef HDF
           (*vpp)->cdf= handle;
-#endif
 
           if( NC_var_shape(*vpp, handle->dims) == -1)
               return(-1) ;
@@ -500,11 +482,7 @@ int *nattrsp ;
 
 	if(name != NULL)
 	{
-#ifdef HDF
 		(void)memcpy( name, vp->name->values, vp->name->len) ;
-#else
-		(void)strncpy( name, vp->name->values, vp->name->len) ;
-#endif
 		name[vp->name->len] = 0 ;
 	}
 
@@ -890,7 +868,6 @@ xdr_NC_var(xdrs, vpp)
 	if( xdrs->x_op == XDR_DECODE )
 		(*vpp)->begin = begin ;
 
-#ifdef HDF
 
         if( xdrs->x_op == XDR_DECODE ) {
             
@@ -901,7 +878,6 @@ xdr_NC_var(xdrs, vpp)
                 
         }
 
-#endif
 
 	return( TRUE ) ;
 }

@@ -40,6 +40,7 @@ typedef NETLONG     netlong;
 
 #ifdef _MSC_VER
 #include <io.h>
+#endif
 
 #include <sys/types.h>
 
@@ -49,7 +50,7 @@ typedef NETLONG     netlong;
 		       * <rpc/xdr.h> */
 #include "mfhdf.h"
 
-#if !(defined DOS_FS) 
+#ifndef _MSC_VER
         typedef u_int ncpos_t ;  /* all unicies */
 #else
       typedef off_t ncpos_t ;
@@ -64,7 +65,7 @@ typedef struct {
     int nwrote ;    /* number of bytes last write */
     int cnt ;       /* number of valid bytes in buffer */
     unsigned char *ptr;         /* next byte */
-#ifdef DOS_FS
+#ifdef _MSC_VER
 #define BIOBUFSIZ   512
 #else
 #define BIOBUFSIZ   8192
@@ -657,7 +658,7 @@ fprintf(stderr,"NCxdrfile_create(): XDR=%p, path=%s, ncmode=%d\n",xdrs,path,ncmo
         NCadvise(NC_EINVAL, "Bad flag %0x", ncmode & 0x0f) ;
         return(-1) ;
     }
-#ifdef DOS_FS
+#ifdef _MSC_VER
     /*
      * set default mode to binary to suppress the expansion of
      * 0x0f into CRLF

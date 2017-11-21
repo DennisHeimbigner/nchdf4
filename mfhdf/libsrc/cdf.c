@@ -19,7 +19,6 @@
 #include	"local_nc.h"
 #include	"alloc.h"
 
-#ifdef HDF
 #include    "hfile.h"
 extern intn  hdf_xdr_cdf
    PROTO((XDR *xdrs, NC**handlep));
@@ -32,8 +31,6 @@ intn hdf_close(NC *handle);
 static intn
 hdf_num_attrs(NC *handle,/* IN: handle to SDS */
               int32 vg   /* IN: ref of top Vgroup */);
-
-#endif /* HDF */
 
 static bool_t NC_xdr_cdf(XDR *xdrs, NC **handlep);
 
@@ -114,7 +111,6 @@ NC *handle ;
             xdr_destroy(handle->xdrs);
             Free(handle->xdrs);
 
-#ifdef HDF
             if(handle->file_type == HDF_FILE) 
               {
                 if (Vend(handle->hdf_file) == FAIL)
@@ -130,7 +126,6 @@ NC *handle ;
                   }
 
               }
-#endif /* HDF */
 
             Free(handle);
         }
@@ -146,7 +141,6 @@ done:
 }
 
 
-#ifdef HDF 
 
 /* --------------------------- hdf_get_magicnum ---------------------------- */
 /*
@@ -297,7 +291,6 @@ done:
 } /* HDisnetcdf64 */
 
 /******************************************************************************/
-#endif /* HDF */
 
 
 /*
@@ -308,9 +301,7 @@ NC_new_cdf(name, mode)
 const char *name ;
 int mode ;
 {
-#ifdef HDF
     int32 hdf_mode =  DFACC_RDWR; /* default */
-#endif
 	NC   *cdf = NULL;
     static const char *FUNC = "NC_new_cdf";
     NC   *ret_value = NULL;
@@ -334,7 +325,6 @@ int mode ;
           goto done;
       } /* else */
 	
-#ifdef HDF
     /*
      * See what type of file we are looking at.
      * If we are creating a new file it will be an HDF file
@@ -385,14 +375,6 @@ int mode ;
           break;
       }
         
-#else /* !HDF */
-    if( NCxdrfile_create( cdf->xdrs, name, mode ) < 0) 
-      {
-          ret_value = NULL;
-          goto done;
-      } 
-#endif /* !HDF */
-
 	cdf->dims = NULL ;
 	cdf->attrs = NULL ;
 	cdf->vars = NULL ;
@@ -401,7 +383,6 @@ int mode ;
 	cdf->numrecs = 0 ;
 	cdf->redefid = -1 ;
 
-#ifdef HDF 
     /* 
      * determine the HDF access mode 
      */
@@ -474,7 +455,6 @@ int mode ;
               HRETURN_ERROR(DFE_DENIED,NULL);
           break;
       }
-#endif /* HDF */
 
     /*
      * Read in the contents
@@ -556,9 +536,7 @@ NC *old ;
 	cdf->recsize = 0 ;
 	cdf->numrecs = 0 ;
 
-#ifdef HDF
     cdf->file_type = old->file_type;
-#endif
 
 	if(NCxdrfile_create( cdf->xdrs, name, mode) < 0)
       {
@@ -657,7 +635,6 @@ xdr_cdf(xdrs, handlep)
 {
     bool_t ret_value = TRUE;
 
-#ifdef HDF    
     switch((*handlep)->file_type) 
       {
       case HDF_FILE:
@@ -674,9 +651,6 @@ xdr_cdf(xdrs, handlep)
           ret_value = FALSE;
           break;
       }
-#else /* !HDF */
-    ret_value = NC_xdr_cdf(xdrs, handlep);
-#endif /* !HDF */
 
     return ret_value;
 }
@@ -688,7 +662,7 @@ NC_xdr_cdf(xdrs, handlep)
 	NC **handlep;
 {
 
-	u_long	magic;
+	u_long	magic = 0;;
 
 	if( xdrs->x_op == XDR_FREE)
       {
@@ -755,7 +729,6 @@ NC_xdr_cdf(xdrs, handlep)
 	return(TRUE) ;
 }
 
-#ifdef HDF
 /*****************************************************************************
 * 
 *			NCSA HDF / netCDF Project
@@ -3552,7 +3525,6 @@ done:
 } /* hdf_close */
 
 /*******************************************************************************/                
-#endif /* HDF */
 
 /*
  * How much space will the xdr'd NC description take.
@@ -3581,10 +3553,8 @@ xdr_numrecs(xdrs, handle)
 	NC *handle;
 {
 
-#ifdef HDF
     if(handle->file_type == HDF_FILE) 
         return TRUE; /* hmm...why? */
-#endif
 
 	if( (handle->flags & NC_NOFILL)
 		&& xdrs->x_op == XDR_ENCODE

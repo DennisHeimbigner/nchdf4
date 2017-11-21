@@ -77,7 +77,7 @@ MODIFICATION HISTORY
 #define COMPRESS_MASTER
 #include "hdf.h"
 
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
 #include "szlib.h"                                                                                 
 #endif 
 
@@ -1705,7 +1705,7 @@ HCget_config_info( comp_coder_t coder_type,  /* IN: compression type */
               break;
 
            case COMP_CODE_SZIP:
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
 	      if (SZ_encoder_enabled()) {
 		*compression_config_info = COMP_DECODER_ENABLED|COMP_ENCODER_ENABLED;
 		} else {
@@ -1713,7 +1713,7 @@ HCget_config_info( comp_coder_t coder_type,  /* IN: compression type */
 		}
 #else
 		*compression_config_info = 0;
-#endif /* H4_HAVE_LIBSZ */
+#endif /* HAVE_LIBSZ */
               break;
           default:
 		*compression_config_info = 0;

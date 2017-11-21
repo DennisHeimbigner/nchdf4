@@ -57,7 +57,7 @@ LOW-LEVEL ROUTINES
 #include "vgint.h"
 #include "mfan.h"
 
-#ifdef H4_HAVE_LIBSZ	/* we have the szip library */
+#ifdef HAVE_LIBSZ	/* we have the szip library */
 #include "szlib.h"
 #endif
 

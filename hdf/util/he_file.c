@@ -14,6 +14,10 @@
 /* $Id$ */
 
 /* --- he-file.c  --- file and annotation manipulation routines */
+#include "h4config.h"
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
 #include "he.h"
 
 /* get the prototype for the wait() func. */
@@ -121,7 +125,7 @@ annotate(const char *editor, int ann)
               editor = "/usr/bin/ex";
       }
     /* Use the fork/wait or system methods if supported, else no support. */
-#if defined(H4_HAVE_FORK) && defined(H4_HAVE_WAIT)
+#if defined(HAVE_FORK) && defined(HAVE_WAIT)
     if (fork() == 0)
       {
           /* this is the child */
@@ -135,7 +139,7 @@ annotate(const char *editor, int ann)
 
     /* the parent waits for the child to die */
     wait(0);
-#elif defined(H4_HAVE_SYSTEM)
+#elif defined(HAVE_SYSTEM)
     {   char    cmd[256];
         if (HDstrlen(editor) > 100) {
             fprintf(stderr, "Environment variable EDITOR too big\n");

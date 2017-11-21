@@ -84,7 +84,7 @@ parse_list_opts(list_info_t * list_opts,
 
     for (; curr_arg < argc; curr_arg++)
       {
-#if defined(WIN386) || defined(DOS386)
+#ifdef _MSC_VER
           if (argv[curr_arg][0] == '-' || argv[curr_arg][0] == '/')
 #else
           if (argv[curr_arg][0] == '-' )

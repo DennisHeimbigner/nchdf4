@@ -74,7 +74,6 @@
 
  **************************************************************************/
 
-#ifdef HDF
 #include        "local_nc.h"
 
 #define SDG_MAX_INITIAL 100
@@ -1896,4 +1895,3 @@ done:
     return ret_value;
 } /* hdf_read_sds_cdf */
 
-#endif /* HDF */

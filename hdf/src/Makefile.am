@@ -25,4 +25,5 @@ CHEADERS = atom.h bitvect.h cdeflate.h cnbit.h cnone.h cskphuff.h crle.h    \
 
 libdf_la_SOURCES = $(CSOURCES)
 libdf_la_LDFLAGS = -no-undefined
-include_HEADERS = $(CHEADERS)
+
+include_HEADERS = H4api_adpt.h hbitio.h hcomp.h hdatainfo.h hdf.h hdfi.h herr.h hlimits.h hntdefs.h hproto.h htags.h mfgr.h vg.h

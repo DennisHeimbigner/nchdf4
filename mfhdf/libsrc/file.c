@@ -28,7 +28,7 @@
 
 /* obtain the maximum number of open files allowed, at the same time,
    on the current system */
-#ifdef _WIN32
+#ifdef _MSC_VER
 #define MAX_SYS_OPENFILES	_getmaxstdio()
 #else
 #include <sys/resource.h>
@@ -68,7 +68,7 @@ static NC **_cdfs;
 #define remove(fpath) unlink((fpath))
 #endif
 
-#ifdef DOS_FS
+#ifdef _MSC_VER
 #define SEP '\\' /* this separates path components on DOS */
 #endif
 #ifndef SEP
@@ -393,9 +393,7 @@ int id ;
             {
                 if(!xdr_numrecs(handle->xdrs, handle) )
                     return(-1) ;
-#ifdef HDF
                 if (handle->file_type != HDF_FILE)
-#endif
                     handle->flags &= ~(NC_NDIRTY) ;
             }
       } 
@@ -440,9 +438,7 @@ int cdfid ;
 	NC *handle ;
 	char path[FILENAME_MAX + 1] ;
 	unsigned flags ;
-#ifdef HDF
     intn   file_type;
-#endif
 
 	cdf_routine_name = "ncabort" ;
 
@@ -487,12 +483,9 @@ int cdfid ;
             }
         }
 
-#ifdef HDF
     file_type = handle->file_type;
-#endif
 	NC_free_cdf(handle) ; /* calls fclose */
 
-#ifdef HDF
     switch(file_type) 
       {
       case netCDF_FILE:
@@ -510,13 +503,6 @@ int cdfid ;
             }
           break;
       }
-#else
-    if(flags & (NC_INDEF | NC_CREAT))
-      {
-          if( remove(path) != 0 )
-              nc_serror("couldn't remove filename \"%s\"", path) ;
-      }
-#endif
 
 	_cdfs[cdfid] = NULL ; /* reset pointer */
 
@@ -573,7 +559,7 @@ const char *proto ;
 /* NO_GETPID defined if the OS lacks the getpid() function */
 #ifndef NO_GETPID
 #	define TN_NDIGITS 4
-#ifdef _WIN32
+#ifdef _MSC_VER
 	typedef int pid_t;
 #endif
 	pid_t getpid(void);
@@ -672,14 +658,12 @@ int cdfid ;
       }
 
 
-#ifdef HDF
     if(handle->file_type == HDF_FILE) 
       {
           handle->flags |= NC_INDEF ;
           handle->redefid = TRUE;
           return(0);
       }
-#endif
 
 	/* find first available id */
 	for(id = 0 ; id < _ncdf; id++)
@@ -893,9 +877,7 @@ NC *handle ;
 	NC_var **vpp ;
 	NC *stash = STASH(cdfid) ; /* faster rvalue */
 
-#ifdef HDF
     if(handle->file_type != HDF_FILE)
-#endif	
         NC_begins(handle) ;
 
 	xdrs = handle->xdrs ;
@@ -907,7 +889,6 @@ NC *handle ;
           return(-1) ;
       }
 
-#ifdef HDF
     /* Get rid of the temporary buffer allocated for I/O */
     SDPfreebuf();
 
@@ -916,7 +897,6 @@ NC *handle ;
           handle->flags &= ~(NC_CREAT | NC_INDEF | NC_NDIRTY | NC_HDIRTY) ;
           return(0) ;
       }
-#endif	
 
     if(handle->vars == NULL) 
 		goto done ;
@@ -988,7 +968,7 @@ NC *handle ;
 
           /* close stash */
 /*                NC_free_cdf(stash) ; */
-#ifdef DOS_FS
+#ifdef _MSC_VER
           xdr_destroy(handle->xdrs) ; /* close handle */
           if( remove(realpath) != 0 )
               nc_serror("couldn't remove filename \"%s\"", realpath) ;
@@ -1011,7 +991,7 @@ NC *handle ;
                 return(-1) ;
             }
           (void) strncpy(handle->path, realpath, FILENAME_MAX) ;
-#ifdef DOS_FS
+#ifdef _MSC_VER
           if( NCxdrfile_create( handle->xdrs, handle->path, NC_WRITE ) < 0)
               return -1 ;
 #endif
@@ -1084,10 +1064,8 @@ int cdfid ;
             }
 	}
 
-#ifdef HDF
 	if(handle->file_type == HDF_FILE) 
 	    hdf_close(handle);
-#endif
 
 	NC_free_cdf(handle) ; /* calls fclose */
 
@@ -1136,12 +1114,10 @@ int fillmode ;
                  * We are changing back to fill mode
                  * so do a sync
                  */
-#ifdef HDF       /* save the original x_op  */
                 enum xdr_op  xdr_op = handle->xdrs->x_op;
                  
                 if (handle->flags & NC_RDWR)   /* make sure we can write */
                     handle->xdrs->x_op = XDR_ENCODE; /*  to the file */
-#endif
                 if(handle->flags & NC_HDIRTY)
                   {
                       if(!xdr_cdf(handle->xdrs, &handle) )
@@ -1152,17 +1128,11 @@ int fillmode ;
                   {
                       if(!xdr_numrecs(handle->xdrs, handle) )
                           return(-1) ;
-#ifdef HDF
                       if (handle->file_type != HDF_FILE)
                           handle->flags &= ~(NC_NDIRTY) ;
-#else              
-                      handle->flags &= ~(NC_NDIRTY) ;
-#endif
                   }
                 handle->flags &= ~NC_NOFILL ;
-#ifdef HDF                /* re-store the x_op  */
                 handle->xdrs->x_op = xdr_op;
-#endif
             }
       }
 	else

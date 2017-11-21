@@ -83,7 +83,7 @@ EXPORTED ROUTINES
 /* Directory seperator definitions relating to a path. 
  * Note this does not provide a universal way to recognize
  * different path name conventions and translate between them */
-#if defined WIN386 | defined DOS386
+#ifdef _MSC_VER
 /* DOS-Windows seperator */
 #define DIR_SEPC  92  /* Integer value of '\' */
 #define DIR_SEPS  "\\"

@@ -66,16 +66,11 @@ xdr_int(xdrs, ip)
 	int *ip;
 {
 
-#ifdef lint
-	(void) (xdr_short(xdrs, (short *)ip));
-	return (xdr_long(xdrs, (long *)ip));
-#else
 	if (sizeof (int) == sizeof (long)) {
 		return (xdr_long(xdrs, (long *)ip));
 	} else {
 		return (xdr_short(xdrs, (short *)ip));
 	}
-#endif
 }
 
 /*
@@ -87,16 +82,11 @@ xdr_u_int(xdrs, up)
 	u_int *up;
 {
 
-#ifdef lint
-	(void) (xdr_u_short(xdrs, (u_short *)up));
-	return (xdr_u_long(xdrs, (u_long *)up));
-#else
 	if (sizeof (u_int) == sizeof (u_long)) {
 		return (xdr_u_long(xdrs, (u_long *)up));
 	} else {
 		return (xdr_u_short(xdrs, (u_short *)up));
 	}
-#endif
 }
 
 /*
@@ -272,14 +262,14 @@ xdr_enum(xdrs, ep)
 	XDR *xdrs;
 	enum_t *ep;
 {
-#ifndef lint
 	enum sizecheck { SIZEVAL };	/* used to find the size of an enum */
-
 	/*
 	 * enums are treated as ints
 	 */
 	if (sizeof (enum sizecheck) == sizeof (long)) {
 		return (xdr_long(xdrs, (long *)ep));
+	} else if (sizeof (enum sizecheck) == sizeof (int)) {
+		return (xdr_int(xdrs, (int *)ep));
 	} else if (sizeof (enum sizecheck) == sizeof (short)) {
 		return (xdr_short(xdrs, (short *)ep));
 	} else if (sizeof (enum sizecheck) == sizeof (char)) {
@@ -287,11 +277,6 @@ xdr_enum(xdrs, ep)
 	} else {
 		return (FALSE);
 	}
-#else
-	(void) (xdr_char(xdrs, (char *)ep));
-	(void) (xdr_short(xdrs, (short *)ep));
-	return (xdr_long(xdrs, (long *)ep));
-#endif
 }
 
 /*

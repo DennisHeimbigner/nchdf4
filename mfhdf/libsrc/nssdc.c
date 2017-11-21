@@ -12,7 +12,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "local_nc.h"
-#ifdef HDF
+
 #include "hfile.h"
 
 /* constants/macros pulled out of the CDF library source */
@@ -898,5 +898,3 @@ nssdc_xdr_cdf(xdrs, handlep)
     return (status);
   
 } /* nssdc_xdr_cdf */
-
-#endif /* HDF */

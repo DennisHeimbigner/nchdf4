@@ -22,7 +22,7 @@
 #ifndef _HLIMITS_H
 #define _HLIMITS_H
 
-#ifndef _WIN32
+#ifndef _MSC_VER
 #define HDsetvbuf(F,S,M,Z)	setvbuf(F,S,M,Z)
 #endif
 /**************************************************************************
@@ -192,7 +192,7 @@
    constants were modified with H4 prefix to avoid conflicts with the
    real NetCDF-3 library   - EIP 9/5/07                                     */
 
-#ifdef H4_HAVE_NETCDF
+#ifdef HAVE_NETCDF
 #define MAX_NC_OPEN  H4_MAX_NC_OPEN
 #define MAX_NC_DIMS  H4_MAX_NC_DIMS
 #define MAX_NC_VARS  H4_MAX_NC_VARS

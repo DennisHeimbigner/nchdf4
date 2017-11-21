@@ -89,11 +89,10 @@ NOTE: This file needs to have the comments cleaned up for most of the
 
 #include "local_nc.h"
 
-#ifdef HDF
 #include "mfhdf.h"
 #include "hfile.h"
 
-#ifdef H4_HAVE_LIBSZ          /* we have the szip library */
+#ifdef HAVE_LIBSZ          /* we have the szip library */
 #include "szlib.h"
 #ifndef MIN
 #define MIN(a,b)    (((a)<(b)) ? (a) : (b))
@@ -4399,7 +4398,7 @@ done:
     return ret_value;    
 } /* SDsetnbitdataset */
 
-#ifdef H4_HAVE_LIBSZ          /* we have the library */
+#ifdef HAVE_LIBSZ          /* we have the library */
 
 /******************************************************************************
  NAME
@@ -4554,7 +4553,7 @@ SDsetcompress(int32 id,                /* IN: dataset ID */
         {
             HGOTO_ERROR(DFE_ARGS, FAIL);
         }
-#ifdef H4_HAVE_LIBSZ          /* we have the library */
+#ifdef HAVE_LIBSZ          /* we have the library */
 	if (comp_type == COMP_CODE_SZIP) {
 	   if (SDsetup_szip_parms( id, handle, &c_info_x, NULL) == FAIL) {
 		HGOTO_ERROR(DFE_INTERNAL, FAIL);
@@ -4566,7 +4565,7 @@ SDsetcompress(int32 id,                /* IN: dataset ID */
 	if (comp_type == COMP_CODE_SZIP) {
 		HGOTO_ERROR(DFE_BADCODER, FAIL);
 	}
-#endif /* H4_HAVE_LIBSZ          */
+#endif /* HAVE_LIBSZ          */
 
 #ifdef SDDEBUG
     printf("SDsetcompress(): var->data_ref=%d\n",(int)var->data_ref);
@@ -6029,7 +6028,7 @@ SDsetchunk(int32         sdsid,     /* IN: sds access id */
        }
        else /* requested compression is SZIP */
 
-#ifdef H4_HAVE_LIBSZ          /* we have the library */
+#ifdef HAVE_LIBSZ          /* we have the library */
           {
            cdims = cdef->comp.chunk_lengths;
            chunk[0].chunk_flag = SPECIAL_COMP;  /* Compression */
@@ -6046,7 +6045,7 @@ SDsetchunk(int32         sdsid,     /* IN: sds access id */
           {
 		HGOTO_ERROR(DFE_BADCODER, FAIL);
           }
-#endif /* H4_HAVE_LIBSZ */
+#endif /* HAVE_LIBSZ */
 
           break;
       case (HDF_CHUNK | HDF_NBIT):
@@ -7551,5 +7550,3 @@ done:
 
     return ret_value;
 } /* SDgetnamelen */
-
-#endif /* HDF */

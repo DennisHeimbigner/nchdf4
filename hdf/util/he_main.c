@@ -189,7 +189,7 @@ getElement(int desc, char **pdata)
         return FAIL;
 
     /* read in the element and check for error */
-    if ((fid = Hopen(he_file, DFACC_READ, 0)) == (int32) NULL)
+    if ((fid = Hopen(he_file, DFACC_READ, 0)) == 0)
       {
           HEprint(stderr, 0);
           return FAIL;
@@ -548,7 +548,7 @@ deleteDesc(int desc)
 {
     int32       fid;
 
-    if ((fid = Hopen(he_file, DFACC_WRITE, 0)) == (int32) NULL)
+    if ((fid = Hopen(he_file, DFACC_WRITE, 0)) == 0)
       {
           HEprint(stderr, 0);
           return FAIL;

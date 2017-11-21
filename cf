@@ -1,4 +1,10 @@
-export LDFLAGS="-L/usr/lib -lz -ljpeg"
+export LDFLAGS="-L/usr/lib64 -lz -ljpeg -L/usr/local/lib -lsz"
+export CPPFLAGS="-I/home/dmh/git/netcdf-c"
 export CFLAGS="-g -O0"
-./configure --prefix=/usr/local --disable-static --enable-shared
+FLAGS=""
+FLAGS="$FLAGS --disable-shared --enable-static"
+#FLAGS="$FLAGS --enable-shared --enable-static" 
+./configure --prefix=/tmp/hdf4 $FLAGS
+
+
 

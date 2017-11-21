@@ -1457,7 +1457,7 @@ DFGRIaddimlut(const char *filename, const void * imlut, int32 xdim, int32 ydim,
           HGOTO_DONE(SUCCEED);
       }
 
-    if (( file_id = DFGRIopen(filename, newfile ? DFACC_CREATE : DFACC_RDWR))== (int32) NULL)
+    if (( file_id = DFGRIopen(filename, newfile ? DFACC_CREATE : DFACC_RDWR))== 0)
         HGOTO_ERROR(DFE_BADOPEN, FAIL);
 
     /* make 8-bit compatibility only for older 8-bit stuff, not JPEG */

@@ -21,7 +21,7 @@
 #   define NULL 0
 #endif
 
-#if defined __STDC__ || defined PC || defined _WINDOWS || defined _WIN32
+#if defined __STDC__ || defined PC || defined _MSC_VER
 #define STDC_INCLUDES
 #endif
 

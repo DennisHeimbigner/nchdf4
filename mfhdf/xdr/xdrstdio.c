@@ -15,17 +15,11 @@ static char sccsid[] = "@(#)xdr_stdio.c 1.16 87/08/11 Copyr 1984 Sun Micro";
 
 #include <stdio.h>
 #include "types.h"
-#if !(defined MSDOS || defined WINNT || defined _WIN32 || defined __MINGW32__)
+#ifdef HAVE_NETINET_IN_H
 #        include <netinet/in.h>     /* for htonl() */
-#else
-#     if !(defined WINNT) & !defined _WIN32 & !defined __MINGW32__
-           extern long ntohl(long i_in);
-           extern long htonl(long i_in);
-           extern short ntohs(short i_in);
-           extern short htons(short i_in);
-#      else
+#endif
+#ifdef HAVE_WINSOCK_H
 #          include <winsock.h>
-#      endif /* WINNT */
 #endif
 #include "xdr.h"
 

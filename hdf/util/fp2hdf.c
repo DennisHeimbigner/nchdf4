@@ -173,8 +173,10 @@
 #include <string.h>
 #include <ctype.h>
 
-#ifdef _WIN32
+#ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
+#endif
+#ifdef HAVE_FCNTL_H
 #include <fcntl.h>
 #endif
 
@@ -379,7 +381,7 @@ main(int argc, char *argv[])
     const char *err3 = "No output file given.\n";
     const char *err4 = "Program aborted.\n";
 
-#ifdef _WIN32
+#ifdef _MSC_VER
 	_fmode = _O_BINARY;
 #endif
 
@@ -1122,7 +1124,7 @@ gtype(char *infile, struct Input *in, FILE **strm)
                 goto err;
             }
           if (!HDmemcmp("TEXT", buf, 4) || !HDmemcmp("text", buf, 4)) {
-#ifdef _WIN32
+#ifdef _MSC_VER
 			  _fmode = _O_TEXT;
 #endif
               in->is_text = TRUE;

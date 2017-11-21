@@ -34,7 +34,7 @@ name_path(char *path)
 {
  char *cp, *newc;
  
-#ifdef MSDOS
+#ifdef _MSC_VER
 #define FILE_DELIMITER '\\'
 #endif    
 #ifndef FILE_DELIMITER /* default to unix */

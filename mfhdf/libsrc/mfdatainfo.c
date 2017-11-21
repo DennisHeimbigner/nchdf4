@@ -43,14 +43,13 @@ LOCAL ROUTINES
 
 #include "local_nc.h"
 
-#ifdef HDF
 
 #ifndef DATAINFO_MASTER
 #define DATAINFO_MASTER
 #endif
 #include "mfhdf.h"
 
-#ifdef H4_HAVE_LIBSZ          /* we have the szip library */
+#ifdef HAVE_LIBSZ          /* we have the szip library */
 #include "szlib.h"
 #endif
 
@@ -913,4 +912,3 @@ intn SDgetanndatainfo(int32 sdsid, ann_type annot_type, uintn size, int32* offse
     return ret_value;
 } /* SDgetanndatainfo */
 
-#endif /* HDF */

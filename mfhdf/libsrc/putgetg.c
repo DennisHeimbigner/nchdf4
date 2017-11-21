@@ -31,9 +31,6 @@
  * Perform I/O on a generalized hyperslab.  The efficiency of this
  * implementation is dependent upon caching in the lower layers.
  */
-#ifndef HDF
-    static 
-#endif
 int
 NCgenio(handle, varid, start, count, stride, imap, values)
     NC		*handle;
