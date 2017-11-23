@@ -56,8 +56,9 @@ typedef    unsigned long    u_long;
 #include    <rpc/types.h>
 #include    <rpc/xdr.h>
 #else    /* NO_SYS_XDR_INC */
-#include      <types.h>  /* <types.h */
-#include      <xdr.h>    /* <xdr.h> */
+/* Take from ../xdr */
+#include      "types.h"  /* "types.h" */
+#include      "xdr.h"    /* "xdr.h" */
 #endif /* NO_SYSTEM_XDR_INCLUDES */
 
 #include "H4api_adpt.h"

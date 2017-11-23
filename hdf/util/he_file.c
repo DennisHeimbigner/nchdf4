@@ -18,6 +18,9 @@
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
+#ifdef HAVE_SYS_WAIT_H
+#include <sys/wait.h>
+#endif
 #include "he.h"
 
 /* get the prototype for the wait() func. */

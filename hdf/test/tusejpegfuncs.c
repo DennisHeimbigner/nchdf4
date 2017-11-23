@@ -3,8 +3,8 @@
  * the JPEG package by The Independent JPEG Group                            *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include <stdio.h>
-#include "jpeglib.h"
 #include "tproto.h"
+#include "jpeglib.h"
 
 #define ABS(x)  ((int)(x)<0 ? (-x) : x)
 

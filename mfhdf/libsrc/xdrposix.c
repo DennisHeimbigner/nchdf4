@@ -26,6 +26,10 @@
 typedef NETLONG     netlong;
 #undef  NETLONG
 
+#include "local_nc.h" /* prototypes for NCadvis, nc_error */
+		      /* also obtains <stdio.h>, <rpc/types.h>, &
+		       * <rpc/xdr.h> */
+
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
@@ -42,16 +46,19 @@ typedef NETLONG     netlong;
 #include <io.h>
 #endif
 
+#ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
+#endif
+
+#ifdef HAVE_ARPA_INET_H
+#include <arpa/inet.h>
+#endif
 
 #include <string.h>
-#include "local_nc.h" /* prototypes for NCadvis, nc_error */
-		      /* also obtains <stdio.h>, <rpc/types.h>, &
-		       * <rpc/xdr.h> */
 #include "mfhdf.h"
 
 #ifndef _MSC_VER
-        typedef u_int ncpos_t ;  /* all unicies */
+        typedef u_long ncpos_t ;  /* all unicies */
 #else
       typedef off_t ncpos_t ;
 #endif

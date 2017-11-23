@@ -90,4 +90,12 @@ void verify_datasize(int32 sds_id, int32 data_size, char* sds_name);
 /* Find and open an SDS by name */
 int32 get_SDSbyName(int32 sd_id, char* sds_name);
 
+/* Verify the unlimited dimension's size and the variable's data. */
+int verify_info_data(int32 sds_id, int32 expected_dimsize, int16 *result);
+
+/* Test driver for testing dimension functionality */
+int test_dimensions();
+
+/* Generate the correct name for the test file. */
+intn make_datafilename(char* basename, char* testfile, unsigned int size);
 

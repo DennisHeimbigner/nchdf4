@@ -51,6 +51,7 @@
 #endif
 
 #include "hdftest.h"
+#include "mfdatainfo.h"
 
 static intn test_nonspecial_SDSs();
 static intn test_compressed_SDSs();

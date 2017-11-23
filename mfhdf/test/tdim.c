@@ -768,7 +768,7 @@ static intn test_dim_strs()
 } /* test_dim_strs */
 
 /* Test driver for testing dimension functionality */
-extern int test_dimensions()
+int test_dimensions()
 {
     int num_errs = 0;
 

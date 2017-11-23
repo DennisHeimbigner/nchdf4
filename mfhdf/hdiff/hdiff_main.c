@@ -74,9 +74,11 @@ static void usage()
 int
 main(int argc, char *argv[])
 {
+/*
     extern int optind;
     extern int opterr;
     extern char *optarg;
+*/
  
     static diff_opt_t opt = /* defaults, overridden on command line */
     {

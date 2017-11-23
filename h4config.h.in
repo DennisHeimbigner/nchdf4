@@ -12,6 +12,9 @@
 /* Define to 1 if you have the <alloc.h> header file. */
 #undef HAVE_ALLOC_H
 
+/* Define to 1 if you have the <arpa/inet.h> header file. */
+#undef HAVE_ARPA_INET_H
+
 /* Define to 1 if the system has the type `boolean'. */
 #undef HAVE_BOOLEAN
 
@@ -42,7 +45,7 @@
 /* Define to 1 if you have the `jpeg' library (-ljpeg). */
 #undef HAVE_LIBJPEG
 
-/* Define to 1 if the system has the type 'long long int'. */
+/* Define to 1 if the system has the type `long long int'. */
 #undef HAVE_LONG_LONG_INT
 
 /* Define to 1 if you have the <malloc.h> header file. */
@@ -132,6 +135,9 @@
 /* Define to 1 if you have the <sys/types.h> header file. */
 #undef HAVE_SYS_TYPES_H
 
+/* Define to 1 if you have the <sys/wait.h> header file. */
+#undef HAVE_SYS_WAIT_H
+
 /* Define to 1 if the system has the type `uchar'. */
 #undef HAVE_UCHAR
 
@@ -141,7 +147,7 @@
 /* Define to 1 if you have the `unlink' function. */
 #undef HAVE_UNLINK
 
-/* Define to 1 if the system has the type 'unsigned long long int'. */
+/* Define to 1 if the system has the type `unsigned long long int'. */
 #undef HAVE_UNSIGNED_LONG_LONG_INT
 
 /* Define to 1 if you have the `vprintf' function. */
@@ -150,18 +156,17 @@
 /* Define to 1 if you have the `wait' function. */
 #undef HAVE_WAIT
 
-/* Define to 1 if you have the <winsock.h> header file. */
-#undef HAVE_WINSOCK_H
-
 /* Define to 1 if the system has the type `_Bool'. */
 #undef HAVE__BOOL
 
 /* Define if building HDF4 (always true) */
 #undef HDF
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
+
+/* Never use system xdr.h */
+#undef NO_SYS_XDR_INC
 
 /* Name of package */
 #undef PACKAGE

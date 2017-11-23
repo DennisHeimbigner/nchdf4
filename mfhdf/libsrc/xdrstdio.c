@@ -18,10 +18,10 @@
  *      last op cached in x_handy
  */
 
-#include <stdio.h>
 #include "local_nc.h" /* prototypes for NCadvis, nc_error */
 		      /* also obtains <stdio.h>, <rpc/types.h>, &
 		       * <rpc/xdr.h> */
+#include <stdio.h>
 #ifdef _MSC_VER
 #include    <fcntl.h>   /* O_BINARY */
 #define USE_BFLAG

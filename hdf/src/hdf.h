@@ -17,6 +17,8 @@
 #define HDF_H
 
 #include "h4config.h"
+#ifdef HAVE_SYS_TYPES_H
+#endif
 #include "hdfi.h"
 #include "hlimits.h"
 

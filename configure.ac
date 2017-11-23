@@ -50,9 +50,10 @@ AC_HEADER_STDC
 AC_CHECK_HEADERS([malloc.h memory.h stddef.h stdlib.h string.h strings.h unistd.h stdarg.h])
 AC_CHECK_HEADERS([fcntl.h stdc.h math.h alloc.h])
 AC_CHECK_HEADERS([netinet/in.h])
-AC_CHECK_HEADERS([winsock.h])
+AC_CHECK_HEADERS([arpa/inet.h])
 AC_CHECK_HEADERS([conio.h])
 AC_CHECK_HEADERS([sys/stat.h sys/types.h])
+AC_CHECK_HEADERS([sys/wait.h])
 
 ##################################################
 # Checks for typedefs, structures, and compiler characteristics.
@@ -124,6 +125,7 @@ AC_SUBST([LDFLAGS])
 # Always Define
 
 AC_DEFINE([HDF],[1],[Define if building HDF4 (always true)])
+AC_DEFINE([NO_SYS_XDR_INC],[1],[Never use system xdr.h])
 
 ##################################################
 # Process the Makefile.am (and other) files
