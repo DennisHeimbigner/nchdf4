@@ -43,10 +43,7 @@
     The new version of the netCDF library(2.4.3?) has fixed 
     this I think. To fix it here requires merging in those fixes.*/
 
-#define NETCDF_READ_TEST 
-
 /* all test functions to be called in main */
-extern int test_netcdf_reading();
 extern int test_szip_compression();
 extern int test_checkempty();
 extern int test_idtest();
@@ -1346,12 +1343,6 @@ main(int argc, char *argv[])
     CHECK(status, FAIL, "test_chunk");
     num_errs = num_errs + status;
 #endif /* CHUNK_TEST */
-
-#ifdef NETCDF_READ_TEST
-    status = test_netcdf_reading();
-    CHECK(status, FAIL, "test_netcdf_reading");
-    num_errs = num_errs + status;
-#endif /* NETCDF_READ_TEST */
 
     /* BMR: Added a test routine dedicated for testing dimensions.  A
        test on SDsetdimscale for an unsigned type was added while I was

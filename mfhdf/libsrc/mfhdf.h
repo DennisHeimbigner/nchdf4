@@ -21,13 +21,7 @@
 /* change this back if it causes problems on other machines than the Alhpa-QAK */
 /* Reverse back to the previous way. AKC */
 #include "hdf.h"
-#ifdef HAVE_NETCDF
-#include "netcdf.h"
-#else
-#include "hdf4_netcdf.h"
-#endif
 #include "local_nc.h"
-
 #include "mfhdfi.h"
 #include "mfdatainfo.h"
 

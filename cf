@@ -1,4 +1,5 @@
-CYGWIN=1
+
+#CYGWIN=1
 
 LDFLAGS=
 if test x$CYGWIN = x ; then

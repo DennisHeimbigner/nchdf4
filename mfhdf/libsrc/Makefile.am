@@ -17,9 +17,10 @@ AM_CPPFLAGS = $(lib_INCLUDES) $(DEFINES)
 lib_LTLIBRARIES = libmfhdf.la
 
 ## Information for building the "libmfhdf.la" library
-CSOURCES = array.c attr.c cdf.c dim.c file.c hdfsds.c iarray.c error.c    \
-         globdef.c mfsd.c mfdatainfo.c nssdc.c putget.c putgetg.c	\
+CSOURCES = array.c cdf.c attr.c dim.c file.c hdfsds.c iarray.c error.c    \
+         globdef.c mfsd.c mfdatainfo.c nssdc.c putget.c putgetg.c 	\
 	 sharray.c string.c var.c xdrposix.c
+# cdf.c
 
 libmfhdf_la_SOURCES = $(CSOURCES)
 

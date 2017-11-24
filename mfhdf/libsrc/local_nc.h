@@ -32,41 +32,12 @@
 #endif
 
 /* Do we have system XDR files */
-#ifndef  NO_SYS_XDR_INC
-
-#ifdef __CYGWIN__
-#ifndef __u_char_defined
-typedef    unsigned char    u_char;
-#define __u_char_defined
-#endif
-#ifndef __u_short_defined
-typedef    unsigned short    u_short;
-#define __u_short_defined
-#endif
-#ifndef __u_int_defined
-typedef    unsigned int    u_int;
-#define __u_int_defined
-#endif
-#ifndef __u_long_defined
-typedef    unsigned long    u_long;
-#define __u_long_defined
-#endif
-#endif /* __CYGWIN__ */
-
-#include    <rpc/types.h>
-#include    <rpc/xdr.h>
-#else    /* NO_SYS_XDR_INC */
 /* Take from ../xdr */
 #include      "types.h"  /* "types.h" */
 #include      "xdr.h"    /* "xdr.h" */
-#endif /* NO_SYSTEM_XDR_INCLUDES */
 
 #include "H4api_adpt.h"
-#ifdef H4_HAVE_NETCDF
-#include    "netcdf.h" /* needed for defs of nc_type, ncvoid, ... */
-#else
 #include "hdf4_netcdf.h"
-#endif
 
 /* ptr argument type in internal functions */
 #define Void    char
@@ -243,7 +214,6 @@ typedef struct {
 #define IS_RECVAR(vp) \
     ((vp)->shape != NULL ? (*(vp)->shape == NC_UNLIMITED) : 0 )
 
-#define netCDF_FILE  0
 #define HDF_FILE     1
 #define CDF_FILE     2
 
@@ -257,12 +227,6 @@ HDFLIBAPI const char *cdf_routine_name ; /* defined in lerror.c */
 
 /* Format version number for HDF file */
 #define HDFXMAGIC   0x0e031301   /* ^N^C^S^A */
-
-/* Format version number for netCDF classic file */
-#define NCMAGIC     0x43444601   /*  C D F 1 */
-
-/* Format version number for 64-bit offset file */
-#define NCMAGIC64   0x43444602   /*  C D F 2 */
 
 /* Format version number for link file */
 #define NCLINKMAGIC 0x43444c01   /*  C D L 1 */
@@ -283,7 +247,6 @@ extern "C" {
 /* If using the real netCDF library and API (when --disable-netcdf configure flag is used)
    need to mangle the HDF versions of netCDF API function names
    to not conflict w/ oriinal netCDF ones */
-#ifndef H4_HAVE_NETCDF
 #define nc_serror        HNAME(nc_serror)
 #define NCadvise         HNAME(NCadvise)
 #define NC_computeshapes HNAME(NC_computeshapes)
@@ -341,49 +304,6 @@ extern "C" {
 #define NCxdrfile_create HNAME(NCxdrfile_create)
 #define NCgenio          HNAME(NCgenio)      /* from putgetg.c */
 #define NC_var_shape     HNAME(NC_var_shape) /* from var.c */
-#endif /* !H4_HAVE_NETCDF ie. NOT USING HDF version of netCDF ncxxx API */
-
-#define nncpopt           H4_F77_FUNC(ncpopt, NCPOPT)
-#define nncgopt           H4_F77_FUNC(ncgopt, NCGOPT)
-#define nnccre            H4_F77_FUNC(nccre, NCCRE)
-#define nncopn            H4_F77_FUNC(ncopn, NCOPN)
-#define nncddef           H4_F77_FUNC(ncddef, NCDDEF)
-#define nncdid            H4_F77_FUNC(ncdid, NCDID)
-#define nncvdef           H4_F77_FUNC(ncvdef, NCVDEF)
-#define nncvid            H4_F77_FUNC(ncvid, NCVID)
-#define nnctlen           H4_F77_FUNC(nctlen, NCTLEN)
-#define nncclos           H4_F77_FUNC(ncclos, NCCLOS)
-#define nncredf           H4_F77_FUNC(ncredf, NCREDF)
-#define nncendf           H4_F77_FUNC(ncendf, NCENDF)
-#define nncinq            H4_F77_FUNC(ncinq, NCINQ)
-#define nncsnc            H4_F77_FUNC(ncsnc, NCSNC)
-#define nncabor           H4_F77_FUNC(ncabor, NCABOR)
-#define nncdinq           H4_F77_FUNC(ncdinq, NCDINQ)
-#define nncdren           H4_F77_FUNC(ncdren, NCDREN)
-#define nncvinq           H4_F77_FUNC(ncvinq, NCVINQ)
-#define nncvpt1           H4_F77_FUNC(ncvpt1, NCVPT1)
-#define nncvp1c           H4_F77_FUNC(ncvp1c, NCVP1C)
-#define nncvpt            H4_F77_FUNC(ncvpt, NCVPT)
-#define nncvptc           H4_F77_FUNC(ncvptc, NCVPTC)
-#define nncvptg           H4_F77_FUNC(ncvptg, NCVPTG)
-#define nncvpgc           H4_F77_FUNC(ncvpgc, NCVPGC)
-#define nncvgt1           H4_F77_FUNC(ncvgt1, NCVGT1)
-#define nncvg1c           H4_F77_FUNC(ncvg1c, NCVG1C)
-#define nncvgt            H4_F77_FUNC(ncvgt, NCVGT)
-#define nncvgtc           H4_F77_FUNC(ncvgtc, NCVGTC)
-#define nncvgtg           H4_F77_FUNC(ncvgtg, NCVGTG)
-#define nncvggc           H4_F77_FUNC(ncvggc, NCVGGC)
-#define nncvren           H4_F77_FUNC(ncvren, NCVREN)
-#define nncapt            H4_F77_FUNC(ncapt, NCAPT)
-#define nncaptc           H4_F77_FUNC(ncaptc, NCAPTC)
-#define nncainq           H4_F77_FUNC(ncainq, NCAINQ)
-#define nncagt            H4_F77_FUNC(ncagt, NCAGT)
-#define nncagtc           H4_F77_FUNC(ncagtc, NCAGTC)
-#define nncacpy           H4_F77_FUNC(ncacpy, NCACPY)
-#define nncanam           H4_F77_FUNC(ncanam, NCANAM)
-#define nncaren           H4_F77_FUNC(ncaren, NCAREN)
-#define nncadel           H4_F77_FUNC(ncadel, NCADEL)
-#define nncsfil           H4_F77_FUNC(ncsfil, NCSFIL)
 
 #ifdef WIN32
 HDFFCLIBAPI void nncpopt
@@ -804,13 +724,6 @@ HDFLIBAPI bool_t nssdc_xdr_cdf
 
 HDFLIBAPI intn HDiscdf
     (const char *filename);
-
-HDFLIBAPI intn HDisnetcdf
-    (const char *filename);
-
-HDFLIBAPI intn HDisnetcdf64
-    (const char *filename);
-
 
 #ifdef __cplusplus
 }

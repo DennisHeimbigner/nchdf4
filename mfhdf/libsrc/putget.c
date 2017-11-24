@@ -392,8 +392,6 @@ const long *coords ;
             {
             case HDF_FILE:
                 return( vp->dsizes[0] * *coords + offset) ;
-            case netCDF_FILE:
-                return( vp->begin + handle->recsize * *coords + offset) ;
             case CDF_FILE:
 #ifdef DEBUG
                 fprintf(stderr, "Yow!  Don't do CDF records yet\n");
@@ -407,8 +405,6 @@ const long *coords ;
             {
             case HDF_FILE:
                 return (offset);
-            case netCDF_FILE:
-                return (vp->begin + offset);
             case CDF_FILE:
                 if((vix = vp->vixHead) == NULL)
                     return (-1);
@@ -1789,9 +1785,6 @@ Void *value ;
                     return -1;
                 else
                     return 0;
-            case netCDF_FILE:
-                return(xdr_NCv1data(handle->xdrs, vp->begin, vp->type, value) ?
-                       0 : -1 ) ;
             }
       }
 
@@ -1810,10 +1803,6 @@ Void *value ;
     switch(handle->file_type) {
     case HDF_FILE:
         if(FAIL == hdf_xdr_NCv1data(handle, vp, offset, vp->type, value))
-            return(-1) ;
-        break;
-    case netCDF_FILE:
-        if( !xdr_NCv1data(handle->xdrs, offset, vp->type, value))
             return(-1) ;
         break;
     }
@@ -2099,12 +2088,6 @@ Void *values ;
                                 (uint32)*edges, values))
               return(-1) ;
           break;
-      case netCDF_FILE:
-          if(!xdr_NCvdata(handle->xdrs,
-                          offset, vp->type, 
-                          (unsigned)*edges, values))
-              return(-1) ;
-          break;
       }
         
 	if(newrecs > 0)
@@ -2157,12 +2140,6 @@ void *values ;
 	arrayp("edges", vp->assoc->count, edges) ;
 #endif /* VDEBUG */
 
-    if(handle->file_type != netCDF_FILE)
-      {
-          if (FAIL == DFKsetNT(vp->HDFtype))
-              return -1;
-      }
-
 	if(vp->assoc->count == 0) /* 'scaler' variable */
       {
 
@@ -2173,9 +2150,6 @@ void *values ;
                     return -1;
                 else
                     return 0;
-            case netCDF_FILE:
-                return(xdr_NCv1data(handle->xdrs, vp->begin, vp->type, values) ?
-                       0 : -1 ) ;
             }
 
       }
@@ -2271,12 +2245,6 @@ void *values ;
                                 if(!nssdc_xdr_NCvdata(handle, vp,
                                                       offset, vp->type, 
                                                       (uint32)iocount, values))
-                                    return(-1) ;
-                                break;
-                            case netCDF_FILE:
-                                if(!xdr_NCvdata(handle->xdrs,
-                                                offset, vp->type, 
-                                                (unsigned)iocount, values))
                                     return(-1) ;
                                 break;
                             }
@@ -2612,12 +2580,6 @@ Void **datap ;
                 if(!nssdc_xdr_NCvdata(handle, rvp[ii],
                                       offset, rvp[ii]->type, 
                                       (uint32)iocount, datap[ii]))
-                    return(-1) ;
-                break;
-            case netCDF_FILE:
-                if(!xdr_NCvdata(handle->xdrs,
-                                offset, rvp[ii]->type, 
-                                iocount, datap[ii]))
                     return(-1) ;
                 break;
             }

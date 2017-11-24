@@ -186,8 +186,7 @@ const char *filename;
     HI_CLOSE(fp);
 
     /* If magic_num is a valid file format version number, then return it */
-    if (magic_num == HDFXMAGIC || magic_num == CDFMAGIC ||
-	magic_num == NCMAGIC  || magic_num == NCMAGIC64)
+    if (magic_num == HDFXMAGIC || magic_num == CDFMAGIC)
 	ret_value = magic_num;
     else
 	HGOTO_ERROR(DFE_INVFILE, FAIL);
@@ -230,6 +229,7 @@ done:
     return ret_value;
 }
 
+#if 0
 /* -------------------------------- HDisnetcdf --------------------------------
 
   Return TRUE if the given file is a netCDF file, FALSE otherwise.
@@ -249,7 +249,7 @@ const char *filename;
     if (magic_num == NCMAGIC) 
         ret_value = TRUE;
     else 
-        ret_value = FALSE;
+    ret_value = FALSE;
 
 done:
     if (ret_value == FALSE)
@@ -289,6 +289,8 @@ done:
 
     return ret_value;
 } /* HDisnetcdf64 */
+
+#endif
 
 /******************************************************************************/
 
@@ -339,8 +341,6 @@ int mode ;
               cdf->file_type = HDF_FILE;
           else if(HDiscdf(name))
               cdf->file_type = CDF_FILE;
-          else if(HDisnetcdf(name))
-              cdf->file_type = netCDF_FILE;
           else
             {
                 ret_value = NULL;
@@ -360,13 +360,6 @@ int mode ;
       {
       case HDF_FILE:
           hdf_xdrfile_create(cdf->xdrs, mode); /* return type is 'void' */
-          break;
-      case netCDF_FILE:
-          if( NCxdrfile_create( cdf->xdrs, name, mode ) < 0) 
-            {
-                ret_value = NULL;
-                goto done;
-            } 
           break;
       case CDF_FILE:
           /* CDF_xdrfile_create(); */
@@ -442,9 +435,6 @@ int mode ;
 	  /* copy filename only up to its length instead of FILENAME_MAX as
 	     used to be */
           HDstrncpy(cdf->path, name, strlen(name)+1);
-          break;
-      case netCDF_FILE:
-          /* Nothing */
           break;
       case CDF_FILE:
 #ifdef DEBUG
@@ -641,9 +631,6 @@ xdr_cdf(xdrs, handlep)
           if (hdf_xdr_cdf(xdrs, handlep) == FAIL)
               ret_value = FALSE;
           break;
-      case netCDF_FILE:
-          ret_value = NC_xdr_cdf(xdrs, handlep);
-          break;
       case CDF_FILE:
           ret_value = nssdc_xdr_cdf(xdrs, handlep);
           break;
@@ -695,7 +682,7 @@ NC_xdr_cdf(xdrs, handlep)
           return(FALSE) ;
       }
 
-	if( xdrs->x_op == XDR_DECODE && magic != NCMAGIC )
+	if( xdrs->x_op == XDR_DECODE)
       {
           if(magic == NCLINKMAGIC)
             {

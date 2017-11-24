@@ -488,13 +488,6 @@ int cdfid ;
 
     switch(file_type) 
       {
-      case netCDF_FILE:
-          if(flags & (NC_INDEF | NC_CREAT))
-            {
-                if( remove(path) != 0 )
-                    nc_serror("couldn't remove filename \"%s\"", path) ;
-            }
-          break;
       case HDF_FILE:
           if(flags & NC_CREAT)
             {

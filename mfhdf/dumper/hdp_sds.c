@@ -1193,25 +1193,16 @@ intn dsd(dump_info_t *dumpsds_opts,
       HDstrcpy( dumpsds_opts->ifile_name, file_name ); /* record file name */
       curr_arg++; /* move argument pointer forward */
 
-      /* HDF4 doesn't process netCDF 64-bit files */
-      if (HDisnetcdf64(file_name))
-      {
-         printf("Invalid input file: hdp cannot read a netCDF 64-bit file, %s\n", file_name );
-         continue; /* to the next file */
-      }
-
-      if (HDisnetcdf(file_name)) /* record if file is netCDF */
-         dumpsds_opts->file_type = netCDF_FILE;
-      else if (Hishdf(file_name)) /* record if file is HDF */
+      if (Hishdf(file_name)) /* record if file is HDF */
          dumpsds_opts->file_type = HDF_FILE;
       else
       {
          /* if there are no more files to be processed, print informative
             message, then returns with FAIL */
 	 if( curr_arg == argc )
-	    {ERROR_GOTO_1( "in dsd: %s is not an HDF or netCDF file", file_name);}
+	    {ERROR_GOTO_1( "in dsd: %s is not an HDF file", file_name);}
          else /* print message, then continue processing the next file */
-            {ERROR_CONT_1( "in dsd: %s is not an HDF or netCDF file", file_name);}
+            {ERROR_CONT_1( "in dsd: %s is not an HDF file", file_name);}
       }
 	 
       /* open current hdf file with error check, if fail, go to next file */
