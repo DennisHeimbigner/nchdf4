@@ -9,9 +9,10 @@ include $(top_srcdir)/config/commence.am
 
 SUBDIRS = hdf mfhdf man
 
-EXTRA_DIST = 
-DISTCLEANFILE =
+EXTRA_DIST = README.txt README.md CMakeLists.txt LICENSE UNIDATA.TXT \
+		h4config.h.cmake.in release_notes libhdf4.settings.in
 
+DISTCLEANFILE =
 
 # install .settings in lib directory.
 settingsdir=$(libdir)

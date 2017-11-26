@@ -88,7 +88,7 @@ usage(void)
     printf("               [-b[egin] name] \n");
     printf("               [-s[ummary]]  \n");
     printf("               [-c[leanoff]]  \n");
-    printf("               [-n[ocaching]]  \n");
+    printf("               [-C[aching]]  \n");
     printf("               [-h[elp]]  \n");
     printf("\n\n");
     printf("verbose   controls the amount of information displayed\n");
@@ -97,7 +97,7 @@ usage(void)
     printf("begin     start at the name of the test givin\n");
     printf("summary   prints a summary of test results at the end\n");
     printf("cleanoff  does not delete *.hdf files after execution of tests\n");
-    printf("nocaching do not turn on low-level DD caching\n");
+    printf("Caching turn on low-level DD caching\n");
     printf("help      print out this information\n");
     printf("\n\n");
     printf("This program currently tests the following: \n\n");
@@ -115,7 +115,7 @@ main(int argc, char *argv[])
     int         Loop, Loop1;
     int         Summary = 0;
     int         CleanUp = 1;
-    int         Cache = 1;
+    int         Cache = 0;
     uint32      lmajor, lminor, lrelease;
     char        lstring[81];
 
@@ -196,9 +196,9 @@ main(int argc, char *argv[])
                                   (HDstrcmp(argv[CLLoop], "-c") == 0)))
               CleanUp = 0;
 
-          if ((argc > CLLoop) && ((HDstrcmp(argv[CLLoop], "-nocache") == 0) ||
-                                  (HDstrcmp(argv[CLLoop], "-n") == 0)))
-              Cache = 0;
+          if ((argc > CLLoop) && ((HDstrcmp(argv[CLLoop], "-Cache") == 0) ||
+                                  (HDstrcmp(argv[CLLoop], "-C") == 0)))
+              Cache = 1;
 
           if ((argc > CLLoop + 1) && ((HDstrcmp(argv[CLLoop], "-exclude") == 0) ||
                                       (HDstrcmp(argv[CLLoop], "-x") == 0)))

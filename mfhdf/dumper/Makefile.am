@@ -21,8 +21,16 @@ bin_PROGRAMS = hdp
 
 ## Information for building the "hdp" program
 hdp_SOURCES = hdp.c hdp_dump.c hdp_gr.c hdp_list.c hdp_rig.c hdp_sds.c      \
-              hdp_util.c hdp_vd.c hdp_vg.c show.c
+              hdp_util.c hdp_vd.c hdp_vg.c show.c hdp.h
 hdp_LDADD = $(LIBMFHDF) $(LIBHDF) @LIBS@
 hdp_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF)
 
-include $(top_srcdir)/config/conclude.am
+#############################################################################
+
+TESTS = testhdp.sh
+
+EXTRA_DIST = testfiles testhdp.sh.in
+
+#############################################################################
+
+#include $(top_srcdir)/config/conclude.am

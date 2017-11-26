@@ -11,7 +11,10 @@ AM_CPPFLAGS=-I$(top_srcdir)/hdf/src
 ##                          Programs to build                              ##
 #############################################################################
 
-TEST_PROG = testhdf buffer
+EXTRA_DIST = Tables_External_File
+
+#TEST_PROG = testhdf buffer
+TESTS = testhdf buffer
 check_PROGRAMS = testhdf buffer
 
 testhdf_SOURCES = an.c anfile.c bitio.c blocks.c chunks.c comp.c   \
@@ -19,7 +22,9 @@ testhdf_SOURCES = an.c anfile.c bitio.c blocks.c chunks.c comp.c   \
                   mgr.c nbit.c rig.c sdmms.c sdnmms.c sdstr.c slab.c tbv.c  \
                   tattdatainfo.c tdatainfo.c tdfr8.c tdupimgs.c testhdf.c   \
 		  tmgrattr.c tmgrcomp.c tree.c tszip.c tusejpegfuncs.c      \
-		  tutils.c tvattr.c tvnameclass.c tvset.c tvsfpack.c vers.c
+		  tutils.c tvattr.c tvnameclass.c tvset.c tvsfpack.c vers.c \
+		  tdatainfo.h tproto.h tutils.h
+
 testhdf_LDADD = $(LIBHDF)
 testhdf_DEPENDENCIES = testdir $(LIBHDF) 
 
@@ -40,5 +45,4 @@ CHECK_CLEANFILES += fortest.arg Fortran_err.dat testdir/t5.hdf Tables_External_F
 distclean-local:
 	-rm -rf testdir
 
-include $(top_srcdir)/config/conclude.am
-                 
+#include $(top_srcdir)/config/conclude.am

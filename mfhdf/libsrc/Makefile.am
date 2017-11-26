@@ -20,9 +20,13 @@ lib_LTLIBRARIES = libmfhdf.la
 CSOURCES = array.c cdf.c attr.c dim.c file.c hdfsds.c iarray.c error.c    \
          globdef.c mfsd.c mfdatainfo.c nssdc.c putget.c putgetg.c 	\
 	 sharray.c string.c var.c xdrposix.c
+
+CHEADERS = alloc.h error.h hdf2netcdf.h local_nc.h mfdatainfo.h \
+	mfhdf.h mfhdfi.h mfprivate.h 
+
 # cdf.c
 
-libmfhdf_la_SOURCES = $(CSOURCES)
+libmfhdf_la_SOURCES = $(CSOURCES) $(CHEADERS)
 
 libmfhdf_la_LIBADD = $(top_builddir)/mfhdf/xdr/libxdr.la \
 			$(top_builddir)/hdf/src/libdf.la
@@ -36,3 +40,4 @@ include_HEADERS = local_nc.h mfhdf.h mfhdfi.h mfdatainfo.h
 #############################################################################
 
 DISTCLEANFILES = *.new *.hdf *.cdf *.cdl This*
+

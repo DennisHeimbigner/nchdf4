@@ -23,9 +23,16 @@ bin_PROGRAMS = hdiff
 ## Information for building the "hdiff" program
 hdiff_SOURCES = hdiff.c hdiff_array.c hdiff_gr.c hdiff_list.c hdiff_main.c  \
                 hdiff_mattbl.c hdiff_gattr.c hdiff_misc.c hdiff_sds.c       \
-                hdiff_table.c hdiff_vs.c hdiff_dim.c
+                hdiff_table.c hdiff_vs.c hdiff_dim.c                        \
+		hdiff.h hdiff_dim.h hdiff_list.h hdiff_mattbl.h hdiff_table.h
 hdiff_LDADD = $(LIBMFHDF) $(LIBHDF) -lm
 hdiff_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF)
+
+#############################################################################
+
+TESTS = testhdiff.sh
+
+EXTRA_DIST = testfiles testhdiff.sh.in
 
 #############################################################################
 ##                          And the cleanup                                ##
@@ -35,4 +42,4 @@ CHECK_CLEANFILES += hdifftst1.hdf hdifftst2.hdf hdifftst3.hdf hdifftst4.hdf hdif
 
 DISTCLEANFILES =
 
-include $(top_srcdir)/config/conclude.am
+#include $(top_srcdir)/config/conclude.am

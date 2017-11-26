@@ -2,14 +2,14 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.62)
-AC_INIT([hdf4], 4.2.13, support-netcdf@unidata.ucar.edu)
+AC_INIT([nchdf4], 4.2.13, support-netcdf@unidata.ucar.edu)
 
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 AC_CONFIG_MACRO_DIR([conf])
 AC_CONFIG_HEADER([h4config.h])
 
-AM_INIT_AUTOMAKE([foreign dist-tarZ subdir-objects])
+AM_INIT_AUTOMAKE([foreign subdir-objects])
 
 #
 # ======================================================================
@@ -129,14 +129,18 @@ AC_DEFINE([NO_SYS_XDR_INC],[1],[Never use system xdr.h])
 
 ##################################################
 # Process the Makefile.am (and other) files
+
+# Following are the shell scripts
+SCRIPTS="hdf/util/h4redeploy hdf/util/h4cc hdf/util/testutil.sh mfhdf/dumper/testhdp.sh \
+          mfhdf/hdfimport/testutil.sh mfhdf/hdiff/testhdiff.sh mfhdf/hrepack/hrepack.sh  \
+	  mfhdf/hrepack/hrepack_all.sh mfhdf/test/testmfhdf.sh"
+
 AC_CONFIG_FILES([Makefile
+libhdf4.settings
 hdf/Makefile
 hdf/src/Makefile
 hdf/util/Makefile
-hdf/util/h4redeploy
-hdf/util/h4cc
 hdf/test/Makefile
-libhdf4.settings
 man/Makefile
 mfhdf/Makefile
 mfhdf/libsrc/Makefile
@@ -145,13 +149,17 @@ mfhdf/hdfimport/Makefile
 mfhdf/hdiff/Makefile
 mfhdf/hrepack/Makefile
 mfhdf/xdr/Makefile
-mfhdf/hrepack/hrepack.sh
-mfhdf/hrepack/hrepack_all.sh
 mfhdf/test/Makefile
-mfhdf/test/testmfhdf.sh
+${SCRIPTS}
 ])
 
 AC_OUTPUT
 
+# AC_CONFIG_COMMANDS_POST does not work as I thought it did, so do it directly
+
+# Make all shell scripts executable 
+for sc in ${SCRIPTS} ; do chmod a+x ${sc}; done
+
 # Display settings
 cat libhdf4.settings
+

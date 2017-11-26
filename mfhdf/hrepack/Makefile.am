@@ -25,18 +25,24 @@ hrepack_SOURCES = hrepack.c hrepack_an.c hrepack_gr.c                       \
                   hrepack_list.c hrepack_lsttable.c hrepack_main.c          \
                   hrepack_opttable.c hrepack_parse.c                        \
                   hrepack_sds.c hrepack_utils.c                             \
-                  hrepack_vg.c hrepack_vs.c hrepack_dim.c
+                  hrepack_vg.c hrepack_vs.c hrepack_dim.c                   \
+		  hrepack.h hrepack_an.h hrepack_dim.h hrepack_gr.h         \
+		  hrepack_lsttable.h hrepack_opttable.h hrepack_parse.h     \
+		  hrepack_sds.h hrepack_utils.h hrepack_vg.h                \
+		  hrepack_vs.h pal_rgb.h
+
 hrepack_LDADD = $(LIBMFHDF) $(LIBHDF)
 hrepack_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF)
 
 #############################################################################
 ##                   Testing -- Here there be dragons.                     ##
 #############################################################################
-TEST_SCRIPT=hrepack.sh
-TEST_PROG=test_hrepack
+#TEST_SCRIPT=hrepack.sh
+#TEST_PROG=test_hrepack
 
-check_SCRIPTS=hrepack.sh
+#check_SCRIPTS=hrepack.sh
 check_PROGRAMS = hrepack_check test_hrepack
+TESTS = hrepack.sh test_hrepack
 
 test_hrepack_SOURCES = hrepacktst.c
 test_hrepack_LDADD = $(LIBMFHDF) $(LIBHDF) -lm
@@ -49,6 +55,10 @@ hrepack_check_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF)
 # The hrepack.sh script needs test_hrepack to run first.
 hrepack.sh.chkexe_: test_hrepack.chkexe_
 
+EXTRA_DIST = hrepack.sh.in hrepack_all.sh.in
+
+EXTRA_DIST += hrepacktst1.hdf hrepacktst2.hdf hrepacktst3.hdf
+
 #############################################################################
 ##                          And the cleanup                                ##
 #############################################################################
@@ -57,4 +67,4 @@ CHECK_CLEANFILES += *.hdf
 
 DISTCLEANFILES = hrepack.sh
 
-include $(top_srcdir)/config/conclude.am
+#include $(top_srcdir)/config/conclude.am

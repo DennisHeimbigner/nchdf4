@@ -17,7 +17,7 @@ bin_PROGRAMS = gif2hdf hdf2gif hdf2jpeg hdf24to8 hdf8to24 hdfcomp hdfed     \
 
 bin_SCRIPTS = h4redeploy h4cc
 
-gif2hdf_SOURCES = gif2hdf.c gif2mem.c gifread.c decompress.c writehdf.c
+gif2hdf_SOURCES = gif2hdf.c gif2mem.c gifread.c decompress.c writehdf.c gif.h
 gif2hdf_LDADD = $(LIBHDF)
 gif2hdf_DEPENDENCIES = $(LIBHDF)
 gif2hdf_LDFLAGS = $(LT_STATIC_EXEC) $(AM_LDFLAGS)
@@ -47,7 +47,7 @@ hdfcomp_LDADD = $(LIBHDF)
 hdfcomp_DEPENDENCIES = $(LIBHDF)
 hdfcomp_LDFLAGS = $(LT_STATIC_EXEC) $(AM_LDFLAGS)
 
-hdfed_SOURCES = he_cntrl.c he_disp.c he_file.c he_main.c
+hdfed_SOURCES = he_cntrl.c he_disp.c he_file.c he_main.c he.h he_proto.h
 hdfed_LDADD = $(LIBHDF)
 hdfed_DEPENDENCIES = $(LIBHDF)
 hdfed_LDFLAGS = $(LT_STATIC_EXEC) $(AM_LDFLAGS)
@@ -108,6 +108,10 @@ vshow_DEPENDENCIES = ../src/libdf.la
 vshow_LDFLAGS = $(LT_STATIC_EXEC) $(AM_LDFLAGS)
 
 #############################################################################
+
+TESTS = testutil.sh
+
+#############################################################################
 ##                          And the cleanup                                ##
 #############################################################################
 
@@ -121,5 +125,22 @@ distclean-local:
 
 DISTCLEANFILES =
 
-include $(top_srcdir)/config/conclude.am
-                 
+#include $(top_srcdir)/config/conclude.am
+
+EXTRA_DIST = h4cc.in h4fc.in h4redeploy.in testutil.sh.in
+
+EXTRA_DIST += \
+ fp2hdf.input1 \
+ fp2hdf.out1 \
+ hdfcomp.out1 \
+ hdfed-w.out1 \
+ hdfed.input1 \
+ hdfed.out1 \
+ hdfpack.out1 \
+ hdftor8.out1 \
+ jpeg2hdf.out1 \
+ ristosds.input1 \
+ ristosds.out1
+
+EXTRA_DIST += testfiles testutil.sh.in
+
