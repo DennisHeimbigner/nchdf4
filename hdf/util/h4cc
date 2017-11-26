@@ -25,7 +25,7 @@ includedir="${prefix}/include"
 ##                                                                        ##
 ############################################################################
 
-host_os="cygwin"
+host_os="linux-gnu"
 
 prog_name="`basename $0`"
 
@@ -46,8 +46,8 @@ CCBASE="gcc"
 CLINKERBASE="gcc"
 CFLAGS="-g -O0"
 CPPFLAGS="-I/home/dmh/git/netcdf-c"
-LDFLAGS=" -lz -ljpeg -L/usr/local/lib -lsz"
-LIBS="-ljpeg -lz "
+LDFLAGS=" -L/usr/lib64 -lz -ljpeg -L/usr/local/lib -lsz"
+LIBS="-ljpeg "
 
 CC="${HDF4_CC:-$CCBASE}"
 CLINKER="${HDF4_CLINKER:-$CLINKERBASE}"
