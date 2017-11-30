@@ -7,7 +7,7 @@ srcdir=.
 currentdir=`pwd`
 
 # Determine whether the szip library is available
-USE_COMP_SZIP="@USE_COMP_SZIP@"
+USE_COMP_SZIP=""
 
 # Definitions of commands and variables
 HDP='./hdp'               # The tool name
@@ -238,7 +238,7 @@ TEST dumpsds-14.out dumpsds sds2_dim1_samename.hdf
 # Test 15 prints headers of all data sets with various compression method to
 # test displaying compression information
 
-if test $USE_COMP_SZIP != "yes"; then
+if test "x$USE_COMP_SZIP" != "xyes"; then
 TEST dumpsds-15.out dumpsds sds_compressed.hdf
 else
 TEST dumpsds-15szip.out dumpsds sds_compressed.hdf

@@ -30,32 +30,22 @@ hdfnctest_LDADD = $(LIBMFHDF) $(LIBHDF) @LIBS@ $(XDRLIB)
 hdftest_SOURCES = hdftest.c tutils.c tchunk.c tcomp.c tcoordvar.c	\
 		  tdim.c temptySDSs.c tattributes.c texternal.c tfile.c	\
 		  tmixed_apis.c trank0.c tsd.c tsdsprops.c	\
-		  tszip.c tattdatainfo.c tdatainfo.c tdatasizes.c
+		  tszip.c tattdatainfo.c tdatainfo.c tdatasizes.c \
+		  hdftest.h
+
 hdftest_LDADD = $(LIBMFHDF) $(LIBHDF) @LIBS@ $(XDRLIB)
 
-EXTRA_DIST = testmfhdf.sh.in
+EXTRA_DIST = testmfhdf.sh.in cdftest.mak
 
-EXTRA_DIST += \
-    ExternalSDSexisting SDSlongname.hdf SD_external_file SD_external_file \
-    Unlim_dim.hdf Unlim_inloop.hdf attdatainfo.hdf b150.hdf \
-    bug376.hdf cdfout.new chknbit.hdf chktst.hdf \
-    comptst1.hdf comptst2.hdf comptst3.hdf comptst4.hdf \
-    comptst5.hdf comptst6.hdf comptst7.hdf datainfo_chk.hdf \
-    datainfo_chkcmp.hdf datainfo_cmp.hdf datainfo_extend.hdf datainfo_nodata.hdf \
-    datainfo_simple.hdf datasizes.hdf dim.hdf emptySDSs.hdf \
-    exttst.hdf hdffile.hdf idtypes.hdf multidimmixed.hdf \
-    multidimvar.nc nbit.hdf onedimmultivars.hdf onedimmultivars.nc \
-    onedimonevar.nc scaletst.hdf sds1_dim1_samename.hdf sds2_dim1_samename.hdf \
-    sds_compressed.hdf tattributes.hdf tdfanndg.hdf tdfansdg.hdf \
-    tdfsdatts.hdf test.cdf test1.hdf test2.hdf \
-    test_arguments.hdf testmfhdf.sh tvdatasvgroups_SD.hdf vars_samename.hdf
+EXTRA_DIST += sds_szipped.dat smallslice.0000.nc test1.nc testout.sav
 
 #############################################################################
 ##                          And the cleanup                                ##
 #############################################################################
 
-CHECK_CLEANFILES += *.new *.hdf *.cdf SD_externals
+CLEANFILES = ExternalSDSexisting multidimvar.nc onedimmultivars.nc onedimonevar.nc \
+		*.new *.hdf *.cdf SD_externals SD_external_file* This*
 
-DISTCLEANFILES =
+DISTCLEANFILES = testmfhdf.sh
 
 #include $(top_srcdir)/config/conclude.am

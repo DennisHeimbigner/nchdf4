@@ -78,7 +78,7 @@ MODIFICATION HISTORY
 #include "hdf.h"
 
 #ifdef HAVE_LIBSZ
-#include "szlib.h"                                                                                 
+#include "szlib.h"
 #endif 
 
 /* HDF compression includes */

@@ -31,6 +31,8 @@ TESTS = testhdp.sh
 
 EXTRA_DIST = testfiles testhdp.sh.in
 
+DISTCLEANFILES = testhdp.sh
+
 #############################################################################
 
 #include $(top_srcdir)/config/conclude.am

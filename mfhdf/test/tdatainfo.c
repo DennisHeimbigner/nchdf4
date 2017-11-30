@@ -46,7 +46,7 @@
 #define DATAINFO_TESTER /* to include mfdatainfo.h */
 #endif
 
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
 #include "szlib.h"
 #endif
 
@@ -571,7 +571,7 @@ static intn test_compressed_SDSs()
         for (jj = 0; jj < LENGTH2_Y; jj++)
             data2[ii][jj] = 500.50 * (ii + jj);
 
-#ifdef H4_HAVE_SZIP_ENCODER
+#ifdef HAVE_LIBSZ
     /* 
      * Create a 2-dim 5x8 element SDS, type float32, set SZIP compression,
      * then write 5x8 values to it
@@ -732,7 +732,7 @@ static intn test_compressed_SDSs()
     comp_type = COMP_CODE_INVALID; /* reset variables before retrieving info */
     status = SDgetcomptype(sds_id, &comp_type);
     CHECK(status, FAIL, "test_compressed_SDSs: SDgetcomptype");
-#ifdef H4_HAVE_SZIP_ENCODER
+#ifdef HAVE_LIBSZ
     VERIFY(comp_type, COMP_CODE_SZIP, "test_compressed_SDSs: SDgetcomptype");
 #else
     VERIFY(comp_type, COMP_CODE_NBIT, "test_compressed_SDSs: SDgetcomptype");

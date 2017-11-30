@@ -89,8 +89,6 @@ fi
 AC_SEARCH_LIBS([deflate], [zlibwapi zlibstat zlib zlib1 z], [], [
      AC_MSG_ERROR([Can't find or link to the z library. See config.log for errors.])])
 
-AC_SEARCH_LIBS([SZ_BufftoBuffCompress], [szlib], [HAVE_LIBSZ=yes], [HAVE_LIBSZ=1])
-
 AC_CHECK_LIB([jpeg], [jpeg_set_quality], [], [AC_MSG_ERROR([Can't find or link to the jpeg library. See config.log for errors.])])
 
 AC_CHECK_HEADERS(netcdf.h, [HAVE_NETCDF=1],[HAVE_NETCDF=0])
@@ -98,7 +96,21 @@ if test "x$HAVE_NETCDF" = x0 ; then
   AC_MSG_ERROR([Cannot locate netcdf.h; Please add it to CPPFLAGS])
 fi
 
-AM_CONDITIONAL(HAVE_LIBSZ, [test xHAVE_LIBSZ = x1])
+# Make use of szip a configuration option
+AC_MSG_CHECKING([whether to enable szip])
+AC_ARG_ENABLE([szip],
+              [AS_HELP_STRING([--enable-szip],
+                              [Enable szipe support])])
+test "x$enable_szip" = xyes || enable_szip=no
+AC_MSG_RESULT([$enable_szip])
+if test "x$enable_szip" = xyes; then
+   AC_DEFINE(HAVE_LIBSZ, 1, [set this only when szip is enabled])
+   # There are way too many aliases needed
+   AC_DEFINE(USE_COMP_SZIP, 1, [alias for HAVE_LIBSZ])
+   AC_SUBST(USE_COMP_SZIP, yes)
+   # Assume encoder is always there
+   AC_DEFINE(SZIP_HAS_ENCODER, yes, [alias for HAVE_LIBSZ])
+fi
 
 ##################################################
 
@@ -150,15 +162,14 @@ mfhdf/hdiff/Makefile
 mfhdf/hrepack/Makefile
 mfhdf/xdr/Makefile
 mfhdf/test/Makefile
-${SCRIPTS}
-])
+${SCRIPTS}])
 
 AC_OUTPUT
 
 # AC_CONFIG_COMMANDS_POST does not work as I thought it did, so do it directly
 
 # Make all shell scripts executable 
-for sc in ${SCRIPTS} ; do chmod a+x ${sc}; done
+chmod a+x ${SCRIPTS}
 
 # Display settings
 cat libhdf4.settings

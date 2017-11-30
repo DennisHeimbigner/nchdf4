@@ -44,7 +44,9 @@
     this I think. To fix it here requires merging in those fixes.*/
 
 /* all test functions to be called in main */
+#ifdef HAVE_LIBSZ
 extern int test_szip_compression();
+#endif
 extern int test_checkempty();
 extern int test_idtest();
 /* extern int test_sd(); - removed temporarily, see note in main(...) */
@@ -1412,10 +1414,12 @@ main(int argc, char *argv[])
     status = test_external();
     num_errs = num_errs + status;
 
+#ifdef HAVE_LIBSZ
     /* BMR: Verifies that some functions will not fail even though SZIP 
        library is not present or only decoder is available. */
     status = test_szip_compression();  /* in tszip.c */
     num_errs = num_errs + status;
+#endif
 
     /* BMR: This test fails on some systems when the user are logged in
      * as root.  We decided to comment it out until further work can be

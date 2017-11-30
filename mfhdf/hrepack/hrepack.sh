@@ -1,10 +1,10 @@
 #! /bin/sh
 #
 
-srcdir=@srcdir@
+srcdir=.
 
 # Determine whether the szip library is available
-USE_COMP_SZIP="@USE_COMP_SZIP@"
+USE_COMP_SZIP=""
 SZIP_HAS_ENCODER="@SZIP_HAS_ENCODER@"
 
 TESTNAME=hrepack

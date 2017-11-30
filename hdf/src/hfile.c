@@ -121,6 +121,10 @@
 #include <errno.h>
 #include "glist.h" /* for double-linked lists, stacks and queues */
 
+#if defined(_MSC_VER) || defined(__CYGWIN__) || defined(_WIN32) || defined(_WIN64)
+#define NO_MULTI_OPEN 1
+#endif
+
 /*--------------------- Locally defined Globals -----------------------------*/
 
 /* The default state of the file DD caching */

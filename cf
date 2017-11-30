@@ -1,5 +1,4 @@
-
-SZIP=1
+#SZIP=1
 
 # So are we operating under CYGWIN? (test using uname)
 tcc=`uname | cut -d '_'  -f 1`
@@ -11,7 +10,8 @@ LDFLAGS=
 if test x$CYGWIN = x ; then
 LDFLAGS="$LDFLAGS -L/usr/lib64"
 fi
-LDFLAGS="$LDFLAGS -lz -ljpeg"
+LDFLAGS="$LDFLAGS -lz"
+LDFLAGS="$LDFLAGS -L/usr/local/lib -ljpeg"
 
 if test x$SZIP = x1 ; then
 LDFLAGS="$LDFLAGS -L/usr/local/lib -lsz"
@@ -23,10 +23,14 @@ export CFLAGS="-g -O0"
 FLAGS=""
 FLAGS="$FLAGS --disable-shared --enable-static"
 #FLAGS="$FLAGS --enable-shared --enable-static" 
+if test x$SZIP = x1 ; then
+FLAGS="$FLAGS --enable-szip"
+fi
 export DISTCHECK_CONFIGURE_FLAGS="$FLAGS"
 
-./configure --prefix=/tmp/hdf4 $FLAGS
-
 if test x$1 = xdc ; then
-make all distcheck
+make distcheck
+else
+./configure --prefix=/tmp/hdf4 $FLAGS
 fi
+

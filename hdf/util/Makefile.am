@@ -115,7 +115,7 @@ TESTS = testutil.sh
 ##                          And the cleanup                                ##
 #############################################################################
 
-CHECK_CLEANFILES += gif_hdf_temp/bttrfly.hdf gif_hdf_temp/skull.gif    \
+CLEANFILES = gif_hdf_temp/bttrfly.hdf gif_hdf_temp/skull.gif    \
                  gif_hdf_temp/SunWheel.hdf
 
 # Automake's distclean won't remove directories, so we can add an additional
@@ -123,11 +123,9 @@ CHECK_CLEANFILES += gif_hdf_temp/bttrfly.hdf gif_hdf_temp/skull.gif    \
 distclean-local:
 	-rm -rf gif_hdf_temp
 
-DISTCLEANFILES =
+DISTCLEANFILES = h4cc h4redeploy testutil.sh
 
-#include $(top_srcdir)/config/conclude.am
-
-EXTRA_DIST = h4cc.in h4fc.in h4redeploy.in testutil.sh.in
+EXTRA_DIST = h4cc.in h4redeploy.in testutil.sh.in
 
 EXTRA_DIST += \
  fp2hdf.input1 \
@@ -144,3 +142,4 @@ EXTRA_DIST += \
 
 EXTRA_DIST += testfiles testutil.sh.in
 
+#include $(top_srcdir)/config/conclude.am

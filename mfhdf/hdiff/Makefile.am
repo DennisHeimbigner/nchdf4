@@ -38,8 +38,8 @@ EXTRA_DIST = testfiles testhdiff.sh.in
 ##                          And the cleanup                                ##
 #############################################################################
 
-CHECK_CLEANFILES += hdifftst1.hdf hdifftst2.hdf hdifftst3.hdf hdifftst4.hdf hdifftst5.hdf hdifftst6.hdf hdifftst7.hdf
+CLEANFILES = hdifftst1.hdf hdifftst2.hdf hdifftst3.hdf hdifftst4.hdf hdifftst5.hdf hdifftst6.hdf hdifftst7.hdf
 
-DISTCLEANFILES =
+DISTCLEANFILES = testhdiff.sh
 
 #include $(top_srcdir)/config/conclude.am

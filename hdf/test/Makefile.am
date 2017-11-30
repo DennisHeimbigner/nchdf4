@@ -11,7 +11,7 @@ AM_CPPFLAGS=-I$(top_srcdir)/hdf/src
 ##                          Programs to build                              ##
 #############################################################################
 
-EXTRA_DIST = Tables_External_File
+EXTRA_DIST = test_files
 
 #TEST_PROG = testhdf buffer
 TESTS = testhdf buffer
@@ -21,9 +21,9 @@ testhdf_SOURCES = an.c anfile.c bitio.c blocks.c chunks.c comp.c   \
                   conv.c extelt.c file.c file1.c litend.c macros.c man.c    \
                   mgr.c nbit.c rig.c sdmms.c sdnmms.c sdstr.c slab.c tbv.c  \
                   tattdatainfo.c tdatainfo.c tdfr8.c tdupimgs.c testhdf.c   \
-		  tmgrattr.c tmgrcomp.c tree.c tszip.c tusejpegfuncs.c      \
+		  tmgrattr.c tmgrcomp.c tree.c tusejpegfuncs.c      \
 		  tutils.c tvattr.c tvnameclass.c tvset.c tvsfpack.c vers.c \
-		  tdatainfo.h tproto.h tutils.h
+		  tdatainfo.h tproto.h tszip.c tutils.h
 
 testhdf_LDADD = $(LIBHDF)
 testhdf_DEPENDENCIES = testdir $(LIBHDF) 
@@ -38,7 +38,7 @@ testdir:
 ##                          And the cleanup                                ##
 #############################################################################
 
-CHECK_CLEANFILES += fortest.arg Fortran_err.dat testdir/t5.hdf Tables_External_File
+CLEANFILES = testdir/t5.hdf Tables_External_File
 
 # Automake's distclean won't remove directories, so we can add an additional
 # hook target which will do so during 'make distclean'.

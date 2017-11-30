@@ -41,7 +41,7 @@
    BMR - May 18, 2007
 *********************************************************************/
 
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
 #include "szlib.h"
 #endif
 
@@ -128,7 +128,7 @@ test_various_comps()
     status = SDendaccess (sds_id);
     CHECK(status, FAIL, "SDendaccess");
 
-#ifdef H4_HAVE_SZIP_ENCODER     /* we have szip library with encoder */
+#ifdef HAVE_LIBSZ     /* we have szip library with encoder */
     /* Create 3rd data set for SZIP compression. */
     sds_id = SDcreate (sd_id, SDS3_NAME, DFNT_INT32, RANK, dim_sizes);
     CHECK(sds_id, FAIL, "SDcreate");
@@ -156,7 +156,7 @@ test_various_comps()
     /* Terminate access to the 3rd data set. */
     status = SDendaccess (sds_id);
     CHECK(status, FAIL, "SDendaccess");
-#endif
+#endif /*HAVE_LIBSZ*/
 
     /* Terminate access to the SD interface and close the file. */
     status = SDend (sd_id);

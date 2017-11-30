@@ -149,6 +149,8 @@ const float64 image4[19][17][2]={
 {{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0}}
 };
 
+extern void test_mgr_szip();
+
 static void test_mgr_init(void);
 static void test_mgr_image_b1a(int flag);
 static void test_mgr_image_b1b(int flag);
@@ -4076,7 +4078,7 @@ test_mgr(void)
 #endif /* LATER */
     test_mgr_chunkwr();
 
-#ifdef H4_HAVE_LIBSZ   /* szlib present */
+#ifdef HAVE_LIBSZ   /* szlib present */
     test_mgr_szip();   /* write/read with szip compression */
 #else                  /* skip szip test it and report */
     fprintf(stderr, "         -- ***** GR SZIP test skipped *****\n");

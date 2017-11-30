@@ -11,8 +11,7 @@
  * help@hdfgroup.org.                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* $Id$ */
-
+#include "h4config.h"
 #include <stdio.h>
 #include "mfhdf.h"
 #include "hdp.h"

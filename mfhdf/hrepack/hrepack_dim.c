@@ -12,6 +12,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
+#include "h4config.h"
 #include "hdf.h"
 #include "mfhdf.h"
 #include "hrepack.h"
@@ -375,6 +376,7 @@ static int gen_dim(char* name,              /* name of SDS */
             }
 #else
             printf("SZIP compression not supported in this version <%s>\n",sds_name);
+printf("line=%d file=%s\n",__LINE__,__FILE__);	
 #endif
             break;
         case COMP_CODE_SKPHUFF:

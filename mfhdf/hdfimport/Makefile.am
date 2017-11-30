@@ -42,13 +42,10 @@ TESTS = testutil.sh
 
 EXTRA_DIST = testutil.sh.in
 
-EXTRA_DIST += SDSfloat2.hdf \
-	SDSfloat3.hdf \
-	hdfimport-w.out2 \
-	hdfimport.input1 \
-	hdfimport.out1 \
-	hdfimport.out2 \
-	hdfimport.out3
+EXTRA_DIST += SDSfloat2.hdf SDSfloat3.hdf \
+	      hdfimport.input1 hdfimport.out1 hdfimport.out2 hdfimport.out3
+
+DISTCLEANFILES = testutil.sh
 
 #############################################################################
 

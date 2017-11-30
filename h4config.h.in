@@ -45,7 +45,10 @@
 /* Define to 1 if you have the `jpeg' library (-ljpeg). */
 #undef HAVE_LIBJPEG
 
-/* Define to 1 if the system has the type 'long long int'. */
+/* set this only when szip is enabled */
+#undef HAVE_LIBSZ
+
+/* Define to 1 if the system has the type `long long int'. */
 #undef HAVE_LONG_LONG_INT
 
 /* Define to 1 if you have the <malloc.h> header file. */
@@ -147,7 +150,7 @@
 /* Define to 1 if you have the `unlink' function. */
 #undef HAVE_UNLINK
 
-/* Define to 1 if the system has the type 'unsigned long long int'. */
+/* Define to 1 if the system has the type `unsigned long long int'. */
 #undef HAVE_UNSIGNED_LONG_LONG_INT
 
 /* Define to 1 if you have the `vprintf' function. */
@@ -162,8 +165,7 @@
 /* Define if building HDF4 (always true) */
 #undef HDF
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
 
 /* Never use system xdr.h */
@@ -207,6 +209,12 @@
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
+
+/* alias for HAVE_LIBSZ */
+#undef SZIP_HAS_ENCODER
+
+/* alias for HAVE_LIBSZ */
+#undef USE_COMP_SZIP
 
 /* Version number of package */
 #undef VERSION

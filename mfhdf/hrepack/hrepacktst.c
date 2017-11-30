@@ -11,12 +11,13 @@
  * help@hdfgroup.org.                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+#include "h4config.h"
 #include "hdf.h"
 #include "mfhdf.h"
 #include "hcomp.h"
 #include "pal_rgb.h"
 
-#if defined (HAVE_LIBSZ)
+#ifdef HAVE_LIBSZ
 #include "szlib.h"
 #endif
 
@@ -2572,7 +2573,7 @@ int do_file_all(char* fname)
     if (add_sd(fname,file_id,sd_id,"dset_huff",0,chunk_flags,comp_type,&comp_info)<0)
         goto out;
     
-#if defined (HAVE_LIBSZ)
+#ifdef HAVE_LIBSZ
    /*-------------------------------------------------------------------------
     * SZIP
     *-------------------------------------------------------------------------
@@ -2656,7 +2657,7 @@ int do_file_all(char* fname)
     *-------------------------------------------------------------------------
     */ 
     
-#if defined (HAVE_LIBSZ)
+#ifdef HAVE_LIBSZ
     
     if (SZ_encoder_enabled()) 
     {

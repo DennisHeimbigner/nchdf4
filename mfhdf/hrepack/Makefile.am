@@ -41,8 +41,15 @@ hrepack_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF)
 #TEST_PROG=test_hrepack
 
 #check_SCRIPTS=hrepack.sh
-check_PROGRAMS = hrepack_check test_hrepack
-TESTS = hrepack.sh test_hrepack
+
+check_PROGRAMS = test_hrepack
+# Not sure what the purpose of this is supposed to be
+check_PROGRAMS += hrepack_check
+
+# Order is important here test_hrepack before hrepack.sh
+TESTS = test_hrepack.sh hrepack.sh
+# The hrepack.sh script needs test_hrepack to run first.
+#hrepack.sh.chkexe_: test_hrepack.chkexe_
 
 test_hrepack_SOURCES = hrepacktst.c
 test_hrepack_LDADD = $(LIBMFHDF) $(LIBHDF) -lm
@@ -52,19 +59,16 @@ hrepack_check_SOURCES = hrepack_check.c
 hrepack_check_LDADD = $(LIBMFHDF) $(LIBHDF)
 hrepack_check_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF)
 
-# The hrepack.sh script needs test_hrepack to run first.
-hrepack.sh.chkexe_: test_hrepack.chkexe_
+EXTRA_DIST = hrepack.sh.in hrepack_all.sh.in test_hrepack.sh
 
-EXTRA_DIST = hrepack.sh.in hrepack_all.sh.in
-
-EXTRA_DIST += hrepacktst1.hdf hrepacktst2.hdf hrepacktst3.hdf
+EXTRA_DIST += image24pixel.txt image24plane.txt image8.txt
 
 #############################################################################
 ##                          And the cleanup                                ##
 #############################################################################
 
-CHECK_CLEANFILES += *.hdf
+CLEANFILES = hrepacktst1.hdf hrepacktst2.hdf hrepacktst3.hdf
 
-DISTCLEANFILES = hrepack.sh
+DISTCLEANFILES = hrepack.sh hrepack_all.sh
 
 #include $(top_srcdir)/config/conclude.am

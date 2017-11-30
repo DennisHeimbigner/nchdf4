@@ -11,9 +11,10 @@
  * help@hdfgroup.org.                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+#include "h4config.h"
 #include "mfhdf.h"
 #include "hdftest.h"
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
 #include "szlib.h"
 #endif
 
@@ -28,7 +29,7 @@
 #define WIDTH		6
 #define LENGTH		9
 
-#ifdef H4_HAVE_SZIP_ENCODER /* only compile all these test functions when 
+#ifdef HAVE_SZIP_ENCODER /* only compile all these test functions when 
 				encoder is available */
 static intn test_szip_SDS8bit()
 {

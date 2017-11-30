@@ -12,7 +12,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-
+#include "h4config.h"
 #include "hdf.h"
 #include "mfhdf.h"
 #include "hrepack_utils.h"

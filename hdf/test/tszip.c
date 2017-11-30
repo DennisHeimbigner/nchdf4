@@ -14,12 +14,12 @@
 /*
  *  SZIP support eliminated for HDF4.2R1
  */
-#include <hdf.h>
-#ifdef H4_HAVE_LIBSZ
+#include "h4config.h"
+#include "hdf.h"
+#ifdef HAVE_LIBSZ
 #include "szlib.h"
 #endif
 #include "tutils.h"
-
 
 /*
  *  NOTE: these tests should be elaborated:
@@ -54,7 +54,7 @@
 static void 
 test_szip_RI8bit()
 {
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
    /************************* Variable declaration **************************/
 
     intn  status;         /* status for functions returning an intn */
@@ -222,7 +222,7 @@ test_szip_RI8bit()
 static void 
 test_szip_RI16bit()
 {
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
    /************************* Variable declaration **************************/
 
     intn  status;         /* status for functions returning an intn */
@@ -389,7 +389,7 @@ test_szip_RI16bit()
 static void 
 test_szip_RI32bit()
 {
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
    /************************* Variable declaration **************************/
 
     intn  status;         /* status for functions returning an intn */
@@ -556,7 +556,7 @@ test_szip_RI32bit()
 static void 
 test_szip_RIfl32bit()
 {
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
    /************************* Variable declaration **************************/
 
     intn  status;         /* status for functions returning an intn */
@@ -725,7 +725,7 @@ test_szip_RIfl32bit()
 static void 
 test_szip_RIfl64bit()
 {
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
    /************************* Variable declaration **************************/
 
     intn  status;         /* status for functions returning an intn */
@@ -899,7 +899,7 @@ test_szip_RIfl64bit()
 static void 
 test_szip_chunk()
 {
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
 
     /************************* Variable declaration **************************/
 
@@ -1133,10 +1133,10 @@ test_szip_chunk()
  *       F. Write/Read image with chunked and sziped data
  * 
  * ****************************************************************/
-extern void
+void
 test_mgr_szip()
 {
-#ifdef H4_HAVE_LIBSZ
+#ifdef HAVE_LIBSZ
     /* Output message about test being performed */
     MESSAGE(6, printf("Testing GR szip compression WRITE/READ\n"););
 
