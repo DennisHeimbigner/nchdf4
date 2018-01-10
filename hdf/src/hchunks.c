@@ -268,6 +268,8 @@ LOCAL ROUTINES
 */
 
 #define  _HCHUNKS_MAIN_  /* Master chunk handling file */
+#define hchunks_EXPORTS
+
 #include "hdf.h"
 #include "hfile.h"
 #include "mcache.h" /* cache */
@@ -4352,3 +4354,16 @@ HMCPgetnumrecs(accrec_t* access_rec,	/* access record */
     return ret_value;
 }   /* HMCPgetnumrecs */
 
+/* the accessing special function table for chunks */
+funclist_t  chunked_funcs =
+{
+    HMCPstread,
+    HMCPstwrite,
+    HMCPseek,
+    HMCPinquire,
+    HMCPread,
+    HMCPwrite,
+    HMCPendaccess,
+    HMCPinfo,
+    NULL         /* no routine registerd */
+};

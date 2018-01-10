@@ -37,6 +37,9 @@
  *          dimension, compression, color compensation etc.
  *---------------------------------------------------------------------------*/
 
+
+#define df24_EXPORTS
+
 #include "hdf.h"
 #include "dfgr.h"
 

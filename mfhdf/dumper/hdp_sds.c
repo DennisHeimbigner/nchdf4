@@ -431,7 +431,6 @@ intn get_SDSindex_list(
 
     for (ii = 0; ii < num_sds_chosen; ii++)
     {
-int jj;
 	/* if the current chosen SDS was requested by its index, store the
 	index in the array sds_chosen */
 	switch (dumpsds_opts->all_types[ii].type_of_info)

@@ -19,7 +19,7 @@
 #include	<string.h>
 #include	"local_nc.h"
 #include	"alloc.h"
-
+#include	"mfnetcdf.h"
 
 NC_dim *
 NC_new_dim(name,size)

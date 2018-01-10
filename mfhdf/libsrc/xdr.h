@@ -10,6 +10,8 @@
 #define __XDR_HEADER__
 
 #include "H4api_adpt.h"
+#include "types.h"
+
 /*
  * XDR provides a conventional way for converting between C data
  * types and an external bit-string representation.  Library supplied
@@ -196,29 +198,29 @@ extern "C" {
 /*
  * These are the "generic" xdr routines.
  */
-XDRLIBAPI void     xdr_free(xdrproc_t , char *);
-XDRLIBAPI bool_t	xdr_void(void);
-XDRLIBAPI bool_t	xdr_int(XDR *, int *);
-XDRLIBAPI bool_t	xdr_u_int(XDR *, u_int *);
-XDRLIBAPI bool_t	xdr_long(XDR *, long *);
-XDRLIBAPI bool_t	xdr_u_long(XDR *, u_long *);
-XDRLIBAPI bool_t	xdr_short(XDR *, short *);
-XDRLIBAPI bool_t	xdr_u_short(XDR *, u_short *);
-XDRLIBAPI bool_t	xdr_bool(XDR *, bool_t *);
-XDRLIBAPI bool_t	xdr_enum(XDR *, enum_t *);
-XDRLIBAPI bool_t	xdr_array(XDR *, caddr_t *, u_int *, u_int, u_int, xdrproc_t );
-XDRLIBAPI bool_t	xdr_bytes(XDR *, char **, u_int *, u_int);
-XDRLIBAPI bool_t	xdr_opaque(XDR *, caddr_t , u_int );
-XDRLIBAPI bool_t	xdr_string(XDR *, char **, u_int);
-XDRLIBAPI bool_t	xdr_union(XDR *, enum_t *, char *, struct xdr_discrim *, xdrproc_t );
-XDRLIBAPI bool_t	xdr_char(XDR *, char *);
-XDRLIBAPI bool_t	xdr_u_char(XDR *, char *);
-XDRLIBAPI bool_t	xdr_vector(XDR *, char *, u_int, u_int, xdrproc_t );
-XDRLIBAPI bool_t	xdr_float(XDR *, float *);
-XDRLIBAPI bool_t	xdr_double(XDR *, double *);
-XDRLIBAPI bool_t	xdr_reference();
-XDRLIBAPI bool_t	xdr_pointer();
-XDRLIBAPI bool_t	xdr_wrapstring(XDR *, char **);
+HDFLIBAPI void     xdr_free(xdrproc_t , char *);
+HDFLIBAPI bool_t	xdr_void(void);
+HDFLIBAPI bool_t	xdr_int(XDR *, int *);
+HDFLIBAPI bool_t	xdr_u_int(XDR *, u_int *);
+HDFLIBAPI bool_t	xdr_long(XDR *, long *);
+HDFLIBAPI bool_t	xdr_u_long(XDR *, u_long *);
+HDFLIBAPI bool_t	xdr_short(XDR *, short *);
+HDFLIBAPI bool_t	xdr_u_short(XDR *, u_short *);
+HDFLIBAPI bool_t	xdr_bool(XDR *, bool_t *);
+HDFLIBAPI bool_t	xdr_enum(XDR *, enum_t *);
+HDFLIBAPI bool_t	xdr_array(XDR *, caddr_t *, u_int *, u_int, u_int, xdrproc_t );
+HDFLIBAPI bool_t	xdr_bytes(XDR *, char **, u_int *, u_int);
+HDFLIBAPI bool_t	xdr_opaque(XDR *, caddr_t , u_int );
+HDFLIBAPI bool_t	xdr_string(XDR *, char **, u_int);
+HDFLIBAPI bool_t	xdr_union(XDR *, enum_t *, char *, struct xdr_discrim *, xdrproc_t );
+HDFLIBAPI bool_t	xdr_char(XDR *, char *);
+HDFLIBAPI bool_t	xdr_u_char(XDR *, char *);
+HDFLIBAPI bool_t	xdr_vector(XDR *, char *, u_int, u_int, xdrproc_t );
+HDFLIBAPI bool_t	xdr_float(XDR *, float *);
+HDFLIBAPI bool_t	xdr_double(XDR *, double *);
+HDFLIBAPI bool_t	xdr_reference();
+HDFLIBAPI bool_t	xdr_pointer();
+HDFLIBAPI bool_t	xdr_wrapstring(XDR *, char **);
 
 /*
  * Common opaque bytes objects used by many rpc protocols;
@@ -230,18 +232,18 @@ struct netobj {
 	char	*n_bytes;
 };
 typedef struct netobj netobj;
-XDRLIBAPI bool_t   xdr_netobj(XDR *,struct netobj *);
+HDFLIBAPI bool_t   xdr_netobj(XDR *,struct netobj *);
 
 /*
  * These are the public routines for the various implementations of
  * xdr streams.
  */
-XDRLIBAPI void   xdrmem_create();		/* XDR using memory buffers */
-XDRLIBAPI void   xdrstdio_create(XDR *, FILE *, enum xdr_op );	/* XDR using stdio library */
-XDRLIBAPI void   xdrrec_create();		/* XDR pseudo records for tcp */
-XDRLIBAPI bool_t xdrrec_endofrecord();	/* make end of xdr record */
-XDRLIBAPI bool_t xdrrec_skiprecord();	/* move to beginning of next record */
-XDRLIBAPI bool_t xdrrec_eof();		/* true if no more input */
+HDFLIBAPI void   xdrmem_create();		/* XDR using memory buffers */
+HDFLIBAPI void   xdrstdio_create(XDR *, FILE *, enum xdr_op );	/* XDR using stdio library */
+HDFLIBAPI void   xdrrec_create();		/* XDR pseudo records for tcp */
+HDFLIBAPI bool_t xdrrec_endofrecord();	/* make end of xdr record */
+HDFLIBAPI bool_t xdrrec_skiprecord();	/* move to beginning of next record */
+HDFLIBAPI bool_t xdrrec_eof();		/* true if no more input */
 
 #ifdef __cplusplus
 }

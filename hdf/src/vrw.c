@@ -37,6 +37,8 @@ EXPORTED ROUTINES
 ************************************************************************/
 
 #define VSET_INTERFACE
+#define vrw_EXPORTS
+
 #include "hdf.h"
 
 #ifndef MIN

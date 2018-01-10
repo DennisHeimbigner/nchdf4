@@ -42,6 +42,10 @@
    **   Doug Ilg
  */
 
+#define dfstubs_EXPORTS
+
+#include "h4config.h"
+#include "hdf.h"
 #include "dfstubs.h"
 #include "df.h"
 
@@ -60,6 +64,25 @@
 
 #define CKWRITE(x,y,z,f, ret)   { if (DF_WRITE( (char*)x, (int)y, (int)z,f)<0) \
                 {DFerror = DFE_WRITEERROR; return(ret); } }
+
+/* Forward */
+
+PRIVATE int DFIfind(DF *dfile, DFdle **cDLEp, int *cddp, int isfirst,
+			uint16, uint16, uint16, uint16);
+PRIVATE DFdd * DFIemptyDD(DF*);
+PRIVATE int32 DFIread(DF*, char*, int32);
+PRIVATE int32 DFIseek(DF*, int32);
+PRIVATE int DFIerr(DF * dfile);
+PRIVATE void * DFIgetspace(uint32 qty);
+PRIVATE void * DFIfreespace(void *ptr);
+PRIVATE intn DFIc2fstr(char *str, int len);
+PRIVATE char * DFIf2cstring(_fcd fdesc, intn len);
+
+/*
+ *  Global Variables
+ */
+
+HDFPUBLICDATA int DFerror = 0;            /* Error code for DF routines */
 
 /*
  *  Important Internal Variables
@@ -1155,13 +1178,14 @@ DFIcheck(DF * dfile)
  *          to check if conditions: work it out independently for yourself!
  *---------------------------------------------------------------------------*/
 
+PRIVATE
 int
-DFIfind(dfile, tag, ref, isfirst, ltag, lref, cDLEp, cddp)
-DF         *dfile;
-DFdle     **cDLEp;
-int        *cddp;
-int         isfirst;            /* 1 if no prev search, 0 otherwise */
-uint16      tag, ref, ltag, lref;
+DFIfind(
+DF         *dfile,
+DFdle     **cDLEp,
+int        *cddp,
+int         isfirst,            /* 1 if no prev search, 0 otherwise */
+uint16      tag, ref, ltag, lref)
 {
     DFdle      *DLEp;
     int         i, found = 0;
@@ -1268,6 +1292,7 @@ uint16      tag, ref, ltag, lref;
  * Users:   HDF system programmers, DFaccess, DFdup
  *---------------------------------------------------------------------------*/
 
+PRIVATE
 DFdd       *
 DFIemptyDD(dfile)
 DF         *dfile;
@@ -1345,6 +1370,7 @@ DF         *dfile;
 /* Simplified version without the overhead.  This is useful if you */
  /* know that the args are okay, and if you need to read many time */
  /* (like in a loop in DFSDIgetslice()) */
+PRIVATE
 int32
 DFIread(dfile, ptr, len)
 DF         *dfile;
@@ -1373,6 +1399,7 @@ int32       len;
 /* Simplified version without the overhead.  This is useful if you */
  /* know that the args are okay, and if you need to seek many time */
  /* (like in a loop in DFSDIgetslice()) */
+PRIVATE
 int32
 DFIseek(dfile, offset)
 DF         *dfile;
@@ -1393,6 +1420,7 @@ int32       offset;
  * Remarks: Used to centralize some error handling
  *---------------------------------------------------------------------------*/
 
+PRIVATE
 int
 DFIerr(DF * dfile)
 {
@@ -1413,6 +1441,7 @@ DFIerr(DF * dfile)
 #include <ctype.h>
 #endif
 
+PRIVATE
 void       *
 DFIgetspace(uint32 qty)
 {
@@ -1423,6 +1452,7 @@ DFIgetspace(uint32 qty)
     return (ret);
 }
 
+PRIVATE
 void       *
 DFIfreespace(void *ptr)
 {
@@ -1434,12 +1464,14 @@ DFIfreespace(void *ptr)
 #endif
 }
 
+PRIVATE
 intn
 DFIc2fstr(char *str, int len)
 {
     return (HDc2fstr(str, len));
 }
 
+PRIVATE
 char       *
 DFIf2cstring(_fcd fdesc, intn len)
 {

@@ -65,6 +65,8 @@
 /*                                                                           */
 /*****************************************************************************/
 
+#define dfconv_EXPORTS
+
 #include <ctype.h>
 #include "hdf.h"
 #include "hconv.h"
@@ -75,16 +77,6 @@
 PRIVATE int DFKInoset
             (VOIDP source, VOIDP dest, uint32 num_elm, uint32 source_stride,
              uint32 dest_stride);
-
-/* Prototypes */
-extern int32 DFKqueryNT(void);
-extern int DFKsetcustom(
-  int (*DFKcustin) (VOIDP source, VOIDP dest, uint32 num_elm,
-                           uint32 source_stride, uint32 dest_stride),
-  int  (*DFKcustout) (VOIDP source, VOIDP dest, uint32 num_elm,
-                             uint32 source_stride, uint32 dest_stride));
-extern int DFconvert(uint8 *source, uint8 *dest, int ntype, int sourcetype, 
-                     int desttype, int32 size);
 
 /*
    **  Conversion Routine Pointer Definitions

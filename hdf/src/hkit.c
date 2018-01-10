@@ -13,6 +13,8 @@
 
 /* $Id$ */
 
+#define hkit_EXPORTS
+
 #include <ctype.h>
 #include "hkit.h"
 

@@ -1,6 +1,16 @@
-add_subdirectory(xdr)
+if(ENABLE_DLL)
+  add_definitions(-Dmfhdf_EXPORTS)
+endif()
 add_subdirectory(libsrc)
+if(BUILD_DLL)
+  remove_definitions(-Dmfhdf_EXPORTS)
+endif()
+
+SET(LIBMFHDF mfhdf)
+
+if(NOT CP)
 add_subdirectory(dumper)
 add_subdirectory(hdfimport)
 add_subdirectory(hdiff)
 add_subdirectory(hrepack)
+endif()

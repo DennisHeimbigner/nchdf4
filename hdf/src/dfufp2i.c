@@ -65,6 +65,8 @@
  *
  *--------------------------------------------------------------------------*/
 
+#define dfufp2i_EXPORTS
+
 #include "hdf.h"
 #include "dfufp2i.h"
 #include "dfsd.h"

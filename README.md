@@ -1,32 +1,45 @@
-# The nchdf4 library
-
-__Initial Draft__: 2017-12-1  
-__Last Revised__: 2017-12-1  
-__Author__: Dennis Heimbigner, Unidata  
-__Current Version__: 4.2.13  
-
+# The nchdf4 Library  
+__Summary__: The nchdf4 library has one purpose: to serve as the HDF4 library  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+when the netcdf-c library is built with HDF4 support.  
 ## Table of Contents
 * [Introduction](#Introduction)  
+* [Dependencies](#Dependencies)
+* [Download](#Download)
+* [Automake Build](#Automake)
+* [Cmake Build for Linux](#Cmake)
+* [Miscellaneous Notes](#Misc)
 * [References](#References)  
+* [Contact Information](#Contact)
 
 ## <a name="Introduction">Introduction</a>
+
+The nchdf4 library has one purpose: to serve as the HDF4 library
+to use with netcdf-c when the netcdf-c library is built with
+the "--enable-hdf4" flag is specified to the configure command.
 
 The nchdf4 library is a stripped version of the
 original HDF4 library [1]. The version number of nchdf4
 is the same as the base HDF4 library version from which it
 is derived.
 
-The nchdf4 library has one purpose: to serve as the library
-to use with netcdf-c when the netcdf-c library is built with
-the "--enable-hdf4" flag is specified to the configure command.
+To this end, the original HDF4 library was stripped of all its
+code that attempts to provide netcdf functionality.  Obviously,
+this effort was a pure hack, and there is still a lot of cruft
+and duplication in the code and the configuration files.  The
+biggest problem is that much of the code is conditional'd on
+specific machines (e.g. hpux or ia64) rather than on specific
+properties (e.g. is the machine big-endian, is long 32 bit or 64
+bit).
 
-To this end, the original HDF4 library was stripped of all
-its code that attempts to provide netcdf functionality.
-
-Both autoconf and cmake builds are supported. It has been
-successfully built and tested for the following platforms:
-* CentOS7 version of linux (64-bit)
-* CYGWIN (32-bit)
+The current successful build matrix is as follows.
+<table>
+<tr><th>OS<th>Word Size<th>C Compiler<th>Autoconf<th>Cmake
+<tr><td>Linux(Centos7)<td>64-bit<td>gcc 6.4.0<td>yes<td>yes
+<tr><td>Cygwin<td>32-bit<td>gcc 6.4.0<td>yes<td>no
+<tr><td>Visual Studio<br>Community Edition<td>14.0<td>64-bit<td>no<td>yes
+</table>
 
 <!-- Visual Studio version 14 2015 (Community Edition) -->
 
@@ -138,6 +151,8 @@ as root or using the sudo command.
 
 1. There is still substantial cruft that could be removed.
 2. The github repository contains some files solely for author's use: e.g. cf, cf.cmake.
+3. nchdf4 has its own copy of netcdf-h, which may need to be updated if
+   any relevant constants change.
 
 ## <a name="References">References</a>
 [1] https://support.hdfgroup.org/release4/obtainsrc.html#src  
@@ -145,3 +160,11 @@ as root or using the sudo command.
 [3] Source for libjpeg: https://support.hdfgroup.org/release4/obtain.html#extlibs  
 [4] Source for Libsz: https://gitlab.dkrz.de/k202009/libaec.git  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Libaec can also process szip. This is open source and license free. Hence it  preferable to the one on libz/libjpeg page.
+
+## <a name="Contact">Contact Information</a>
+__Author__: Dennis Heimbigner, Unidata  
+__Initial Draft__: 2017-12-1  
+__Last Revised__: 2017-12-20  
+__Current HDF4 Version__: 4.2.13  
+__Support__: mailto:support-netcdf@unidata.ucar.edu
+

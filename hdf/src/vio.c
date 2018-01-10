@@ -61,6 +61,8 @@ EXPORTED ROUTINES
 *************************************************************************/
 
 #define VSET_INTERFACE
+#define vio_EXPORTS
+
 #include "hdf.h"
 
 /* Private Function Prototypes */
@@ -1295,7 +1297,7 @@ VSgetid(HFILEID f,  /* IN: file handle */
         if (vf->vstree==NULL) 
             HGOTO_DONE(FAIL);
 
-        if ((t = (void **)tbbtfirst((TBBT_NODE *) * (vf->vstree))) == NULL)
+        if ((t = (void **)tbbtfirst((TBBT_NODE *)  (vf->vstree))) == NULL)
             HGOTO_DONE(FAIL);
 
         /* we assume 't' is valid at this point */

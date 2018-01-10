@@ -77,6 +77,12 @@ EXPORTED ROUTINES
 
 ------------------------------------------------------------------------- */
 
+#define hextelt_EXPORTS
+
+#include "h4config.h"
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
 #include "hdf.h"
 #include "hfile.h"
 
@@ -1297,7 +1303,6 @@ HXIbuildfilename(const char *ext_fname, const intn acc_mode)
 
     char	*finalpath = NULL;	/* Final pathname to return */
     const char	*fname = NULL;
-    struct	stat filestat;	/* for checking pathname existence */
     char        *ret_value = NULL; /* FAIL */
 
     /* initialize HDFEXTDIR and HDFCREATEDIR if invoked the first time */
@@ -1357,7 +1362,8 @@ HXIbuildfilename(const char *ext_fname, const intn acc_mode)
     } /*DFACC_CREATE */
     case DFACC_OLD:{			/* Locating an old external element */
         if ( *fname == DIR_SEPC ) {	/* Absolute Pathname */
-            if (HDstat(fname, &filestat) == 0){
+            if (HDaccess(fname, F_OK) == 0)
+            {
                 ret_value = (HDstrcpy(finalpath, fname));
                 goto done;
             }
@@ -1397,7 +1403,7 @@ HXIbuildfilename(const char *ext_fname, const intn acc_mode)
                         HGOTO_ERROR(DFE_NOSPACE, NULL);
 
                     HDstrcpy(path_pt, fname);
-                    if (HDstat(finalpath, &filestat) == 0 ){
+                    if (HDaccess(finalpath, F_OK) == 0 ){
                         ret_value = finalpath;
                         goto done;
                     }
@@ -1426,7 +1432,7 @@ HXIbuildfilename(const char *ext_fname, const intn acc_mode)
                         HGOTO_ERROR(DFE_NOSPACE, NULL);
 
                     HDstrcpy(path_pt, fname);
-                    if (HDstat(finalpath, &filestat) == 0 ){
+                    if (HDaccess(finalpath, F_OK) == 0 ){
                         ret_value = finalpath;
                         goto done;
                     }
@@ -1437,7 +1443,7 @@ HXIbuildfilename(const char *ext_fname, const intn acc_mode)
             /* Don't have Head File information now.  Continue */
 
             /* See if the file exists */
-            if (HDstat(fname, &filestat) == 0 )
+            if (HDaccess(fname, F_OK) == 0 )
               {
                   ret_value = (HDstrcpy(finalpath, fname));
                   goto done;

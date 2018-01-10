@@ -36,10 +36,18 @@
  */
 
 /* General HDF includes */
-#include "hdf.h"
+#define cnone_EXPORTS
+#define mstdio_EXPORTS
+#define crle_EXPORTS
+#define cnbit_EXPORTS
+#define cskphuff_EXPORTS
+#define cdeflate_EXPORTS
 
 #define CNONE_MASTER
 #define CODER_CLIENT
+
+#include "hdf.h"
+
 /* HDF compression includes */
 #include "hcompi.h"     /* Internal definitions for compression */
 
@@ -338,3 +346,15 @@ HCPcnone_endaccess(accrec_t * access_rec)
 
     return (SUCCEED);
 }   /* HCPcnone_endaccess() */
+
+/* Moved from cnone.h */
+funclist_t  cnone_funcs =
+{                               /* functions to perform run-length encoding */
+    HCPcnone_stread,
+    HCPcnone_stwrite,
+    HCPcnone_seek,
+    HCPcnone_inquire,
+    HCPcnone_read,
+    HCPcnone_write,
+    HCPcnone_endaccess
+};

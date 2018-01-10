@@ -28,6 +28,8 @@
 #ifndef __CNONE_H
 #define __CNONE_H
 
+#ifndef cnone_EXPORTS
+
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
@@ -37,32 +39,34 @@ extern      "C"
    ** from cnone.c
  */
 
-    extern int32 HCPcnone_stread
+    HDFLIBAPI int32 HCPcnone_stread
                 (accrec_t * rec);
 
-    extern int32 HCPcnone_stwrite
+    HDFLIBAPI int32 HCPcnone_stwrite
                 (accrec_t * rec);
 
-    extern int32 HCPcnone_seek
+    HDFLIBAPI int32 HCPcnone_seek
                 (accrec_t * access_rec, int32 offset, int origin);
 
-    extern int32 HCPcnone_inquire
+    HDFLIBAPI int32 HCPcnone_inquire
                 (accrec_t * access_rec, int32 *pfile_id, uint16 *ptag, uint16 *pref,
                int32 *plength, int32 *poffset, int32 *pposn, int16 *paccess,
                  int16 *pspecial);
 
-    extern int32 HCPcnone_read
+    HDFLIBAPI int32 HCPcnone_read
                 (accrec_t * access_rec, int32 length, void * data);
 
-    extern int32 HCPcnone_write
+    HDFLIBAPI int32 HCPcnone_write
                 (accrec_t * access_rec, int32 length, const void * data);
 
-    extern intn HCPcnone_endaccess
+    HDFLIBAPI intn HCPcnone_endaccess
                 (accrec_t * access_rec);
 
 #if defined c_plusplus || defined __cplusplus
 }
 #endif                          /* c_plusplus || __cplusplus */
+
+#endif /*cnone_EXPORTS*/
 
 /* "none" [en|de]coding information */
 typedef struct
@@ -71,19 +75,8 @@ typedef struct
 }
 comp_coder_none_info_t;
 
-#ifndef CNONE_MASTER
-extern funclist_t cnone_funcs;  /* functions to perform run-length encoding */
-#else
-funclist_t  cnone_funcs =
-{                               /* functions to perform run-length encoding */
-    HCPcnone_stread,
-    HCPcnone_stwrite,
-    HCPcnone_seek,
-    HCPcnone_inquire,
-    HCPcnone_read,
-    HCPcnone_write,
-    HCPcnone_endaccess
-};
+#ifndef cnone_EXPORTS
+HDFLIBDATA funclist_t cnone_funcs;  /* functions to perform run-length encoding */
 #endif
 
 #endif /* __CNONE_H */

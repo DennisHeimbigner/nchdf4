@@ -43,6 +43,9 @@ MODIFICATION HISTORY
 */
 
 #define BITMASTER
+#define hbitio_EXPORTS
+
+#include "h4config.h"
 #include "hdf.h"
 #include "hfile.h"
 

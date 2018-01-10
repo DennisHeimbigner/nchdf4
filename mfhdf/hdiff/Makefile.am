@@ -32,7 +32,7 @@ hdiff_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF)
 
 TESTS = testhdiff.sh
 
-EXTRA_DIST = testfiles testhdiff.sh.in
+EXTRA_DIST = testfiles testhdiff.sh.in XGetopt.c XGetopt.h
 
 #############################################################################
 ##                          And the cleanup                                ##

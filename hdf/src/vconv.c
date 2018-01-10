@@ -30,7 +30,10 @@
  */
 
 #define VSET_INTERFACE
+#define vconv_EXPORTS
+
 #include "hdf.h"
+#include "vgint.h"
 
 /*
    ** ==================================================================
@@ -257,7 +260,7 @@ vimakecompat(HFILEID f)
 
     old_bsize = 0;  /* reset state variables */
     buf = NULL;
-    if ((vs = VSIget_vdata_node()) == NULL)
+    if ((vs = (VDATA*)VSIget_vdata_node()) == NULL)
         HRETURN_ERROR(DFE_NOSPACE, 0);
     ret = aid = Hstartread(f, (uint16) OLD_VSDESCTAG, DFREF_WILDCARD);
     while (ret != FAIL)

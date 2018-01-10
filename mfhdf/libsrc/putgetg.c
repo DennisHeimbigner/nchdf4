@@ -24,8 +24,9 @@
  *	$Id$
  */
 
+#include	"h4config.h"
 #include	"local_nc.h"
-
+#include	"mfnetcdf.h"
 
 /*
  * Perform I/O on a generalized hyperslab.  The efficiency of this
@@ -160,7 +161,7 @@ const long *start ;
 const long *count ;
 const long *stride ;
 const long *imap ;
-ncvoid *values ;
+const ncvoid *values ;
 {
 	NC *handle ;
 
@@ -177,7 +178,7 @@ ncvoid *values ;
 	}
 	handle->xdrs->x_op = XDR_ENCODE ;
 
-	return NCgenio(handle, varid, start, count, stride, imap, values);
+	return NCgenio(handle, varid, start, count, stride, imap, (ncvoid*)values);
 }
 
 
@@ -219,7 +220,7 @@ int varid ;
 const long *start ;
 const long *count ;
 const long *stride ;
-ncvoid *values ;
+const ncvoid *values ;
 {
 	NC *handle ;
 
@@ -236,7 +237,7 @@ ncvoid *values ;
 	}
 	handle->xdrs->x_op = XDR_ENCODE ;
 
-	return NCgenio(handle, varid, start, count, stride, NULL, values);
+	return NCgenio(handle, varid, start, count, stride, NULL, (ncvoid*)values);
 }
 
 

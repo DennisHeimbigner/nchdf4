@@ -11,10 +11,11 @@
  * help@hdfgroup.org.                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include <hdf.h>
-#include "gif.h"
+#include "h4config.h"
 #include <string.h>
 #include <stdlib.h>
+#include "hdf.h"
+#include "gif.h"
 
 int
 WriteHDF(GifMemoryStruct, HDFName , GIFFileName)

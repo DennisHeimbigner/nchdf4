@@ -24,6 +24,8 @@
 /*        DFCunimcomp(), sqr()                                          */
 /************************************************************************/
 
+#define dfimcomp_EXPORTS
+
 #include "hdf.h"
 
 #define PALSIZE 256

@@ -160,6 +160,8 @@ typedef struct chunkinfo_t
 chunkinfo_t;
 #endif /* _HCHUNKS_MAIN_ */
 
+#ifndef hchunks_EXPORTS
+
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
@@ -288,30 +290,10 @@ extern      "C"
 
 #endif /* _HCHUNKS_MAIN_ */
 
+#endif /*hchunks_EXPORTS*/
+
 #if defined c_plusplus || defined __cplusplus
 }
 #endif                          /* c_plusplus || __cplusplus */
-
-#ifndef _HCHUNKS_MAIN_
-/* not in master file hchunk.c */
-extern funclist_t chunked_funcs;  /* functions to perform chunking */
-
-#else /* in hchunks.c */
-
-/* the accessing special function table for chunks */
-funclist_t  chunked_funcs =
-{
-    HMCPstread,
-    HMCPstwrite,
-    HMCPseek,
-    HMCPinquire,
-    HMCPread,
-    HMCPwrite,
-    HMCPendaccess,
-    HMCPinfo,
-    NULL         /* no routine registerd */
-};
-
-#endif
 
 #endif /* __HCHUNKS_H */

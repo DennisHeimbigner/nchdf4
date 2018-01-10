@@ -55,15 +55,18 @@
              (uint16*) NULL,    (int32*) NULL,  (int32*)  NULL,   \
              (int32*)   NULL,   (int16*) NULL,  (int16*)  special))
 
-
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
 #endif                          /* c_plusplus || __cplusplus */
 
+#ifndef hfile_EXPORTS
+
 /*
    ** from hfile.c
  */
+
+
     HDFLIBAPI int32 Hopen
                 (const char *path, intn acc_mode, int16 ndds);
 
@@ -169,23 +172,8 @@ extern      "C"
     HDFLIBAPI intn HDvalidfid
                 (int32 file_id);
 
-    HDFLIBAPI const char *HDgettagdesc
-                (uint16 tag);
-
-    HDFLIBAPI char *HDgettagsname
-                (uint16 tag);
-
-    HDFLIBAPI intn HDgettagnum
-                (const char *tag_name);
-
-    HDFLIBAPI char *HDgetNTdesc
-                (int32 nt);
-
-    HDFLIBAPI const char *HDfidtoname
-                (int32 fid);
-
     HDFLIBAPI intn Hgetntinfo
-                (int32 numbertype, hdf_ntinfo_t *nt_info);
+                (const int32 numbertype, hdf_ntinfo_t *nt_info);
 
     HDFLIBAPI intn Hishdf
                 (const char * filename);
@@ -199,10 +187,15 @@ extern      "C"
     HDFLIBAPI void HPend(void);
 
     HDFLIBAPI intn HDdont_atexit(void);
+#endif /*hfile_EXPORTS*/
+
+#ifndef hfiledd_EXPORTS
 
 /*
    ** from hfiledd.c
  */
+
+
 /******************************************************************************
  NAME
      Hdupdd - Duplicate a data descriptor
@@ -373,9 +366,14 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
         uint16 ref              /* IN: Ref of tag/ref to delete */
 );
 
+#endif /*hfiledd_EXPORTS*/
+
+#ifndef hdfalloc_EXPORTS
+
 /*
    ** from hdfalloc.c
  */
+
 
     HDFLIBAPI void * HDmemfill
                 (void * dest, const void * src, uint32 item_size, uint32 num_items);
@@ -386,23 +384,31 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI int32 HDspaceleft
                 (void);
 
-#if defined(MALLOC_CHECK)
-    HDFPUBLIC extern void * HDmalloc
-                (uint32 qty);
-
-    HDFPUBLIC extern void * HDrealloc
-                (void * where, uint32 qty);
-
-    HDFPUBLIC extern void * HDcalloc
-                (uint32 n, uint32 size);
-
-    HDFPUBLIC extern void HDfree
-                (void * ptr);
-
-#endif /* defined MALLOC_CHECK */
-
-    HDFPUBLIC extern char *HDstrdup
+    HDFLIBAPI char *HDstrdup
                 (const char *s);
+#endif /*hdfalloc_EXPORTS*/
+
+#ifndef hkit_EXPORTS
+    HDFLIBAPI const char *HDfidtoname
+                (int32 fid);
+
+    HDFLIBAPI char *HDgettagsname
+                (uint16 tag);
+
+    HDFLIBAPI intn HDgettagnum
+                (const char *tag_name);
+
+    HDFLIBAPI char *HDgetNTdesc
+                (int32 nt);
+
+    HDFLIBAPI intn HDpackFstring
+                (char * src, char * dest, intn len);
+
+    HDFLIBAPI const char *HDgettagdesc
+                (uint16 tag);
+
+    HDFLIBAPI intn HDflush
+                (int32 file_id);
 
     HDFLIBAPI intn HDc2fstr
                 (char * str, intn len);
@@ -410,11 +416,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI char *HDf2cstring
                 (_fcd fdesc, intn len);
 
-    HDFLIBAPI intn HDflush
-                (int32 file_id);
+#endif /*hkit_EXPORTS*/
 
-    HDFLIBAPI intn HDpackFstring
-                (char * src, char * dest, intn len);
+#ifndef hblocks_EXPORTS
 
 /*
    ** from hblocks.c
@@ -440,6 +444,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
 		(int32 file_id, uint8 *buf, uintn start_block,
 		 uintn info_count, int32 *offsetarray, int32 *lengtharray);
 
+#endif /*hblocks_EXPORTS*/
+
+#ifndef hextelt_EXPORTS
 
 /*
    ** from hextelt.c
@@ -453,6 +460,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
 
     HDFLIBAPI intn HXsetdir
                 (const char *dir);
+#endif /*hextelt_EXPORTS*/
+
+#ifndef hcomp_EXPORTS
 
 /*
    ** from hcomp.c
@@ -478,7 +488,7 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
                 (int32 file_id, uint16 data_tag, uint16 data_ref, 
 		 int32* comp_size, int32* orig_size);
 
-    HDFPUBLIC intn HCget_config_info ( comp_coder_t coder_type, uint32 *compression_config_info);
+    HDFLIBAPI intn HCget_config_info ( comp_coder_t coder_type, uint32 *compression_config_info);
 
     HDFLIBAPI int32 HCPquery_encode_header(comp_model_t model_type, model_info * m_info,
              comp_coder_t coder_type, comp_info * c_info);
@@ -489,16 +499,29 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI intn HCPdecode_header(uint8 *p, comp_model_t *model_type, model_info * m_info,
              comp_coder_t *coder_type, comp_info * c_info);
 
+#endif /*hcomp_EXPORTS*/
+
+#ifndef cszip_EXPORTS
+
 /*
    ** from cszip.c
  */
 
      HDFLIBAPI intn HCPsetup_szip_parms ( comp_info *c_info, int32 nt, int32 ncomp, int32 ndims, int32 *dims, int32 *cdims);
+
+#endif /*cszip_EXPORTS*/
+
+#ifndef hbuffer_EXPORTS
+
 /*
    ** from hbuffer.c
  */
     HDFLIBAPI intn HBconvert
                 (int32 aid);
+
+#endif /*hbuffer_EXPORTS*/
+
+#ifndef hcompri_EXPORTS
 
 /*
    ** from hcompri.c
@@ -506,6 +529,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI int32 HRPconvert
                 (int32 fid, uint16 tag, uint16 ref, int32 xdim, int32 ydim,int16 scheme, comp_info *cinfo, uintn pixel_size);
 
+#endif /*hcompri_EXPORTS*/
+
+#ifndef herr_EXPORTS
 
 /*
    ** from herr.c
@@ -530,6 +556,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
                 (void);
 
  	HDFLIBAPI intn HEshutdown(void);
+#endif /*herr_EXPORTS*/
+
+#ifndef hbitio_EXPORTS
 
 /*
    ** from hbitio.c
@@ -559,13 +588,18 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
                 (int32 bitfile_id, intn flushbit);
 
     HDFLIBAPI intn HPbitshutdown(void);
+#endif /*hbitio_EXPORTS*/
+
+#ifndef dfutil_EXPORTS
 
 /*
  ** from dfutil.c
  */
     HDFLIBAPI uint16 DFfindnextref
                 (int32 file_id, uint16 tag, uint16 lref);
+#endif /*dfutil_EXPORTS*/
 
+#ifndef dfcomp_EXPORTS
 /*
    ** from dfcomp.c
  */
@@ -577,6 +611,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI int  DFgetcomp
                 (int32 file_id, uint16 tag, uint16 ref, uint8 * image,
                  int32 xdim, int32 ydim, uint16 scheme);
+#endif /*dfcomp_EXPORTS*/
+
+#ifndef dfrle_EXPORTS
 
 /*
    ** from dfrle.c
@@ -586,6 +623,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
 
     HDFLIBAPI int32 DFCIunrle
                 (uint8 * buf, uint8 *bufto, int32 outlen, int resetsave);
+#endif /*dfrle_EXPORTS*/
+
+#ifndef dfimcomp_EXPORTS
 
 /*
    ** from dfimcomp.c
@@ -597,6 +637,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI void DFCIunimcomp
                 (int32 xdim, int32 ydim, uint8 in[], uint8 out[]);
 
+#endif /*dfimcomp_EXPORTS*/
+
+#ifndef dfjpeg_EXPORTS
+
 /*
    ** from dfjpeg.c
  */
@@ -604,6 +648,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI intn DFCIjpeg
                 (int32 file_id, uint16 tag, uint16 ref, int32 xdim, int32 ydim,
                  const void * image, int16 scheme, comp_info * scheme_info);
+#endif /*dfjpeg_EXPORTS*/
+
+#ifndef dfunjpeg_EXPORTS
 
 /*
    ** from dfunjpeg.c
@@ -612,6 +659,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI intn DFCIunjpeg
                 (int32 file_id, uint16 tag, uint16 ref, void * image, int32 xdim,
                  int32 ydim, int16 scheme);
+
+#endif /*dfunjpeg_EXPORTS*/
+
+#ifndef dfgroup_EXPORTS
 
 /*
    ** from dfgroup.c
@@ -636,6 +687,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
                 
     HDFLIBAPI void DFdifree
     			(int32 groupID);
+#endif /*dfgroup_EXPORTS*/
+
+#ifndef dfp_EXPORTS
 
 /*
    ** from dfp.c
@@ -663,6 +717,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
 
     HDFLIBAPI uint16 DFPlastref
                 (void);
+
+#endif /*dfp_EXPORTS*/
+
+#ifndef dfr8_EXPORTS
 
 /*
    ** from dfr8.c
@@ -705,6 +763,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI intn DFR8getpalref(uint16 *pal_ref);
 
     HDFLIBAPI intn DFR8Pshutdown(void);
+
+#endif /*dfr8_EXPORTS*/
+
+#ifndef dfgr_EXPORTS
 
 /*
    ** from dfgr.c
@@ -782,6 +844,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
 
     HDFLIBAPI intn DFGRPshutdown(void);
 
+#endif /*dfgr_EXPORTS*/
+
+#ifndef df24_EXPORTS
+
 /*
    ** from df24.c
  */
@@ -821,6 +887,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
 
     HDFLIBAPI uint16 DF24lastref
                 (void);
+
+#endif /*df24_EXPORTS*/
+
+#ifndef dfan_EXPORTS
 
 /*
    ** from dfan.c
@@ -910,6 +980,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
                 (int32 file_id, char * ann, int32 maxlen, int type, int isfirst);
 
     HDFLIBAPI intn DFANPshutdown(void);
+
+#endif /*dfan_EXPORTS*/
+
+#ifndef dfsd_EXPORTS
 
 /*
    ** from dfsd.c
@@ -1037,6 +1111,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
 
     HDFLIBAPI intn DFSDPshutdown(void);
 
+#endif /*dfsd_EXPORTS*/
+
+#ifndef dfconv_EXPORTS
+
 /*
    ** from dfconv.c
  */
@@ -1060,6 +1138,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
                 (void * source, void * dest, int32 ntype, int32 num_elm,
                  int16 acc_mode, int32 source_stride, int32 dest_stride);
 
+#endif /*dfconv_EXPORTS*/
+
+#ifndef dfknat_EXPORTS
+
 /*
    ** from dfknat.c
  */
@@ -1076,6 +1158,10 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI intn DFKnb8b
                 (void * s, void * d, uint32 num_elm, uint32 source_stride, uint32 dest_stride);
 
+#endif /*dfknat_EXPORTS*/
+
+#ifndef dfkswap_EXPORTS
+
 /*
    ** from dfkswap.c
  */
@@ -1089,6 +1175,9 @@ HDFLIBAPI intn Hdeldd(int32 file_id,      /* IN: File ID the tag/refs are in */
     HDFLIBAPI intn DFKsb8b
                 (void * s, void * d, uint32 num_elm, uint32 source_stride, uint32 dest_stride);
 
+#endif /*dfkswap_EXPORTS*/
+
+#ifndef mfan_EXPORTS
 
 /* Multi-file Annotation C-routines found in mfan.c */
 HDFLIBAPI int32 ANstart(int32 file_id);
@@ -1132,6 +1221,10 @@ HDFLIBAPI ann_type ANtag2atype(uint16 atag);
 
 /* BMR: Removed because this function is meant to be private.
 HDFLIBAPI intn ANdestroy(void); */ 
+
+#endif /*mfan_EXPORTS*/
+
+#ifndef mfgr_EXPORTS
 
 /* Multi-file Raster C-routines found in mfgr.c */
 HDFLIBAPI intn rigcompare(void * k1, void * k2, intn cmparg);
@@ -1207,6 +1300,8 @@ HDFLIBAPI intn GRPshutdown(void);
 /* This function was added for hmap project only.  Feb-25-2011 */
 HDFLIBAPI intn GR2bmapped(int32 riid, intn *tobe_mapped, intn *created_byGR);
 
+#endif /*mfgr_EXPORTS*/
+
 /*=== HDF_CHUNK_DEF same as in mfhdf.h - moved here  ====*/
 
 /* Bit flags used for SDsetchunk(), SDgetchunkinfo() 
@@ -1244,6 +1339,8 @@ typedef union hdf_chunk_def_u
     } nbit;
 
 } HDF_CHUNK_DEF;
+
+#ifndef mfgr_EXPORTS
 
 /*=== GR Chunking Routines  ====*/
 
@@ -1488,7 +1585,6 @@ HDFLIBAPI intn GRsetchunkcache
      int32 maxcache,  /* IN: max number of chunks to cache */
      int32 flags      /* IN: flags = 0, HDF_CACHEALL */);
 
-
 #ifdef HAVE_FMPOOL
 /******************************************************************************
 NAME
@@ -1539,6 +1635,9 @@ HDFLIBAPI int  Hmpget(int *pagesize, /*OUT: pagesize to used in last open/create
 
 #endif /* HAVE_FMPOOL */
 
+#endif /*mfgr_EXPORTS*/
+
+
 /* Vset interface functions (used to be in vproto.h) */
 
 /* Useful macros, which someday might become actuall functions */
@@ -1560,6 +1659,8 @@ HDFLIBAPI int  Hmpget(int *pagesize, /*OUT: pagesize to used in last open/create
 
 #define VSQueryname(vs, name) \
         (VSinquire (vs, (int32 *) NULL, (int32*) NULL, (char*) NULL, (int32*) NULL, (char*) name))
+
+#ifndef vattr_EXPORTS
 
 /* 
    ** from vattr.c
@@ -1607,6 +1708,10 @@ HDFLIBAPI int  Hmpget(int *pagesize, /*OUT: pagesize to used in last open/create
                   void * values);
    HDFLIBAPI intn VSisattr
                 (int32 vsid);
+#endif /*vattr_EXPORTS*/
+
+#ifndef vconv_EXPORTS
+
 /*
    ** from vconv.c
  */
@@ -1621,6 +1726,10 @@ HDFLIBAPI int  Hmpget(int *pagesize, /*OUT: pagesize to used in last open/create
 
     HDFLIBAPI int32 vmakecompat
                 (char  * fs);
+
+#endif /*vconv_EXPORTS*/
+
+#ifndef vg_EXPORTS
 
 /*
    ** from vg.c
@@ -1688,7 +1797,7 @@ HDFLIBAPI int  Hmpget(int *pagesize, /*OUT: pagesize to used in last open/create
                  uintn array_size, uint16 *refarray);
 
     HDFLIBAPI intn VSgetvdatas
-                (int32 id, uintn start_vd, uintn array_size, uint16 *refarray);
+                (int32 id, const uintn start_vd, const uintn array_size, uint16 *refarray);
     
     HDFLIBAPI intn VSsetblocksize
                 (int32 vkey, int32 block_size);
@@ -1702,6 +1811,10 @@ HDFLIBAPI int  Hmpget(int *pagesize, /*OUT: pagesize to used in last open/create
     HDFLIBAPI void Vsetzap
                 (void);
 
+#endif /*vg_EXPORTS*/
+
+#ifndef vgp_EXPORTS
+
 /*
    ** from vgp.c
  */
@@ -1712,6 +1825,9 @@ HDFLIBAPI int  Hmpget(int *pagesize, /*OUT: pagesize to used in last open/create
                 (void * k1, void * k2, intn cmparg);
 
     HDFLIBAPI void vdestroynode
+                (void * n);
+
+    HDFLIBAPI void vfdestroynode
                 (void * n);
 
     HDFLIBAPI void vtfreekey
@@ -1842,11 +1958,19 @@ Vdeletetagref(int32 vkey, /* IN: vgroup key */
 
     HDFLIBAPI intn VPshutdown(void);
 
+#endif /*vgp_EXPORTS*/
+
+#ifndef vparse_EXPORTS
+
 /*
    ** from vparse.c
  */
     HDFLIBAPI int32 scanattrs
                 (const char  * attrs, int32  * attrc, char  *** attrv);
+
+#endif /*vparse_EXPORTS*/
+
+#ifndef vhi_EXPORTS
 
 /*
    ** from vhi.c
@@ -1863,6 +1987,10 @@ Vdeletetagref(int32 vkey, /* IN: vgroup key */
                 (HFILEID f, int32  tagarray[], int32  refarray[], int32 n,
                     const char * vgname, const char  * vgclass);
 
+#endif /*vhi_EXPORTS*/
+
+#ifndef vio_EXPORTS
+
 /*
    ** from vio.c
  */
@@ -1873,9 +2001,6 @@ Vdeletetagref(int32 vkey, /* IN: vgroup key */
                 (HFILEID f, uint16 vsref);
 
     HDFLIBAPI void vsdestroynode
-                (void * n);
-
-    HDFLIBAPI void vfdestroynode
                 (void * n);
 
     HDFLIBAPI int32 VSattach
@@ -1901,6 +2026,10 @@ Vdeletetagref(int32 vkey, /* IN: vgroup key */
 
     HDFLIBAPI int32 VSappendable
                 (int32 vkey, int32 blk);
+
+#endif /*vio_EXPORTS*/
+
+#ifndef vsfld_EXPORTS
 
 /*
    ** from vsfld.c
@@ -1945,6 +2074,10 @@ Vdeletetagref(int32 vkey, /* IN: vgroup key */
                 void * buf, intn bufsz, intn n_records, 
                 const char *fields, void * fldbufpt[]);
 
+#endif /*vsfld_EXPORTS*/
+
+#ifndef vrw_EXPORTS
+
 /*
    ** from vrw.c
  */
@@ -1959,6 +2092,7 @@ Vdeletetagref(int32 vkey, /* IN: vgroup key */
     HDFLIBAPI int32 VSwrite
                 (int32 vkey, const uint8  buf[], int32 nelt, int32 interlace);
 
+#endif /*vrw_EXPORTS*/
 
 #if defined c_plusplus || defined __cplusplus
 }

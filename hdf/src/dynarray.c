@@ -55,6 +55,8 @@ MODIFICATION HISTORY
 */
 
 #define DYNARRAY_MASTER
+#define dynarray_EXPORTS
+
 #include "hdf.h"
 #include "dynarray.h"
 

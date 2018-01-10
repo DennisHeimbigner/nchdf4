@@ -11,9 +11,11 @@
  * help@hdfgroup.org.                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include <hdf.h>
-#include "gif.h"
+#include "h4config.h"
 #include <string.h>
+#include "hdf.h"
+#include "gif.h"
+
 int
 main(argv , argc)
 int argv;

@@ -33,11 +33,7 @@ static char mrcsid[] = "Id: cdftest.c,v 1.11 1994/01/10 23:07:27 chouck Exp ";
 #include <stdio.h>
 #include "h4config.h"
 #include "H4api_adpt.h"
-#ifdef H4_HAVE_NETCDF
-#include "netcdf.h"
-#else
-#include "hdf4_netcdf.h"
-#endif
+#include "mfnetcdf.h"
 
 #include "hdf.h"
 
@@ -382,13 +378,7 @@ double zed = 0.0 ;
 FILE *dbg_file;
 #endif
 
-#ifdef PROTOTYPE
 int main(int argc, char *argv[])
-#else
-int main(argc, argv)
-int argc;
-char *argv[];
-#endif
 {
 	int ret ;
 	int	 id ;
@@ -411,10 +401,10 @@ char *argv[];
 	ncopts =  NC_VERBOSE ; /* errors non fatal */
 
 
-	id = nccreate(fname,NC_NOCLOBBER) ;
+	id = nccreate(fname,NC_NOOVERWRITE) ;
 	if( id == -1 ) {
 		fprintf(stderr, "trying again\n") ;
-		id = nccreate(fname,NC_CLOBBER) ;
+		id = nccreate(fname,NC_OVERWRITE) ;
 	}
 	if( id == -1 ) 
 		exit(errno) ;

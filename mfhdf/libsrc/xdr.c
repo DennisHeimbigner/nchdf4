@@ -13,6 +13,7 @@ static char sccsid[] = "@(#)xdr.c 1.35 87/08/12";
  * xdr.
  */
 
+#include "h4config.h"
 #include <stdio.h>
 #include <string.h> 
 #include "types.h"

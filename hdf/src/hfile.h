@@ -254,7 +254,7 @@ typedef struct tag_info_str
       /* Needs to be first in this structure */
       bv_ptr b;         /* bit-vector to keep track of which refs are used */
       dynarr_p d;       /* dynarray of the refs for this tag */
-  }tag_info;
+  } tag_info;
 
 /* For determining what the last file operation was */
 typedef enum
@@ -462,6 +462,8 @@ extern      "C"
 {
 #endif                          /* c_plusplus || __cplusplus */
 
+#ifndef hfile_EXPORTS
+
     HDFLIBAPI accrec_t *HIget_access_rec
                 (void);
 
@@ -506,11 +508,9 @@ extern      "C"
     HDFLIBAPI int32 HPread_drec
                 (int32 file_id, atom_t data_id, uint8** drec_buf);
 
-    HDFLIBAPI intn tagcompare
-                (void * k1, void * k2, intn cmparg);
+#endif /*hfile_EXPORTS*/
 
-    HDFLIBAPI VOID tagdestroynode
-                (void * n);
+#ifndef hblocks_EXPORTS
 
 /*
    ** from hblocks.c
@@ -543,6 +543,9 @@ extern      "C"
 
     HDFLIBAPI int32 HLPinfo
                 (accrec_t * access_rec, sp_info_block_t * info_block);
+#endif /*hblocks_EXPORTS*/
+
+#ifndef hextelt_EXPORTS
 
 /*
    ** from hextelt.c
@@ -584,6 +587,9 @@ extern      "C"
 
     HDFLIBAPI intn HXPshutdown
                 (void);
+#endif /*hextelt_EXPORTS*/
+
+#ifndef hcomp_EXPORTS
 
 /*
    ** from hcomp.c
@@ -621,11 +627,10 @@ extern      "C"
     HDFLIBAPI int32 get_comp_len
 	        (accrec_t* access_rec);
 
-/*
-   ** from hchunks.c - should be the same as found in 'hchunks.h'
- */
-#include "hchunks.h"
+#endif /*hcomp_EXPORTS*/
 
+
+#ifndef hbuffer_EXPORTS
 
 /*
    ** from hbuffer.c
@@ -660,6 +665,10 @@ extern      "C"
     HDFLIBAPI int32 HBPinfo
                 (accrec_t * access_rec, sp_info_block_t * info_block);
 
+#endif /*hbuffer_EXPORTS*/
+
+#ifndef hcompri_EXPORTS
+
 /*
    ** from hcompri.c
  */
@@ -692,6 +701,9 @@ extern      "C"
 
     HDFLIBAPI int32 HRPinfo
                 (accrec_t * access_rec, sp_info_block_t * info_block);
+#endif /*hcompri_EXPORTS*/
+
+#ifndef hfiledd_EXPORTS
 
 /*
    ** from hfiledd.c
@@ -895,6 +907,14 @@ intn HTPis_special(atom_t ddid             /* IN: DD id to inquire about */
 intn HTPdump_dds(int32 file_id,     /* IN: file ID of HDF file to dump info for */
     FILE *fout                      /* IN: file stream to output to */
 );
+
+    HDFLIBAPI intn tagcompare
+                (void * k1, void * k2, intn cmparg);
+
+    HDFLIBAPI VOID tagdestroynode
+                (void * n);
+#endif /*hfiledd_EXPORTS*/
+
 
 #if defined c_plusplus || defined __cplusplus
 }

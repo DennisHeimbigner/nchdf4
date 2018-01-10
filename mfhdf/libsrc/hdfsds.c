@@ -75,6 +75,7 @@
  **************************************************************************/
 
 #include        "local_nc.h"
+#include	"mfnetcdf.h"
 
 #define SDG_MAX_INITIAL 100
 
@@ -1131,9 +1132,6 @@ hdf_read_ndgs(NC *handle)
           status = SUCCEED;
           while (status == SUCCEED) 
             {
-                uint16 ntTag;
-                uint16 ntRef;
-
                 if(HQuerytagref(aid, &ndgTag, &ndgRef) == FAIL) 
                   {
                       HGOTO_ERROR(DFE_INTERNAL, FAIL);

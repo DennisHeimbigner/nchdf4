@@ -100,6 +100,11 @@ MODIFICATION HISTORY
  */
 
 #define BV_MASTER
+#define bitvect_EXPORTS
+
+#include "h4config.h"
+#include "hdf.h"
+#include "hfile.h"
 #include "bitvect.h"       /* Multi-file raster information */
 
 /* Local pre-processor macros */
@@ -450,8 +455,6 @@ int32 bv_find(bv_ptr b,int32 last_find,bv_bool value)
           if(last_find>=0)
             {   /* if the last bit found option is used, look for more bits in that same byte */
               intn bit_off;
-int unused;
-
               first_byte=(uint32)last_find/BV_BASE_BITS;
               bit_off=(intn)(((uint32)last_find-(first_byte*BV_BASE_BITS))+1);
               slush_bits=(bv_base)(b->buffer[first_byte]&(~bv_bit_mask[bit_off]));

@@ -27,6 +27,8 @@
 #ifndef __CSKPHUFF_H
 #define __CSKPHUFF_H
 
+#ifndef cskphuff_EXPORTS
+
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
@@ -36,32 +38,34 @@ extern      "C"
    ** from cskphuff.c
  */
 
-    extern int32 HCPcskphuff_stread
+    HDFLIBAPI int32 HCPcskphuff_stread
                 (accrec_t * rec);
 
-    extern int32 HCPcskphuff_stwrite
+    HDFLIBAPI int32 HCPcskphuff_stwrite
                 (accrec_t * rec);
 
-    extern int32 HCPcskphuff_seek
+    HDFLIBAPI int32 HCPcskphuff_seek
                 (accrec_t * access_rec, int32 offset, int origin);
 
-    extern int32 HCPcskphuff_inquire
+    HDFLIBAPI int32 HCPcskphuff_inquire
                 (accrec_t * access_rec, int32 *pfile_id, uint16 *ptag, uint16 *pref,
                int32 *plength, int32 *poffset, int32 *pposn, int16 *paccess,
                  int16 *pspecial);
 
-    extern int32 HCPcskphuff_read
+    HDFLIBAPI int32 HCPcskphuff_read
                 (accrec_t * access_rec, int32 length, void * data);
 
-    extern int32 HCPcskphuff_write
+    HDFLIBAPI int32 HCPcskphuff_write
                 (accrec_t * access_rec, int32 length, const void * data);
 
-    extern intn HCPcskphuff_endaccess
+    HDFLIBAPI intn HCPcskphuff_endaccess
                 (accrec_t * access_rec);
 
 #if defined c_plusplus || defined __cplusplus
 }
 #endif                          /* c_plusplus || __cplusplus */
+
+#endif /*cskphuff_EXPORTS*/
 
 /* The maximum source character code: */
 #define SKPHUFF_MAX_CHAR     255
@@ -87,19 +91,8 @@ typedef struct
 }
 comp_coder_skphuff_info_t;
 
-#ifndef CSKPHUFF_MASTER
-extern funclist_t cskphuff_funcs;   /* functions to perform skipping huffman encoding */
-#else
-funclist_t  cskphuff_funcs =
-{                               /* functions to perform skipping huffman encoding */
-    HCPcskphuff_stread,
-    HCPcskphuff_stwrite,
-    HCPcskphuff_seek,
-    HCPcskphuff_inquire,
-    HCPcskphuff_read,
-    HCPcskphuff_write,
-    HCPcskphuff_endaccess
-};
+#ifndef cskphuff_EXPORTS
+HDFLIBDATA funclist_t cskphuff_funcs;   /* functions to perform skipping huffman encoding */
 #endif
 
 #endif /* __CSKPHUFF_H */

@@ -19,6 +19,7 @@
 #include	<string.h> 
 #include	"local_nc.h"
 #include	"alloc.h"
+#include	"mfnetcdf.h"
 
 
 NC_attr *

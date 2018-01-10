@@ -47,9 +47,11 @@ EXPORTED ROUTINES
 
 ------------------------------------------------------------------------- */
 
+#define hbuffer_EXPORTS
+
+#include <assert.h>
 #include "hdf.h"
 #include "hfile.h"
-#include <assert.h>
 
 /* extinfo_t -- external elt information structure */
 

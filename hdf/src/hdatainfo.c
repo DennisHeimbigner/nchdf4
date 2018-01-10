@@ -44,18 +44,16 @@ LOW-LEVEL ROUTINES
 
 **********************************************************************/
 
-#ifndef MFGR_MASTER
 #define MFGR_MASTER	/* for GRgetdatainfo and GRgetattdatainfo */
-#endif			/* mfgr.h had been included in hdf.h */
-
-#ifndef MFAN_MASTER
 #define MFAN_MASTER	/* for ANgetdatainfo */
-#endif			/* mfan.h is included here */
+
+#define hdatainfo_EXPORTS
 
 #include "hdf.h"
 #include "hlimits.h"
 #include "vgint.h"
 #include "mfan.h"
+#include "hchunks.h"
 
 #ifdef HAVE_LIBSZ	/* we have the szip library */
 #include "szlib.h"
@@ -788,7 +786,7 @@ GRgetattdatainfo(int32 id, int32 attrindex, int32 *offset, int32 *length)
         HGOTO_ERROR(DFE_ARGS, FAIL);
 
     /* Search for an attribute with the same index */
-    aentry = (void **)tbbtfirst((TBBT_NODE *)*search_tree);
+    aentry = (void **)tbbtfirst((TBBT_NODE *)search_tree);
     found = FALSE;
     while (!found && (aentry != NULL))
     {
@@ -976,7 +974,6 @@ GRgetpalinfo(int32 gr_id, uintn pal_count, hdf_ddinfo_t *palinfo_array)
     int32 nbytes = 0;
     int32 aid = FAIL;
     intn  idx;
-    uintn count;
     intn  ret_value = SUCCEED;
 
     /* Clear error stack */

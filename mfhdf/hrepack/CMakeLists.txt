@@ -8,5 +8,4 @@ add_executable(hrepack
   hrepack_vg.c hrepack_vs.c hrepack_dim.c
 )
 
-target_link_libraries(hrepack libmfdf libhdf)
-
+target_link_libraries(hrepack ${LIBMFHDF} ${LINK_LIBS})

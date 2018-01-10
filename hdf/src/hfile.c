@@ -113,18 +113,23 @@
    HIread_version       -- reads a version tag from a file
    + */
 
+#define HFILE_MASTER
+#define hfile_EXPORTS
+
+#include "h4config.h"
+#include <errno.h>
 #define HMASTER
 #include "hdf.h"
 #undef HMASTER
-#define HFILE_MASTER
 #include "hfile.h"
-#include <errno.h>
 #include "glist.h" /* for double-linked lists, stacks and queues */
+#include "hchunks.h"
 
 #if defined(_MSC_VER) || defined(__CYGWIN__) || defined(_WIN32) || defined(_WIN64)
 #define NO_MULTI_OPEN 1
 #endif
 
+/* Forward */
 /*--------------------- Locally defined Globals -----------------------------*/
 
 /* The default state of the file DD caching */
@@ -160,7 +165,7 @@ extern funclist_t comp_funcs;
 
 /* Functions for accessing chunked data elements.
    For definition of the chunked data element, see hchunk.c. */
-#include "hchunks.h"
+extern funclist_t chunked_funcs;
 
 /* Functions for accessing buffered data elements.
    For definition of the buffered data element, see hbuffer.c. */

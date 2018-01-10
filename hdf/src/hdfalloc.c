@@ -16,6 +16,8 @@
 #ifdef MALDEBUG
 #define __MALDEBUG__
 #endif
+#define hdfalloc_EXPORTS
+
 #include "hdf.h"
 
 /*

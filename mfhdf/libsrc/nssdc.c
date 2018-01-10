@@ -12,8 +12,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "local_nc.h"
-
 #include "hfile.h"
+#include "mfnetcdf.h"
 
 /* constants/macros pulled out of the CDF library source */
 #define V2_CDR_OFFSET     8

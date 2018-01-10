@@ -35,6 +35,8 @@
  */
 
 /* General HDF includes */
+#define crle_EXPORTS
+
 #include "hdf.h"
 
 #define CRLE_MASTER
@@ -710,3 +712,14 @@ HCPcrle_endaccess(accrec_t * access_rec)
 
     return (SUCCEED);
 }   /* HCPcrle_endaccess() */
+
+funclist_t  crle_funcs =
+{                               /* functions to perform run-length encoding */
+    HCPcrle_stread,
+    HCPcrle_stwrite,
+    HCPcrle_seek,
+    HCPcrle_inquire,
+    HCPcrle_read,
+    HCPcrle_write,
+    HCPcrle_endaccess
+};

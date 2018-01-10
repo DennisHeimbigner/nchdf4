@@ -29,6 +29,8 @@
  *  DFPIopen     : open/reopen file
  *---------------------------------------------------------------------------*/
 
+#define dfp_EXPORTS
+
 #include "hdf.h"
 
 /* remember that '0' is invalid ref number */

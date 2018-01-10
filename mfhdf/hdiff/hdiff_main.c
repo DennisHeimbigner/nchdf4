@@ -12,11 +12,19 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
+#include "h4config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#ifdef HAVE_GETOPT_H
+#include <getopt.h>
+#endif
+#if defined USE_XGETOPT || defined _MSC_VER
+#include "XGetopt.h"
+#endif
+
 #include "hdf.h"
 #include "hfile.h"
 #include "mfhdf.h"

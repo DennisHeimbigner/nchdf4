@@ -91,6 +91,8 @@ Fortran stub functions:
     This version assumes that all the values are floating point.
  *---------------------------------------------------------------------------*/
 
+#define dfsd_EXPORTS
+
 #include "hdf.h"
 #include "dfsd.h"
 
@@ -105,6 +107,26 @@ Fortran stub functions:
 #define NFGSDG_TYPE_SDG 0   /* a pure SDG  */
 #define NFGSDG_TYPE_NFG 1   /* a pure NDG  */
 #define NFGSDG_TYPE_SDGNDG 2    /* an SDG in NDG */
+
+/*forward*/
+static intn DFSDIendslice(intn isfortran);
+static intn DFSDIsetdatastrs(const char *label, const char *unit, const char *format, const char *coordsys);
+static intn DFSDIsetdimstrs(intn dim, const char *label, const char *unit, const char *format);
+static int32 DFSDIopen(const char *filename, intn acc_mode);
+static intn DFSDIsdginfo(int32 file_id);
+static intn DFSDIrefresh(char *filename);
+static intn DFSDIisndg(intn *isndg);
+static intn DFSDIgetrrank(intn *rank);
+static intn DFSDIgetwrank(intn *rank);
+static intn DFSDIclear(DFSsdg * sdg);
+static intn DFSDIgetdata(const char *filename, intn rank, int32 maxsizes[], VOIDP data,
+		              intn isfortran);
+static intn DFSDIputdata(const char *filename, intn rank, int32 *dimsizes, VOIDP data,
+		              intn accmode, intn isfortran);
+static intn DFSDIgetslice(const char *filename, int32 winst[], int32 windims[],
+	               VOIDP data, int32 dims[], intn isfortran);
+static intn DFSDIputslice(int32 windims[], VOIDP data, int32 dims[], intn isfortran);
+static intn DFSDIclearNT(DFSsdg * sdg);
 
 /* Init NSDG table header      */
 PRIVATE DFnsdg_t_hdr *nsdghdr = NULL;
@@ -896,6 +918,7 @@ DFSDsetdatastrs(const char *label, const char *unit, const char *format, const c
  *          "polar" (="spherical") and "cylindrical".  Do "spherical" and
  *          "cylindrical" make sense for 2D?
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIsetdatastrs(const char *label, const char *unit, const char *format, const char *coordsys)
 {
@@ -1008,6 +1031,7 @@ DFSDsetdimstrs(intn dim, const char *label, const char *unit, const char *format
  * Invokes: none
  * Method:  Stores values in global structure Writesdg
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIsetdimstrs(intn dim, const char *label, const char *unit, const char *format)
 {
@@ -1840,6 +1864,7 @@ done:
 * Invokes: none
 * Remarks:
 *--------------------------------------------------------------------*/
+static
 intn
 DFSDIclearNT(DFSsdg * sdg)
 {
@@ -2033,7 +2058,8 @@ done:
  * Returns: 0 on success, FAIL on failure with error set
  * Users:   DFSDIopen for READ
  *--------------------------------------------------------------------------*/
-static intn
+static
+intn
 DFSDIsetnsdg_t(int32 file_id, DFnsdg_t_hdr * l_nsdghdr)
 {
   uint32      sz_DFnsdgle = (uint32) sizeof(struct DFnsdgle);
@@ -2319,7 +2345,8 @@ done:
 *      nsdg: the structure holds the di of next sdg or ndg
 * Returns: 0 on succeeds, FAIL on failure
 * -------------------------------------------------------------------*/
-static intn
+static
+intn
 DFSDInextnsdg(DFnsdg_t_hdr * l_nsdghdr, DFdi * nsdg)
 {
   uint32      num;
@@ -2405,7 +2432,8 @@ done:
  *          previously allocated space.
  * Remarks: This accepts non-float32 data
  *---------------------------------------------------------------------------*/
-static intn
+static
+intn
 DFSDIgetndg(int32 file_id, uint16 tag, uint16 ref, DFSsdg * sdg)
 {
   int16       int16var;
@@ -3069,7 +3097,8 @@ done:
  *          DFwrite
  * Remarks: Writes out NTs
  *---------------------------------------------------------------------------*/
-static intn
+static
+intn
 DFSDIputndg(int32 file_id, uint16 ref, DFSsdg * sdg)
 {
   int32       i;
@@ -3512,6 +3541,7 @@ done:
  * Method:  call DFSDputsdg, close Sfile_id
  * Remarks: checks that slice writes were completed.
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIendslice(intn isfortran)
 {
@@ -3725,6 +3755,7 @@ done:
  * Method:  Call DFIfind to find SDG, then DFSDIgetndg to read it in to Readsdg
  * Remarks: none
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIsdginfo(int32 file_id)
 {
@@ -3811,6 +3842,7 @@ done:
  * Method:  test Newdata and Nextsdg, call DFSDIsdginfo if necessary
  * Remarks: none
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIrefresh(char *filename)
 {
@@ -3857,6 +3889,7 @@ done:
  * Method:  Assigns Readsdg.isndg to isndg.
  * Remarks: none
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIisndg(intn *isndg)
 {
@@ -3877,6 +3910,7 @@ DFSDIisndg(intn *isndg)
  * Method:  Assigns Readsdg.rank to rank.
  * Remarks: none
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIgetrrank(intn *rank)
 {
@@ -3897,6 +3931,7 @@ DFSDIgetrrank(intn *rank)
  * Method:  Assigns Readsdg.rank to rank.
  * Remarks: none
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIgetwrank(intn *rank)
 {
@@ -3918,6 +3953,7 @@ DFSDIgetwrank(intn *rank)
  * Method:  Release space in sdg
  * Remarks: none
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIclear(DFSsdg * sdg)
 {
@@ -4012,6 +4048,7 @@ done:
  *          data may not be contiguous in the array "data"
  *          User sets maxsizes before call.
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIgetdata(const char *filename, intn rank, int32 maxsizes[], VOIDP data,
              intn isfortran)
@@ -4089,6 +4126,7 @@ done:
  *          DFSDstartslice, DFSDIendslice
  * Method:  Create file if necessary, allocate arrays, call slice routines
  *---------------------------------------------------------------------------*/
+static
 intn
 DFSDIputdata(const char *filename, intn rank, int32 *dimsizes, VOIDP data,
              intn accmode, intn isfortran)
@@ -4178,6 +4216,7 @@ done:
    A.
  */
 /*****************************************************************************/
+static
 intn
 DFSDIgetslice(const char *filename, int32 winst[], int32 windims[],
               VOIDP data, int32 dims[], intn isfortran)
@@ -4541,6 +4580,7 @@ done:
  *          must write out array consecutively, according to the setting
  *          of the Fortorder variable - row major if 0, column major if 1
  *--------------------------------------------------------------------------*/
+static
 intn
 DFSDIputslice(int32 windims[], VOIDP data, int32 dims[], intn isfortran)
 {

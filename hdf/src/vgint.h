@@ -246,61 +246,51 @@ extern      "C"
 {
 #endif                          /* c_plusplus || __cplusplus */
 
+#ifndef vconv_EXPORTS
+
 /*
  * Library private routines for the VSet layer
  */
-    VDATA *VSIget_vdata_node(void);
-
-    void VSIrelease_vdata_node(VDATA *v);
-
-    intn VSIgetvdatas(int32 id, const char *vsclass, const uintn start_vd,
-	const uintn n_vds, uint16 *refarray);
-
-    HDFLIBAPI vsinstance_t *VSIget_vsinstance_node(void);
-
-    HDFLIBAPI void VSIrelease_vsinstance_node(vsinstance_t *vs);
-
-    VGROUP *VIget_vgroup_node(void);
-
-    void VIrelease_vgroup_node(VGROUP *v);
-
-    HDFLIBAPI vginstance_t *VIget_vginstance_node(void);
-
-    HDFLIBAPI void VIrelease_vginstance_node(vginstance_t *vg);
-
-    HDFLIBAPI intn VPparse_shutdown(void);
-
-    HDFLIBAPI vfile_t *Get_vfile(HFILEID f);
-
-    HDFLIBAPI vsinstance_t *vsinst
-                (HFILEID f, uint16 vsid);
-
-    HDFLIBAPI vginstance_t *vginst
-            (HFILEID f, uint16 vgid);
-
-    HDFLIBAPI DYN_VWRITELIST *vswritelist
-                (int32 vskey);
-
-    HDFLIBAPI intn vpackvg
-                (VGROUP * vg, uint8 buf[], int32 * size);
-
-    HDFLIBAPI int32 vinsertpair
-                (VGROUP * vg, uint16 tag, uint16 ref);
-
-    HDFLIBAPI intn vpackvs
-                (VDATA * vs, uint8 buf[], int32 * size);
-
-    HDFLIBAPI VGROUP *VPgetinfo
-                (HFILEID f,uint16 ref);
-
-    HDFLIBAPI VDATA *VSPgetinfo
-                (HFILEID f,uint16 ref);
 
     HDFLIBAPI int16 map_from_old_types
                 (intn type);
 
     HDFLIBAPI void trimendblanks
                 (char *ss);
+
+#endif /*vconvt_EXPORTS*/
+
+#ifndef vgp_EXPORTS
+HDFLIBAPI int32 vinsertpair(VGROUP * vg, uint16 tag, uint16 ref);
+HDFLIBAPI VGROUP *VPgetinfo(HFILEID f,uint16 ref);
+HDFLIBAPI vginstance_t *vginst (HFILEID f, uint16 vgid);
+HDFLIBAPI vfile_t *Get_vfile(HFILEID f);
+HDFLIBAPI void VIrelease_vginstance_node(vginstance_t *vg);
+HDFLIBAPI VGROUP *VIget_vgroup_node(void);
+HDFLIBAPI intn vpackvg(VGROUP * vg, uint8 buf[], int32 * size);
+HDFLIBAPI void VIrelease_vgroup_node(VGROUP *v);
+HDFLIBAPI vginstance_t *VIget_vginstance_node(void);
+#endif /*vgp_EXPORTS*/
+
+#ifndef vg_EXPORTS
+HDFLIBAPI intn VSIgetvdatas(int32 id, const char *vsclass, const uintn start_vd,
+	const uintn n_vds, uint16 *refarray);
+#endif /*vg_EXPORTS*/
+
+#ifndef vio_EXPORTS
+HDFLIBAPI VDATA *VSPgetinfo(HFILEID f,uint16 ref);
+HDFLIBAPI intn vpackvs(VDATA * vs, uint8 buf[], int32 * size);
+HDFLIBAPI DYN_VWRITELIST *vswritelist(int32 vskey);
+HDFLIBAPI vsinstance_t *vsinst(HFILEID f, uint16 vsid);
+HDFLIBAPI VDATA *VSIget_vdata_node(void);
+HDFLIBAPI void VSIrelease_vdata_node(VDATA *v);
+HDFLIBAPI vsinstance_t *VSIget_vsinstance_node(void);
+HDFLIBAPI void VSIrelease_vsinstance_node(vsinstance_t *vs);
+#endif
+
+#ifndef vparse_EXPORTS
+    HDFLIBAPI intn VPparse_shutdown(void);
+#endif /*vparse_EXPORTS*/
 
 #if defined c_plusplus || defined __cplusplus
 }

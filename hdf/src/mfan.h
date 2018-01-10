@@ -97,7 +97,6 @@ typedef struct ANentry
 /* WE are NOT in main ANNOTATION source file
  * Nothing EXPORTED except Public fcns */
 
-
 /******************************************************************************
  NAME
    ANstart - open file for annotation handling
@@ -356,7 +355,6 @@ HDFLIBAPI uint16 ANatype2tag(ann_type atype /* IN: Annotation type */);
    Returns type corresponding to annotatin TAG.
 *******************************************************************************/
 HDFLIBAPI ann_type ANtag2atype(uint16 atag /* IN: annotation tag */);
-
 
 #endif /* !defined MFAN_MASTER && !MFAN_TESTER */
 

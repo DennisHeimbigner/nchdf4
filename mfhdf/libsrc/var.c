@@ -16,9 +16,11 @@
 
 /*	$Id$ */
 
+#include	"h4config.h"
 #include	<string.h>
 #include	"local_nc.h"
 #include	"alloc.h"
+#include	"mfnetcdf.h"
 
 #ifdef NOT_USED
 static int ncvarcpy(int, int, int);

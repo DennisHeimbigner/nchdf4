@@ -39,38 +39,37 @@ AC_PROG_INSTALL
 AC_C_BIGENDIAN
 
 ##################################################
-# Checks for library functions.
-AC_FUNC_VPRINTF
-AC_CHECK_FUNCS([memset memmove strcasecmp strchr strrchr strdup strerror strtol access unlink mkstemp getpid strndup strncpy])
-AC_CHECK_FUNCS([fork getrusage system wait])
-
-##################################################
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([malloc.h memory.h stddef.h stdlib.h string.h strings.h unistd.h stdarg.h])
-AC_CHECK_HEADERS([fcntl.h stdc.h math.h alloc.h])
-AC_CHECK_HEADERS([netinet/in.h])
-AC_CHECK_HEADERS([arpa/inet.h])
-AC_CHECK_HEADERS([conio.h])
-AC_CHECK_HEADERS([sys/stat.h sys/types.h])
-AC_CHECK_HEADERS([sys/wait.h])
+AC_CHECK_HEADERS([alloc.h arpa/inet.h conio.h dlfcn.h fcntl.h \
+getopt.h inttypes.h malloc.h math.h memory.h netinet/in.h \
+stdarg.h stdbool.h stdc.h stddef.h stdint.h \
+stdlib.h string.h strings.h sys/stat.h sys/time.h sys/types.h \
+sys/wait.h unistd.h])
 
 ##################################################
-# Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
+# Checks for library functions.
+AC_CHECK_FUNCS([access doprnt fork getpid getrusage \
+memmove memset mkstemp strcasecmp strchr \
+strdup strerror strncpy strndup strrchr \
+strtol system unlink wait])
+AC_FUNC_VPRINTF
+##################################################
+# Checks for typedefs, structures, and compiler characteristics. AC_C_CONST
 AC_HEADER_STDBOOL
 AC_TYPE_LONG_LONG_INT
 AC_TYPE_SIZE_T
 AC_TYPE_OFF_T
 AC_CHECK_TYPES([ssize_t, ptrdiff_t, uchar])
 AC_C_CHAR_UNSIGNED
-AC_C_BIGENDIAN
 AC_CHECK_SIZEOF(int)
 AC_CHECK_SIZEOF(long)
 AC_CHECK_SIZEOF(size_t)
 AC_CHECK_SIZEOF(off_t)
 AC_CHECK_SIZEOF(void*)
 AC_CHECK_TYPES([boolean])
+AC_CHECK_TYPES([bool_t])
+AC_CHECK_TYPES([enum_t])
 
 AC_MSG_CHECKING([sizeof(long) > sizeof(int)])
 if test $SIZEOF_LONG -gt $SIZEOF_INT ; then
@@ -79,7 +78,6 @@ AC_DEFINE([BIG_LONGS],1,[Define if sizeof(long) > sizeof(int)])
 else
 AC_MSG_RESULT([no])
 fi
-
 
 # What is fmpool and MPset/MPget?
 
@@ -160,13 +158,11 @@ mfhdf/dumper/Makefile
 mfhdf/hdfimport/Makefile
 mfhdf/hdiff/Makefile
 mfhdf/hrepack/Makefile
-mfhdf/xdr/Makefile
 mfhdf/test/Makefile
+netcdf.h
 ${SCRIPTS}])
 
 AC_OUTPUT
-
-# AC_CONFIG_COMMANDS_POST does not work as I thought it did, so do it directly
 
 # Make all shell scripts executable 
 chmod a+x ${SCRIPTS}

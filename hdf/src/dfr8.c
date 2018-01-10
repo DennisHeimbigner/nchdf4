@@ -42,6 +42,8 @@
  *          The palette is arranged as RGBRGB...
  *---------------------------------------------------------------------------*/
 
+#define dfr8_EXPORTS
+
 #include "hdf.h"
 #include "dfrig.h"
 

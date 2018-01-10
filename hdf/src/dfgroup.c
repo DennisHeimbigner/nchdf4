@@ -28,6 +28,8 @@
  *          Each tag/ref combination is called a data identifier (DI).
  *---------------------------------------------------------------------------*/
 
+#define dfgroup_EXPORTS
+
 #include "hdf.h"
 #include "hfile.h"
 

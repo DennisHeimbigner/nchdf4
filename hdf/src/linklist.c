@@ -54,6 +54,8 @@ MODIFICATION HISTORY
 */
 
 #define LIST_MASTER
+#define linklist_EXPORTS
+
 #include "hdf.h"
 #include "linklist.h"
 

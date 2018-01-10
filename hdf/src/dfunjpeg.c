@@ -25,6 +25,8 @@
  *      routines.
  *---------------------------------------------------------------------------*/
 
+#define dfunjpeg_EXPORTS
+
 #include "hdf.h"
 #include "jpeglib.h"
 #include "jerror.h"

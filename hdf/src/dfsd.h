@@ -77,6 +77,8 @@ typedef struct DFnsdg_t_hdr
   }
 DFnsdg_t_hdr;
 
+#ifndef dfsd_EXPORTS
+
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
@@ -134,5 +136,7 @@ extern      "C"
 #if defined c_plusplus || defined __cplusplus
 }
 #endif                          /* c_plusplus || __cplusplus */
+
+#endif /*dfsd_EXPORTS*/
 
 #endif                          /* _DFSD_H */

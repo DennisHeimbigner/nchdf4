@@ -53,8 +53,12 @@
  *  DFANIgetfann:    - get file annotation
  *---------------------------------------------------------------------------*/
 
+#define dfan_EXPORTS
+
 #include "hdf.h"
 #include "dfan.h"
+
+/* Forward */
 PRIVATE uint16 Lastref = 0;     /* Last ref read/written */
 PRIVATE uint16 Next_label_ref = 0;  /* Next file label ref to read/write */
 PRIVATE uint16 Next_desc_ref = 0;   /* Next file desc ref to read/write */

@@ -24,13 +24,9 @@
 #include "h4config.h"
 #include "H4api_adpt.h"
 
-#ifdef HAVE_NETCDF
 #include "netcdf.h"
 #include "local_nc.h"
-#else
-#include "hdf4_netcdf.h"
-#endif
-
+#include "mfnetcdf.h"
 
 int ncerr = NC_NOERR ;
 

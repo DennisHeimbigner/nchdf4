@@ -44,18 +44,17 @@ typedef NETLONG     netlong;
 
 #ifdef _MSC_VER
 #include <io.h>
+#include <fcntl.h>
 #endif
 
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
 
-#ifdef HAVE_ARPA_INET_H
-#include <arpa/inet.h>
-#endif
-
 #include <string.h>
+#include "hproto.h"
 #include "mfhdf.h"
+#include "mfnetcdf.h"
 
 #ifndef _MSC_VER
         typedef u_long ncpos_t ;  /* all unicies */
@@ -80,6 +79,35 @@ typedef struct {
     unsigned char base[BIOBUFSIZ];      /* the data buffer */
 } biobuf;
 
+
+/* Provide inline byte swap routines to avoid having to locate htonl and ntohl */
+/* signature: void swapinline32(unsigned int* ip) */
+#define swapinline32(ip) \
+{ \
+    char dst[4]; \
+    char* src = (char*)(ip); \
+    dst[0] = src[3]; \
+    dst[1] = src[2]; \
+    dst[2] = src[1]; \
+    dst[3] = src[0]; \
+    *(ip) = *((unsigned int*)dst); \
+}
+
+/* signature: void swapinline64(unsigned long long* ip) */
+#define swapinline64(ip) \
+{ \
+    char dst[8]; \
+    char* src = (char*)(ip); \
+    dst[0] = src[7]; \
+    dst[1] = src[6]; \
+    dst[2] = src[5]; \
+    dst[3] = src[4]; \
+    dst[4] = src[3]; \
+    dst[5] = src[2]; \
+    dst[6] = src[1]; \
+    dst[7] = src[0]; \
+    *ip = *((unsigned long long*)dst); \
+}
 
 static void
 free_biobuf(abuf)
@@ -408,7 +436,18 @@ xdrposix_getlong(xdrs, lp)
     if(bioread((biobuf *)xdrs->x_private, up, 4) < 4)
         return (FALSE);
 #ifdef SWAP
+    {
+    netlong mycopy = *lp;
+    if(sizeof(mycopy) == sizeof(unsigned int)) {
+        swapinline32(&mycopy);
+    } else {
+        swapinline64(&mycopy);
+    }
+    *lp = mycopy;
+    }
+#if 0
     *lp =  ntohl(*lp);
+#endif
 #endif
     return (TRUE);
 }
@@ -422,10 +461,17 @@ xdrposix_putlong(xdrs, lp)
     long *lp;
 #endif
 {
-
     unsigned char *up = (unsigned char *)lp ;
 #ifdef SWAP
+#if 0
     netlong mycopy = htonl(*lp);
+#endif
+    netlong mycopy = *lp;
+    if(sizeof(mycopy) == sizeof(unsigned int)) {
+        swapinline32(&mycopy);
+    } else {
+        swapinline64(&mycopy);
+    }
     up = (unsigned char *)&mycopy;
 #endif
 #if (defined AIX5L64  || defined __powerpc64__ || (defined __hpux && __LP64__))
@@ -549,10 +595,10 @@ int ncmode ;
 fprintf(stderr,"NCxdrfile_create(): XDR=%p, path=%s, ncmode=%d\n",xdrs,path,ncmode);
 #endif
     switch(ncmode & 0x0f) {
-    case NC_NOCLOBBER :
+    case NC_NOOVERWRITE :
         fmode = O_RDWR | O_CREAT | O_EXCL ;
         break ;
-    case NC_CLOBBER :
+    case NC_OVERWRITE :
         fmode = O_RDWR | O_CREAT | O_TRUNC ;
         break ;
     case NC_WRITE :

@@ -46,9 +46,11 @@
 
 ------------------------------------------------------------------------- */
 
+#define hcompri_EXPORTS
+
+#include <assert.h>
 #include "hdf.h"
 #include "hfile.h"
-#include <assert.h>
 
 /* crinfo_t -- compressed raster information structure */
 
@@ -64,8 +66,6 @@ typedef struct
       uintn image_size;         /* Size of the uncompressed image in memory */
   }
 crinfo_t;
-
-/* forward declaration of the functions provided in this module */
 
 /* cr_funcs -- table of the accessing functions of the compressed raster
    data element function modules.  The position of each function in

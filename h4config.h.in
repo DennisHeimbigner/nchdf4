@@ -18,6 +18,9 @@
 /* Define to 1 if the system has the type `boolean'. */
 #undef HAVE_BOOLEAN
 
+/* Define to 1 if the system has the type `bool_t'. */
+#undef HAVE_BOOL_T
+
 /* Define to 1 if you have the <conio.h> header file. */
 #undef HAVE_CONIO_H
 
@@ -27,11 +30,17 @@
 /* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
 #undef HAVE_DOPRNT
 
+/* Define to 1 if the system has the type `enum_t'. */
+#undef HAVE_ENUM_T
+
 /* Define to 1 if you have the <fcntl.h> header file. */
 #undef HAVE_FCNTL_H
 
 /* Define to 1 if you have the `fork' function. */
 #undef HAVE_FORK
+
+/* Define to 1 if you have the <getopt.h> header file. */
+#undef HAVE_GETOPT_H
 
 /* Define to 1 if you have the `getpid' function. */
 #undef HAVE_GETPID
@@ -135,6 +144,9 @@
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #undef HAVE_SYS_STAT_H
 
+/* Define to 1 if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H
+
 /* Define to 1 if you have the <sys/types.h> header file. */
 #undef HAVE_SYS_TYPES_H
 
@@ -235,9 +247,6 @@
 #ifndef __CHAR_UNSIGNED__
 # undef __CHAR_UNSIGNED__
 #endif
-
-/* Define to empty if `const' does not conform to ANSI C. */
-#undef const
 
 /* Define to `long int' if <sys/types.h> does not define. */
 #undef off_t

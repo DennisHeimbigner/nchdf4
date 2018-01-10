@@ -12,6 +12,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
+#include "h4config.h"
 #include "hdiff.h"
 #include "hdiff_list.h"
 #include "hdiff_mattbl.h"
@@ -30,6 +31,7 @@
  *-------------------------------------------------------------------------
  */
 
+HDFPUBLIC
 uint32 hdiff(const char *fname1, 
              const char *fname2, 
              diff_opt_t *opt)

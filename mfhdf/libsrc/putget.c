@@ -16,10 +16,12 @@
 
 /*	$Id$ */
 
+#include	"h4config.h"
 #include	<string.h>
 #include	"local_nc.h"
 #include	"alloc.h"
-#include    "hfile.h"    /* Ugh!  We need the defs for HI_READ and HI_SEEK */
+#include	"hfile.h"    /* Ugh!  We need the defs for HI_READ and HI_SEEK */
+#include 	"mfnetcdf.h"
 
 /* Local function prototypes */
 static bool_t nssdc_xdr_NCvdata
@@ -2321,7 +2323,7 @@ int cdfid ;
 int varid ;
 const long *start ;
 const long *edges ;
-ncvoid *values ;
+const ncvoid *values ;
 {
 	NC *handle ;
 
@@ -2338,7 +2340,7 @@ ncvoid *values ;
       }
 	handle->xdrs->x_op = XDR_ENCODE ;
 
-	return( NCvario(handle, varid, start, edges, values) ) ;
+	return( NCvario(handle, varid, start, edges, (ncvoid*)values) ) ;
 }
 
 
@@ -2406,7 +2408,6 @@ const long *edges ;
 ncvoid *values ;
 {
 	NC *handle;
-	NC_var *vp;
 	int  status = 0;
 
 	cdf_routine_name = "ncvarget";
@@ -2597,7 +2598,7 @@ int
 ncrecput(cdfid, recnum, datap)
 int cdfid ;
 long recnum ;
-ncvoid * *datap ;
+ncvoid *const *datap ;
 {
 	NC *handle ;
 	long unfilled ;

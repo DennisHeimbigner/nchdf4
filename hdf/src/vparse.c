@@ -23,6 +23,8 @@
 ************************************************************************/
 
 #define VSET_INTERFACE
+#define vparse_EXPORTS
+
 #include "hdf.h"
 
 #define ISCOMMA(c) ( (c==',') ? 1:0 )

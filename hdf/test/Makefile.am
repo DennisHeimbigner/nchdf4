@@ -28,6 +28,7 @@ testhdf_SOURCES = an.c anfile.c bitio.c blocks.c chunks.c comp.c   \
 testhdf_LDADD = $(LIBHDF)
 testhdf_DEPENDENCIES = testdir $(LIBHDF) 
 
+buffer_SOURCES = buffer.c
 buffer_LDADD = $(LIBHDF)
 buffer_DEPENDENCIES = $(LIBHDF)
 

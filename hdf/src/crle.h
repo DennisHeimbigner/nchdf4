@@ -28,6 +28,8 @@
 #ifndef __CRLE_H
 #define __CRLE_H
 
+#ifndef crle_EXPORTS
+
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
@@ -37,32 +39,34 @@ extern      "C"
    ** from crle.c
  */
 
-    extern int32 HCPcrle_stread
+    HDFLIBAPI int32 HCPcrle_stread
                 (accrec_t * rec);
 
-    extern int32 HCPcrle_stwrite
+    HDFLIBAPI int32 HCPcrle_stwrite
                 (accrec_t * rec);
 
-    extern int32 HCPcrle_seek
+    HDFLIBAPI int32 HCPcrle_seek
                 (accrec_t * access_rec, int32 offset, int origin);
 
-    extern int32 HCPcrle_inquire
+    HDFLIBAPI int32 HCPcrle_inquire
                 (accrec_t * access_rec, int32 *pfile_id, uint16 *ptag, uint16 *pref,
                int32 *plength, int32 *poffset, int32 *pposn, int16 *paccess,
                  int16 *pspecial);
 
-    extern int32 HCPcrle_read
+    HDFLIBAPI int32 HCPcrle_read
                 (accrec_t * access_rec, int32 length, void * data);
 
-    extern int32 HCPcrle_write
+    HDFLIBAPI int32 HCPcrle_write
                 (accrec_t * access_rec, int32 length, const void * data);
 
-    extern intn HCPcrle_endaccess
+    HDFLIBAPI intn HCPcrle_endaccess
                 (accrec_t * access_rec);
 
 #if defined c_plusplus || defined __cplusplus
 }
 #endif                          /* c_plusplus || __cplusplus */
+
+#endif /*crle_EXPORTS*/
 
 /* size of the RLE buffer */
 #define RLE_BUF_SIZE    128
@@ -109,19 +113,8 @@ typedef struct
 }
 comp_coder_rle_info_t;
 
-#ifndef CRLE_MASTER
-extern funclist_t crle_funcs;   /* functions to perform run-length encoding */
-#else
-funclist_t  crle_funcs =
-{                               /* functions to perform run-length encoding */
-    HCPcrle_stread,
-    HCPcrle_stwrite,
-    HCPcrle_seek,
-    HCPcrle_inquire,
-    HCPcrle_read,
-    HCPcrle_write,
-    HCPcrle_endaccess
-};
+#ifndef crle_EXPORTS
+HDFLIBDATA funclist_t crle_funcs;   /* functions to perform run-length encoding */
 #endif
 
 #endif /* __CRLE_H */

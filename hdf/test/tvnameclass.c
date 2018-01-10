@@ -359,8 +359,6 @@ test_vgisinternal()
 void
 test_vnameclass(void)
 {
-    int32       status;
-
     /* test Vgroups with name and class that have more than 64 characters */
     test_vglongnames();
 

@@ -33,11 +33,14 @@
    10/24/95     Starting coding
  */
 
-/* General HDF includes */
-#include "hdf.h"
-
 #define CDEFLATE_MASTER
 #define CODER_CLIENT
+/* General HDF includes */
+#define cdeflate_EXPORTS
+
+#include "H4api_adpt.h"
+#include "hdf.h"
+
 /* HDF compression includes */
 #include "hcompi.h"     /* Internal definitions for compression */
 
@@ -790,3 +793,14 @@ HCPcdeflate_endaccess(accrec_t * access_rec)
     return (SUCCEED);
 }   /* HCPcdeflate_endaccess() */
 
+/* Moved here from cdeflate.h */
+funclist_t  cdeflate_funcs =
+{                               /* functions to perform gzip encoding */
+    HCPcdeflate_stread,
+    HCPcdeflate_stwrite,
+    HCPcdeflate_seek,
+    HCPcdeflate_inquire,
+    HCPcdeflate_read,
+    HCPcdeflate_write,
+    HCPcdeflate_endaccess
+};

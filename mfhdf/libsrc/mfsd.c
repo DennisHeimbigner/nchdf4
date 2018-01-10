@@ -91,9 +91,10 @@ NOTE: This file needs to have the comments cleaned up for most of the
 
 #include "mfhdf.h"
 #include "hfile.h"
+#include "mfnetcdf.h"
 
 #ifdef HAVE_LIBSZ          /* we have the szip library */
-#include "szlib.h"
+#include <szlib.h>
 #ifndef MIN
 #define MIN(a,b)    (((a)<(b)) ? (a) : (b))
 #endif
@@ -370,7 +371,7 @@ SDstart(const char *name,   /* IN: file name to open */
       { /* create file */
         if(!SDI_can_clobber(name)) 
             HGOTO_ERROR(DFE_DENIED, FAIL);
-        cdfid = nccreate(name, NC_CLOBBER);
+        cdfid = nccreate(name, NC_OVERWRITE);
       } 
     else 
       { /* open the file */
@@ -3591,7 +3592,6 @@ SDdiminfo(int32  id,    /* IN:  dimension ID */
     NC_var **dp = NULL;
     intn     ii;
     intn     len;
-    int32    varid;
     int      ret_value = SUCCEED;
 
 #ifdef SDDEBUG

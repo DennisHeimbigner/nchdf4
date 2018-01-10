@@ -6,8 +6,13 @@
 #ifndef __TYPES_RPC_HEADER__
 #define __TYPES_RPC_HEADER__
 
+#ifndef HAVE_BOOL_T
 #define bool_t  int
+#endif
+#ifndef HAVE_ENUM_T
 #define enum_t  int
+#endif
+
 #ifdef FALSE
 #undef FALSE
 #endif /* FALSE */

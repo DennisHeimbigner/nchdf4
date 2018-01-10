@@ -185,6 +185,8 @@
 *************************************************************/
 
 #define VSET_INTERFACE
+#define vattr_EXPORTS
+
 #include "hdf.h"
 
 /* -----------------  VSfindex ---------------------

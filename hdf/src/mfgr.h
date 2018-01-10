@@ -133,14 +133,17 @@ typedef struct ri_info {
 
 /* Useful raster routines for generally private use */
 
+#ifndef mfgr_EXPORTS
 HDFLIBAPI intn GRIil_convert(const void * inbuf,gr_interlace_t inil,void * outbuf,
         gr_interlace_t outil,int32 dims[2],int32 ncomp,int32 nt);
 
-extern VOID GRIgrdestroynode(void * n);
+HDFLIBAPI VOID GRIgrdestroynode(void * n);
 
-extern VOID GRIattrdestroynode(void * n);
+HDFLIBAPI VOID GRIattrdestroynode(void * n);
 
-extern VOID GRIridestroynode(void * n);
+HDFLIBAPI VOID GRIridestroynode(void * n);
+
+#endif /*mfgr_EXPORTS*/
 
 #endif /* MFGR_MASTER | MFGR_TESTER */
 

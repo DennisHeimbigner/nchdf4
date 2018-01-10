@@ -113,7 +113,10 @@ extern      "C"
 {
 #endif                          /* c_plusplus || __cplusplus */
 
+#ifndef dfstubs_EXPORTS
+
 /* prototypes for dfstubs.c */
+
     HDFLIBAPI DF  *DFopen
                 (char *name, int acc_mode, int ndds);
 
@@ -191,10 +194,13 @@ extern      "C"
 
     HDFLIBAPI char *DFIf2cstring
                 (_fcd fdesc, intn len);
+#endif /*dfstubs_EXPORTS*/
 
+#ifdef dvconv_EXPORTS
 /* prototypes for dfconv.c */
     HDFLIBAPI int  DFconvert
                 (uint8 *source, uint8 *dest, int ntype, int sourcetype, int desttype, int32 size);
+#endif /*dfconv_EXPORTS*/
 
 #if defined c_plusplus || defined __cplusplus
 }
@@ -203,10 +209,11 @@ extern      "C"
 /*--------------------------------------------------------------------------*/
 /*                          Global Variables                                */
 
-#ifndef DFMASTER
-HDFLIBAPI
-#endif                          /*DFMASTER */
-int DFerror;            /* Error code for DF routines */
+#ifndef dfstubs_EXPORTS
+
+HDFLIBDATA int DFerror;            /* Error code for DF routines */
+
+#endif /*dfstubs_EXPORTS*/
 
 #define DFSETERR(error) (DFerror=(DFerror?DFerror:error))
 

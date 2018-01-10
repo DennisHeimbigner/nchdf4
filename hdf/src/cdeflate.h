@@ -32,6 +32,8 @@
 #include "zlib.h"
 #undef zintf
 
+#ifndef cdeflate_EXPORTS
+
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
@@ -41,32 +43,34 @@ extern      "C"
    ** from cdeflate.c
  */
 
-    extern int32 HCPcdeflate_stread
+    HDFLIBAPI int32 HCPcdeflate_stread
                 (accrec_t * rec);
 
-    extern int32 HCPcdeflate_stwrite
+    HDFLIBAPI int32 HCPcdeflate_stwrite
                 (accrec_t * rec);
 
-    extern int32 HCPcdeflate_seek
+    HDFLIBAPI int32 HCPcdeflate_seek
                 (accrec_t * access_rec, int32 offset, int origin);
 
-    extern int32 HCPcdeflate_inquire
+    HDFLIBAPI int32 HCPcdeflate_inquire
                 (accrec_t * access_rec, int32 *pfile_id, uint16 *ptag, uint16 *pref,
                int32 *plength, int32 *poffset, int32 *pposn, int16 *paccess,
                  int16 *pspecial);
 
-    extern int32 HCPcdeflate_read
+    HDFLIBAPI int32 HCPcdeflate_read
                 (accrec_t * access_rec, int32 length, void * data);
 
-    extern int32 HCPcdeflate_write
+    HDFLIBAPI int32 HCPcdeflate_write
                 (accrec_t * access_rec, int32 length, const void * data);
 
-    extern intn HCPcdeflate_endaccess
+    HDFLIBAPI intn HCPcdeflate_endaccess
                 (accrec_t * access_rec);
 
 #if defined c_plusplus || defined __cplusplus
 }
 #endif                          /* c_plusplus || __cplusplus */
+
+#endif /*cdeflate_EXPORTS*/
 
 /* Define the [default] size of the buffer to interact with the file. */
 #define DEFLATE_BUF_SIZE    4096
@@ -84,19 +88,8 @@ typedef struct
 }
 comp_coder_deflate_info_t;
 
-#ifndef CDEFLATE_MASTER
-extern funclist_t cdeflate_funcs;   /* functions to perform gzip encoding */
-#else
-funclist_t  cdeflate_funcs =
-{                               /* functions to perform gzip encoding */
-    HCPcdeflate_stread,
-    HCPcdeflate_stwrite,
-    HCPcdeflate_seek,
-    HCPcdeflate_inquire,
-    HCPcdeflate_read,
-    HCPcdeflate_write,
-    HCPcdeflate_endaccess
-};
+#ifndef cdeflate_EXPORTS
+HDFLIBDATA funclist_t cdeflate_funcs;   /* functions to perform gzip encoding */
 #endif
 
 #endif /* __CDEFLATE_H */

@@ -45,7 +45,7 @@ SHOW="eval"
 CCBASE="gcc"
 CLINKERBASE="gcc"
 CFLAGS="-g -O0"
-CPPFLAGS="-I/home/dmh/git/netcdf-c"
+CPPFLAGS="-I/home/dmh/git/netcdf-c/include"
 LDFLAGS=" -lz -L/usr/local/lib -ljpeg"
 LIBS="-ljpeg -lz "
 

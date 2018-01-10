@@ -31,6 +31,7 @@
 ****************************************************************************/
 
 #include "mfhdf.h"
+#include "mfnetcdf.h"
 #include "hdftest.h"
 
 #define DIM0 20	/* this value is used to declare larger buffer for when

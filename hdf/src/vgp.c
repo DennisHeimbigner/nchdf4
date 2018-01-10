@@ -103,7 +103,10 @@ EXPORTED ROUTINES
 *************************************************************************/
 
 #define VSET_INTERFACE
+#define vgp_EXPORTS
+
 #include "hdf.h"
+#include "vgint.h"
 
 /* These are used to determine whether a vgroup had been created by the
    library internally, that is, not created by user's application */
@@ -114,6 +117,7 @@ const char *HDF_INTERNAL_VGS[] = {_HDF_VARIABLE, _HDF_DIMENSION,
 /* Prototypes */
 extern VOID vprint(VOIDP k1);
 
+/*Forward*/
 PRIVATE intn Load_vfile
             (HFILEID f);
 
@@ -208,7 +212,8 @@ done:
     No return value
 
 *******************************************************************************/
-void VIrelease_vgroup_node(VGROUP *vg)
+void
+VIrelease_vgroup_node(VGROUP *vg)
 {
 #ifdef LATER
     CONSTR(FUNC, "VIrelease_vgroup_node");	/* for HERROR */
@@ -2622,7 +2627,7 @@ Vgetid(HFILEID f,  /* IN: file handle */
           if (vf->vgtree == NULL )
               HGOTO_DONE(FAIL); /* just return FAIL, no error */
 
-          if (NULL == (t = (VOIDP *) tbbtfirst((TBBT_NODE *) * (vf->vgtree))))
+          if (NULL == (t = (VOIDP *) tbbtfirst((TBBT_NODE *) (vf->vgtree))))
               HGOTO_DONE(FAIL); /* just return FAIL, no error */
 
           /* t is assumed to valid at this point */
@@ -2637,7 +2642,7 @@ Vgetid(HFILEID f,  /* IN: file handle */
           t = (VOIDP *) tbbtdfind(vf->vgtree, (VOIDP) &key, NULL);
 
           if (t == NULL ||
-              t == (VOIDP *) tbbtlast((TBBT_NODE *) * (vf->vgtree)))  
+              t == (VOIDP *) tbbtlast((TBBT_NODE *) (vf->vgtree)))  
             { /* couldn't find the old vgid or at the end */
               ret_value = (FAIL);  
             }
@@ -2839,7 +2844,6 @@ Vgetclassnamelen(int32 vkey,   /* IN: vgroup key */
 {
     vginstance_t *v = NULL;
     VGROUP       *vg = NULL;
-    size_t       temp_len;
     int32        ret_value = SUCCEED;
     CONSTR(FUNC, "Vgetclassnamelen");
 

@@ -47,7 +47,7 @@ typedef enum {BV_FALSE=0, BV_TRUE=1} bv_bool;
 /* Create the external interface data structures needed */
 typedef struct bv_struct_tag *bv_ptr;
 
-#if defined BV_MASTER | defined BV_TESTER
+#if defined BV_MASTER || defined BV_TESTER
 
 /* Base type of the array used to store the bits */
 typedef unsigned char bv_base;
@@ -359,7 +359,9 @@ static const int8 bv_num_ones[256]={
 
 /* Useful routines for generally private use */
 
-#endif /* BV_MASTER | BV_TESTER */
+#endif /* BV_MASTER || BV_TESTER */
+
+#ifndef bitvect_EXPORTS
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
@@ -383,6 +385,8 @@ HDFLIBAPI int32 bv_find(bv_ptr b, int32 last_find, bv_bool value);
 #if defined c_plusplus || defined __cplusplus
 }
 #endif                          /* c_plusplus || __cplusplus */
+
+#endif /*bitvect_EXPORTS*/
 
 #endif /* __BITVECT_H */
 

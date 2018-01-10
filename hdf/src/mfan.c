@@ -83,9 +83,12 @@
  *
  *---------------------------------------------------------------------------*/
 
-#ifndef MFAN_MASTER  /* define main annotation source file */
 #define MFAN_MASTER
 
+#define mfan_EXPORTS
+
+#include "h4config.h"
+#include "hdf.h"
 #include "mfan.h"
 #include "atom.h"
 #include "hfile.h" /* needed for filerec_t */
@@ -757,7 +760,7 @@ ANInumann(int32    an_id,   /* IN: annotation interface id */
       }
 
     /* Traverse the list looking for a match */
-    for(entry = tbbtfirst((TBBT_NODE *)*(file_rec->an_tree[type])); 
+    for(entry = tbbtfirst((TBBT_NODE *)(file_rec->an_tree[type])); 
         entry != NULL; entry = tbbtnext(entry))
       {
           ann_entry = (ANentry *) entry->data; /* get annotation entry from node */
@@ -830,7 +833,7 @@ ANIannlist(int32    an_id,    /* IN: annotation interface id */
       }
 
     /* Traverse the list looking for a match */
-    for(entry = tbbtfirst((TBBT_NODE *)*(file_rec->an_tree[type])); 
+    for(entry = tbbtfirst((TBBT_NODE *)(file_rec->an_tree[type])); 
         entry != NULL; entry = tbbtnext(entry))
       {
           ann_entry = (ANentry *) entry->data; /* get annotation entry from node */
@@ -1342,7 +1345,7 @@ ANIcreate(int32    file_id,  /* IN: file ID */
     GeorgeV.
 
 --------------------------------------------------------------------------- */
-EXPORT int32
+int32
 ANstart(int32 file_id /* IN: file to start annotation access on*/)
 {
     CONSTR(FUNC, "ANstart");
@@ -1389,7 +1392,7 @@ ANstart(int32 file_id /* IN: file to start annotation access on*/)
     GeorgeV.
 
 --------------------------------------------------------------------------*/
-EXPORT intn 
+intn 
 ANfileinfo(int32  an_id,        /* IN:  annotation interface id */
            int32 *n_file_label, /* OUT: the # of file labels */
            int32 *n_file_desc,  /* OUT: the # of file descriptions */
@@ -1464,7 +1467,7 @@ ANfileinfo(int32  an_id,        /* IN:  annotation interface id */
  RETURNS
     SUCCEED / FAIL
 --------------------------------------------------------------------------- */
-EXPORT int32
+int32
 ANend(int32 an_id /* IN: Annotation ID of file to close */)
 {
     CONSTR(FUNC,"ANend");
@@ -1489,7 +1492,7 @@ ANend(int32 an_id /* IN: Annotation ID of file to close */)
     /* free file label annotation rb tree */
     if (file_rec->an_tree[AN_FILE_LABEL] != NULL) 
       { /* Traverse tree puling ann_id's to delete from annotation atom group */
-          for(aentry = tbbtfirst((TBBT_NODE *)*(file_rec->an_tree[AN_FILE_LABEL])); 
+          for(aentry = tbbtfirst((TBBT_NODE *)(file_rec->an_tree[AN_FILE_LABEL])); 
               aentry != NULL;
               aentry = tbbtnext(aentry))
             { /* get annotation entry from node */
@@ -1509,7 +1512,7 @@ ANend(int32 an_id /* IN: Annotation ID of file to close */)
     /* free file desc annotation rb tree */
     if (file_rec->an_tree[AN_FILE_DESC] != NULL) 
       { /* Traverse tree puling ann_id's to delete from annotation atom group */
-          for(aentry = tbbtfirst((TBBT_NODE *)*(file_rec->an_tree[AN_FILE_DESC])); 
+          for(aentry = tbbtfirst((TBBT_NODE *)(file_rec->an_tree[AN_FILE_DESC])); 
               aentry != NULL;
               aentry = tbbtnext(aentry))
             { /* get annotation entry from node */
@@ -1530,7 +1533,7 @@ ANend(int32 an_id /* IN: Annotation ID of file to close */)
     /* free label annotation rb tree */
     if (file_rec->an_tree[AN_DATA_LABEL] != NULL) 
       { /* Traverse tree puling ann_id's to delete from annotation atom group */
-          for(aentry = tbbtfirst((TBBT_NODE *)*(file_rec->an_tree[AN_DATA_LABEL])); 
+          for(aentry = tbbtfirst((TBBT_NODE *)(file_rec->an_tree[AN_DATA_LABEL])); 
               aentry != NULL;
               aentry = tbbtnext(aentry))
             { /* get annotation entry from node */
@@ -1550,7 +1553,7 @@ ANend(int32 an_id /* IN: Annotation ID of file to close */)
     /* free desc annotation rb tree */
     if (file_rec->an_tree[AN_DATA_DESC] != NULL) 
       { /* Traverse tree puling ann_id's to delete from annotation atom group */
-          for(aentry = tbbtfirst((TBBT_NODE *)*(file_rec->an_tree[AN_DATA_DESC])); 
+          for(aentry = tbbtfirst((TBBT_NODE *)(file_rec->an_tree[AN_DATA_DESC])); 
               aentry != NULL;
               aentry = tbbtnext(aentry))
             { /* get annotation entry from node */
@@ -1604,7 +1607,7 @@ ANend(int32 an_id /* IN: Annotation ID of file to close */)
     GeorgeV.
 
 --------------------------------------------------------------------------- */
-EXPORT int32
+int32
 ANcreate(int32    an_id,    /* IN: annotation interface ID */
          uint16   elem_tag, /* IN: tag of item to be assigned annotation */ 
          uint16   elem_ref, /* IN: reference number of itme to be assigned ann */ 
@@ -1636,7 +1639,7 @@ ANcreate(int32    an_id,    /* IN: annotation interface ID */
     GeorgeV.
 
 --------------------------------------------------------------------------- */
-EXPORT int32
+int32
 ANcreatef(int32    an_id,/* IN: annotation interface ID */
           ann_type type  /* IN:  AN_FILE_LABEL for file labels,
                                  AN_FILE_DESC for file descritpions.*/)
@@ -1691,7 +1694,7 @@ ANcreatef(int32    an_id,/* IN: annotation interface ID */
     GeorgeV.
 
 --------------------------------------------------------------------------- */
-EXPORT int32
+int32
 ANselect(int32    an_id, /* IN: annotation interface ID */
          int32    index, /* IN: index of annottion to get ID for */
          ann_type type   /* IN: AN_DATA_LABEL for data labels, 
@@ -1727,7 +1730,7 @@ ANselect(int32    an_id, /* IN: annotation interface ID */
         HE_REPORT_GOTO("bad index", FAIL);
 
     /* find 'index' entry */
-    if ((entry = tbbtindx((TBBT_NODE *)*(file_rec->an_tree[type]), index)) == NULL)
+    if ((entry = tbbtindx((TBBT_NODE *)(file_rec->an_tree[type]), index)) == NULL)
         HE_REPORT_GOTO("failed to find 'index' entry", FAIL);
 
     ann_entry = (ANentry *) entry->data; 
@@ -1762,7 +1765,7 @@ ANselect(int32    an_id, /* IN: annotation interface ID */
     GeorgeV.
 
  ------------------------------------------------------------------------*/ 
-EXPORT intn
+intn
 ANnumann(int32    an_id,    /* IN: annotation interface id */
          ann_type type,     /* IN: AN_DATA_LABEL for data labels, 
                                    AN_DATA_DESC for data descriptions,
@@ -1808,7 +1811,7 @@ ANnumann(int32    an_id,    /* IN: annotation interface id */
     GeorgeV.
 
  ------------------------------------------------------------------------*/ 
-EXPORT intn
+intn
 ANannlist(int32    an_id,      /* IN: annotation interface id */
           ann_type type,       /* IN: AN_DATA_LABEL for data labels, 
                                       AN_DATA_DESC for data descriptions,
@@ -1852,7 +1855,7 @@ ANannlist(int32    an_id,      /* IN: annotation interface id */
     GeorgeV.
 
  ------------------------------------------------------------------------*/
-EXPORT int32
+int32
 ANannlen(int32 ann_id /* IN: annotation id */)
 {
 #ifdef LATER
@@ -1879,7 +1882,7 @@ ANannlen(int32 ann_id /* IN: annotation id */)
     GeorgeV.
 
  ------------------------------------------------------------------------*/
-EXPORT int32
+int32
 ANwriteann(int32 ann_id,     /* IN: annotation id */
            const char *ann,  /* IN: annotation to write */
            int32 annlen      /* IN: length of annotation */)
@@ -1908,7 +1911,7 @@ ANwriteann(int32 ann_id,     /* IN: annotation id */
     GeorgeV.
 
  ------------------------------------------------------------------------*/
-EXPORT int32
+int32
 ANreadann(int32 ann_id,  /* IN: annotation id (handle) */
           char *ann,     /* OUT: space to return annotation in */
           int32 maxlen   /* IN: size of space to return annotation in */)
@@ -1936,7 +1939,7 @@ ANreadann(int32 ann_id,  /* IN: annotation id (handle) */
     GeorgeV.
 
 --------------------------------------------------------------------------- */
-EXPORT intn
+intn
 ANendaccess(int32 ann_id /* IN: annotation id */)
 {
 #ifdef LATER
@@ -1965,7 +1968,7 @@ ANendaccess(int32 ann_id /* IN: annotation id */)
     GeorgeV.
 
 --------------------------------------------------------------------------- */
-EXPORT int32
+int32
 ANget_tagref(int32    an_id, /* IN: annotation interface ID */
              int32    index, /* IN: index of annotation to get tag/ref for */
              ann_type type,  /* IN: AN_DATA_LABEL for data labels, 
@@ -2003,7 +2006,7 @@ ANget_tagref(int32    an_id, /* IN: annotation interface ID */
         HE_REPORT_GOTO("bad index", FAIL);
 
     /* find 'index' entry */
-    if ((entry = tbbtindx((TBBT_NODE *)*(file_rec->an_tree[type]), index)) == NULL)
+    if ((entry = tbbtindx((TBBT_NODE *)(file_rec->an_tree[type]), index)) == NULL)
         HE_REPORT_GOTO("failed to find 'index' entry", FAIL);
 
     ann_entry = (ANentry *) entry->data; 
@@ -2221,7 +2224,7 @@ ANtagref2id(int32  an_id,   /* IN  Annotation interface id */
     GeorgeV.
 
 --------------------------------------------------------------------*/
-EXPORT uint16
+uint16
 ANatype2tag(ann_type atype /* IN: Annotation type */)
 {   /* Switch on annotation type "atype" */
 #ifdef LATER
@@ -2254,7 +2257,7 @@ ANatype2tag(ann_type atype /* IN: Annotation type */)
     GeorgeV.
 
 --------------------------------------------------------------------*/
-EXPORT ann_type
+ann_type
 ANtag2atype(uint16 atag /* IN: annotation tag */)
 {   /* Switch on annotation tag */
 #ifdef LATER
@@ -2274,4 +2277,3 @@ ANtag2atype(uint16 atag /* IN: annotation tag */)
     return atype;
 } /* ANtag2atype */
 
-#endif /* MFAN_MASTER */

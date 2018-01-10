@@ -18,11 +18,6 @@
 
 #include "H4api_adpt.h"
 
-#if defined c_plusplus || defined __cplusplus
-extern      "C"
-{
-#endif                          /* c_plusplus || __cplusplus */
-
 /* Structure that holds a data descriptor.  First added for GRgetpalinfo. */
 typedef struct hdf_ddinfo_t
 {
@@ -32,7 +27,14 @@ typedef struct hdf_ddinfo_t
     int32 length;
 } hdf_ddinfo_t;
 
+#if defined c_plusplus || defined __cplusplus
+extern      "C"
+{
+#endif                          /* c_plusplus || __cplusplus */
+
 /* Public functions for getting raw data information */
+
+#ifndef hdatainfo_EXPORTS
 
     HDFLIBAPI intn ANgetdatainfo
 		(int32 ann_id, int32 *offset, int32 *length);
@@ -61,8 +63,11 @@ typedef struct hdf_ddinfo_t
 
     HDFLIBAPI intn GRgetpalinfo(int32 gr_id, uintn pal_count, hdf_ddinfo_t *palinfo_array);
 
+#endif /*hdatainfo_EXPORTS*/
+
 #if defined c_plusplus || defined __cplusplus
 }
 #endif				/* c_plusplus || __cplusplus */
+
 #endif                          /* _HDATAINFO */
 

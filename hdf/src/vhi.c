@@ -24,6 +24,8 @@
  */
 
 #define VSET_INTERFACE
+#define vhi_EXPORTS
+
 #include "hdf.h"
 
 /* ------------------------ VHstoredata -------------------------------

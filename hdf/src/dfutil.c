@@ -33,6 +33,8 @@
  *    This version assumes that all the values are floating point.
  *--------------------------------------------------------------------------*/
 
+#define dfutil_EXPORTS
+
 #include "hdf.h"
 
 /*-----------------------------------------------------------------------------

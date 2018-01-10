@@ -31,6 +31,7 @@
 ****************************************************************************/
 
 #include "mfhdf.h"
+#include "mfnetcdf.h"
 #include "hdftest.h"
 
 /********************************************************************
@@ -75,7 +76,7 @@ static int test_1dim_singlevar()
     short result[] = {320,301,301,302,99,99,30,31,801,802,803};
 
     /* Enter define mode */
-    ncid = nccreate(FILENAME1, NC_CLOBBER);
+    ncid = nccreate(FILENAME1, NC_OVERWRITE);
     CHECK(ncid, -1, "nccreate");
 
     /* Variables will be filled with fill values when data is missing */
@@ -309,7 +310,7 @@ static int test_1dim_multivars()
     short result2[] = {102,104,-2,-2,200,201,202,-2,-2,-2,-2,-2,-2,-2,-2};
 
     /* Enter define mode */
-    ncid = nccreate(FILENAME2, NC_CLOBBER);
+    ncid = nccreate(FILENAME2, NC_OVERWRITE);
     CHECK(ncid, -1, "nccreate");
 
     /* Variables will be filled with fill values when data is missing */
@@ -662,7 +663,7 @@ static int test_multidim_singlevar()
     short result[DIM0][DIM1][DIM2] = {300,-3,-3,-3,-3,-3,301,-3,-3,-3,-3,-3,302,-3,-3,-3,-3,-3,303,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,400,-3,-3,-3,-3,-3,401,-3,-3,-3,-3,-3,800,801,802,803,804,805};
 
     /* Enter define mode */
-    ncid = nccreate(FILENAME3, NC_CLOBBER);
+    ncid = nccreate(FILENAME3, NC_OVERWRITE);
     CHECK(ncid, -1, "nccreate");
 
     /* variables will be filled with fill values when data is missing */

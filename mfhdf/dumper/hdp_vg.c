@@ -700,7 +700,7 @@ int32 get_VGindex_list(
 	int32 **vg_chosen,
 	intn *index_error )
 {
-   intn     ii, jj;
+   intn     ii;
    int32    index,
             find_ref,
             vg_count = 0,

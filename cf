@@ -18,7 +18,7 @@ LDFLAGS="$LDFLAGS -L/usr/local/lib -lsz"
 fi
 
 export LDFLAGS
-export CPPFLAGS="-I/home/dmh/git/netcdf-c"
+export CPPFLAGS="-I/home/dmh/git/netcdf-c/include"
 export CFLAGS="-g -O0"
 FLAGS=""
 FLAGS="$FLAGS --disable-shared --enable-static"

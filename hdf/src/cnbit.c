@@ -34,6 +34,8 @@
  */
 
 /* General HDF includes */
+#define cnbit_EXPORTS
+
 #include "hdf.h"
 
 #define CNBIT_MASTER
@@ -817,3 +819,15 @@ HCPcnbit_endaccess(accrec_t * access_rec)
 #endif
     return (SUCCEED);
 }   /* HCPcnbit_endaccess() */
+
+/* Moved from cnbit.h */
+funclist_t  cnbit_funcs =
+{                               /* functions to perform N-bit encoding */
+    HCPcnbit_stread,
+    HCPcnbit_stwrite,
+    HCPcnbit_seek,
+    HCPcnbit_inquire,
+    HCPcnbit_read,
+    HCPcnbit_write,
+    HCPcnbit_endaccess
+};

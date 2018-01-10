@@ -34,9 +34,10 @@
 **                                                                          **
 **  Copyright (C) 1991-92 by Graphics Software Labs.  All rights reserved.  **
 \****************************************************************************/
+#include "h4config.h"
 #include <stdio.h>
 #include "gif.h"
-#include <hdf.h>
+#include "hdf.h"
 
 #define GIF_VERSION                     "1.00"
 extern int EndianOrder;

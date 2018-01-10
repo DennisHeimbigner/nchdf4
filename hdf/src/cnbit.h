@@ -27,6 +27,8 @@
 #ifndef __CNBIT_H
 #define __CNBIT_H
 
+#ifndef cnbit_EXPORTS
+
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
@@ -36,32 +38,34 @@ extern      "C"
    ** from cnbit.c
  */
 
-    extern int32 HCPcnbit_stread
+    HDFLIBAPI int32 HCPcnbit_stread
                 (accrec_t * rec);
 
-    extern int32 HCPcnbit_stwrite
+    HDFLIBAPI int32 HCPcnbit_stwrite
                 (accrec_t * rec);
 
-    extern int32 HCPcnbit_seek
+    HDFLIBAPI int32 HCPcnbit_seek
                 (accrec_t * access_rec, int32 offset, int origin);
 
-    extern int32 HCPcnbit_inquire
+    HDFLIBAPI int32 HCPcnbit_inquire
                 (accrec_t * access_rec, int32 *pfile_id, uint16 *ptag, uint16 *pref,
                int32 *plength, int32 *poffset, int32 *pposn, int16 *paccess,
                  int16 *pspecial);
 
-    extern int32 HCPcnbit_read
+    HDFLIBAPI int32 HCPcnbit_read
                 (accrec_t * access_rec, int32 length, void * data);
 
-    extern int32 HCPcnbit_write
+    HDFLIBAPI int32 HCPcnbit_write
                 (accrec_t * access_rec, int32 length, const void * data);
 
-    extern intn HCPcnbit_endaccess
+    HDFLIBAPI intn HCPcnbit_endaccess
                 (accrec_t * access_rec);
 
 #if defined c_plusplus || defined __cplusplus
 }
 #endif                          /* c_plusplus || __cplusplus */
+
+#endif /*cnbit_EXPORTS*/
 
 /* size of the N-bit buffer */
 #define NBIT_BUF_SIZE   (MAX_NT_SIZE*64)
@@ -94,19 +98,8 @@ typedef struct
   }
 comp_coder_nbit_info_t;
 
-#ifndef CNBIT_MASTER
-extern funclist_t cnbit_funcs;  /* functions to perform N-bit encoding */
-#else
-funclist_t  cnbit_funcs =
-{                               /* functions to perform N-bit encoding */
-    HCPcnbit_stread,
-    HCPcnbit_stwrite,
-    HCPcnbit_seek,
-    HCPcnbit_inquire,
-    HCPcnbit_read,
-    HCPcnbit_write,
-    HCPcnbit_endaccess
-};
+#ifndef cnbit_EXPORTS
+HDFLIBDATA funclist_t cnbit_funcs;  /* functions to perform N-bit encoding */
 #endif
 
 #endif /* __CNBIT_H */

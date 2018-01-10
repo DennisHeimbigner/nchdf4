@@ -25,6 +25,8 @@
 #include	"local_nc.h"
 #include	"alloc.h"
 #include	"herr.h"
+#include	"netcdf.h"
+#include	"mfnetcdf.h"
 
 /* obtain the maximum number of open files allowed, at the same time,
    on the current system */
@@ -314,7 +316,7 @@ int mode ;
               return(-1);
           }
 
-          if((mode & 0x0f) == NC_CLOBBER)
+          if((mode & 0x0f) == NC_OVERWRITE)
             {
 		/* only attempt to remove the file if it's not currently 
 		   in use - bugzilla #376 */
@@ -683,7 +685,7 @@ int cdfid ;
 
 	scratchfile = NCtempname(handle->path) ;
 
-	new = NC_dup_cdf(scratchfile, NC_NOCLOBBER, handle) ;
+	new = NC_dup_cdf(scratchfile, NC_NOOVERWRITE, handle) ;
 	if(new == NULL)
       {
           return(-1) ;

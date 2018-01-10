@@ -58,6 +58,8 @@
 */
 
 #define	__MCACHEINTERFACE_PRIVATE
+#define mcache_EXPORTS
+
 #include "hdf.h"     /* number types ..etc */
 #include "hqueue.h"  /* Circluar queue functions(Macros) */
 #include "mcache.h"

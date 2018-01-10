@@ -24,6 +24,8 @@
  *      that has to know about how to use the JPEG routines.
  *---------------------------------------------------------------------------*/
 
+#define dfjpeg_EXPORTS
+
 #include "hdf.h"
 #include "jpeglib.h"
 #include "jerror.h"

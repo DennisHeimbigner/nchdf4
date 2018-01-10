@@ -48,6 +48,8 @@ MODIFICATION HISTORY
  */
 
 /* General HDF includes */
+#define mstdio_EXPORTS
+
 #include "hdf.h"
 #include "hfile.h"
 
@@ -342,3 +344,14 @@ HCPmstdio_endaccess(accrec_t * access_rec)
         HRETURN_ERROR(DFE_CODER, FAIL);
     return (ret);
 }   /* HCPmstdio_endaccess() */
+
+funclist_t  mstdio_funcs =
+{                               /* functions to perform run-length encoding */
+    HCPmstdio_stread,
+    HCPmstdio_stwrite,
+    HCPmstdio_seek,
+    HCPmstdio_inquire,
+    HCPmstdio_read,
+    HCPmstdio_write,
+    HCPmstdio_endaccess
+};

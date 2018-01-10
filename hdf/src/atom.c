@@ -56,9 +56,29 @@ MODIFICATION HISTORY
 */
 
 #define ATOM_MASTER
+#define atom_EXPORTS
+
+#include "h4config.h"
 #include "hdf.h"
 #include "atom.h"
 #include <assert.h>
+
+/* Array of pointers to atomic groups */
+static atom_group_t *atom_group_list[MAXGROUP]={NULL};
+
+/* Pointer to the atom node free list */
+static atom_info_t *atom_free_list=NULL;
+
+#ifdef ATOMS_ARE_CACHED
+/* Array of pointers to atomic groups */
+#ifdef OLD_WAY
+static atom_t atom_id_cache[ATOM_CACHE_SIZE]={-1,-1,-1,-1};
+static VOIDP atom_obj_cache[ATOM_CACHE_SIZE]={NULL};
+#else /* !OLD_WAY */
+HDFPUBLICDATA atom_t atom_id_cache[ATOM_CACHE_SIZE]={-1,-1,-1,-1};
+HDFPUBLICDATA VOIDP atom_obj_cache[ATOM_CACHE_SIZE] = {NULL};
+#endif /* !OLD_WAY */
+#endif /* ATOMS_ARE_CACHED */
 
 /* Private function prototypes */
 static atom_info_t *HAIfind_atom(atom_t atm);

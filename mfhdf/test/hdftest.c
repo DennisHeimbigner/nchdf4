@@ -14,7 +14,7 @@
 /* $Id: hdftest.c 5218 2009-08-29 04:21:49Z bmribler $ */
 
 #include "mfhdf.h"
-
+#include "mfnetcdf.h"
 #include "hdftest.h"
 
 #define UFOFILE   "file.UFO"  /* non-existing file */

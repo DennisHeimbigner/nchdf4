@@ -21,6 +21,10 @@
 
 #include "H4api_adpt.h"
 
+#ifndef lint     /* lint always complains but may complain more if... */
+# define   TBBT_INTERNALS   /* TBBT_INTERNALS not always defined */
+#endif /* lint */
+
 typedef struct tbbt_node TBBT_NODE;
 
 /* Threaded node structure */
@@ -143,6 +147,8 @@ typedef TBBT_NODE **TBBT_TREE;
 extern      "C"
 {
 #endif                          /* c_plusplus || __cplusplus */
+
+#ifndef tbbt_EXPORTS
 
 HDFLIBAPI TBBT_TREE  *tbbtdmake
                 (intn (*compar) (VOIDP, VOIDP, intn), intn arg, uintn fast_compare);
@@ -313,7 +319,9 @@ HDFLIBAPI long        tbbtcount
                 (TBBT_TREE * tree);
 
 /* Terminate the buffers used in the tbbt*() interface */
-HDFPUBLIC intn tbbt_shutdown(void);
+HDFLIBAPI intn tbbt_shutdown(void);
+
+#endif /*tbbt_EXPORTS*/
 
 #if defined c_plusplus || defined __cplusplus
 }

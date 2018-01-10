@@ -14,6 +14,9 @@
 /* $Id$ */
 
 /* General HDF includes */
+#define CSZIP_MASTER
+
+#define cszip_EXPORTS
 
 #include "hdf.h"
 #include <assert.h>
@@ -26,7 +29,6 @@
 #define HAVE_SZIP_ENCODER
 #endif
 
-#define CSZIP_MASTER
 #define CODER_CLIENT
 /* HDF compression includes */
 #include "hcompi.h"     /* Internal definitions for compression */
@@ -1084,3 +1086,15 @@ done:
    return(FAIL);
 #endif
 }
+
+funclist_t  cszip_funcs =
+{                               /* functions to perform szip encoding */
+     HCPcszip_stread,
+     HCPcszip_stwrite,
+     HCPcszip_seek,
+     HCPcszip_inquire,
+     HCPcszip_read,
+     HCPcszip_write,
+     HCPcszip_endaccess
+};
+

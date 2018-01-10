@@ -16,6 +16,7 @@
 #ifndef _TPROTO_H
 #define _TPROTO_H
 
+#include "h4config.h"
 #include "hdf.h"
 #include "tutils.h"
 

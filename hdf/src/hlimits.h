@@ -22,9 +22,8 @@
 #ifndef _HLIMITS_H
 #define _HLIMITS_H
 
-#ifndef _MSC_VER
 #define HDsetvbuf(F,S,M,Z)	setvbuf(F,S,M,Z)
-#endif
+
 /**************************************************************************
 *  Generally useful macro definitions
 *   (These are copied from hdfi.h and shoudl remain included in both files

@@ -34,6 +34,8 @@
  */
 
 /* General HDF includes */
+#define cskphuff_EXPORTS
+
 #include "hdf.h"
 
 #define CSKPHUFF_MASTER
@@ -787,3 +789,15 @@ HCPcskphuff_endaccess(accrec_t * access_rec)
 
     return (SUCCEED);
 }   /* HCPcskphuff_endaccess() */
+
+
+funclist_t  cskphuff_funcs =
+{                               /* functions to perform skipping huffman encoding */
+    HCPcskphuff_stread,
+    HCPcskphuff_stwrite,
+    HCPcskphuff_seek,
+    HCPcskphuff_inquire,
+    HCPcskphuff_read,
+    HCPcskphuff_write,
+    HCPcskphuff_endaccess
+};

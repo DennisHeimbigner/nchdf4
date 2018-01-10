@@ -1,10 +1,32 @@
-/* h4config.h.in.  Generated from configure.ac by autoheader.  */
+/* h4config.h.cmake.in */
+
+#cmakedefine H4_BUILT_AS_DYNAMIC_LIB 1
+#cmakedefine SHARED_EXPORTS 1
+#cmakedefine USE_XGETOPT 1
 
 /* Define if building universal (internal helper macro) */
 #cmakedefine AC_APPLE_UNIVERSAL_BUILD 1
 
+/* Define if sizeof(long) > sizeof(int) */
+#cmakedefine BIG_LONGS 1
+
 /* Define to 1 if you have the `access' function. */
 #cmakedefine HAVE_ACCESS 1
+
+/* Define to 1 if you have the <alloc.h> header file. */
+#cmakedefine HAVE_ALLOC_H 1
+
+/* Define to 1 if you have the <arpa/inet.h> header file. */
+#cmakedefine HAVE_ARPA_INET_H 1
+
+/* Define to 1 if the system has the type `boolean'. */
+#cmakedefine HAVE_BOOLEAN 1
+
+/* Define to 1 if the system has the type `bool_t'. */
+#cmakedefine HAVE_BOOL_T 1
+
+/* Define to 1 if you have the <conio.h> header file. */
+#cmakedefine HAVE_CONIO_H 1
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #cmakedefine HAVE_DLFCN_H 1
@@ -12,17 +34,38 @@
 /* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
 #cmakedefine HAVE_DOPRNT 1
 
+/* Define to 1 if the system has the type `enum_t'. */
+#cmakedefine HAVE_ENUM_T 1
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#cmakedefine HAVE_FCNTL_H 1
+
+/* Define to 1 if you have the `fork' function. */
+#cmakedefine HAVE_FORK 1
+
 /* Define to 1 if you have the `getpid' function. */
 #cmakedefine HAVE_GETPID 1
 
+/* Define to 1 if you have the `getrusage' function. */
+#cmakedefine HAVE_GETRUSAGE 1
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #cmakedefine HAVE_INTTYPES_H 1
+
+/* Define to 1 if you have the `jpeg' library (-ljpeg). */
+#cmakedefine HAVE_LIBJPEG 1
+
+/* set this only when szip is enabled */
+#cmakedefine HAVE_LIBSZ 1
 
 /* Define to 1 if the system has the type `long long int'. */
 #cmakedefine HAVE_LONG_LONG_INT 1
 
 /* Define to 1 if you have the <malloc.h> header file. */
 #cmakedefine HAVE_MALLOC_H 1
+
+/* Define to 1 if you have the <math.h> header file. */
+#cmakedefine HAVE_MATH_H 1
 
 /* Define to 1 if you have the `memmove' function. */
 #cmakedefine HAVE_MEMMOVE 1
@@ -36,6 +79,9 @@
 /* Define to 1 if you have the `mkstemp' function. */
 #cmakedefine HAVE_MKSTEMP 1
 
+/* Define to 1 if you have the <netinet/in.h> header file. */
+#cmakedefine HAVE_NETINET_IN_H 1
+
 /* Define to 1 if the system has the type `ptrdiff_t'. */
 #cmakedefine HAVE_PTRDIFF_T 1
 
@@ -47,6 +93,9 @@
 
 /* Define to 1 if stdbool.h conforms to C99. */
 #cmakedefine HAVE_STDBOOL_H 1
+
+/* Define to 1 if you have the <stdc.h> header file. */
+#cmakedefine HAVE_STDC_H 1
 
 /* Define to 1 if you have the <stddef.h> header file. */
 #cmakedefine HAVE_STDDEF_H 1
@@ -87,11 +136,20 @@
 /* Define to 1 if you have the `strtol' function. */
 #cmakedefine HAVE_STRTOL 1
 
+/* Define to 1 if you have the `system' function. */
+#cmakedefine HAVE_SYSTEM 1
+
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #cmakedefine HAVE_SYS_STAT_H 1
 
+/* Define to 1 if you have the <sys/time.h> header file. */
+#cmakedefine HAVE_SYS_TIME_H 1
+
 /* Define to 1 if you have the <sys/types.h> header file. */
 #cmakedefine HAVE_SYS_TYPES_H 1
+
+/* Define to 1 if you have the <sys/wait.h> header file. */
+#cmakedefine HAVE_SYS_WAIT_H 1
 
 /* Define to 1 if the system has the type `uchar'. */
 #cmakedefine HAVE_UCHAR 1
@@ -108,50 +166,20 @@
 /* Define to 1 if you have the `vprintf' function. */
 #cmakedefine HAVE_VPRINTF 1
 
+/* Define to 1 if you have the `wait' function. */
+#cmakedefine HAVE_WAIT 1
+
 /* Define to 1 if the system has the type `_Bool'. */
 #cmakedefine HAVE__BOOL 1
 
-/* Define to 1 if type boolean is defined */
-#cmakedefine HAVE_BOOLEAN 1
-
-/* Define to 1 if fcntl.h exists */
-#cmakedefine HAVE_FCNTL_H 1
-
-/* Define to 1 if ? */
-#cmakedefine HAVE_FMPOOL 1
-
-/* Define to 1 if fork() function exists */
-#cmakedefine HAVE_FORK 1
-
-/* Define to 1 if getpid() function exists */
-#cmakedefine HAVE_GETPID 1
-
-/* Define to 1 if getrusage() function exists */
-#cmakedefine HAVE_GETRUSAGE 1
-
-/* Define to 1 if have zlib */
-#cmakedefine HAVE_LIBSZ 1
-
-/* Define to 1 if type long long int is defined */
-#cmakedefine HAVE_LONG_LONG_INT 1
-
-/* Define to 1 if stdc.h exists */
-#cmakedefine HAVE_STDC 1
-
-/* Define to 1 if system() function exists */
-#cmakedefine HAVE_SYSTEM 1
-
-/* Define to 1 if have szip */
-#cmakedefine HAVE_SZIP_ENCODER 1
-
-/* Define to 1 if wait() function exists */
-#cmakedefine HAVE_WAIT 1
-
-/* Define to 1 if */
-#cmakedefine HAVE_NETCDF 1
+/* Define if building HDF4 (always true) */
+#cmakedefine HDF 1
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #cmakedefine LT_OBJDIR 1
+
+/* Never use system xdr.h */
+#cmakedefine NO_SYS_XDR_INC 1
 
 /* Name of package */
 #cmakedefine PACKAGE 1
@@ -174,6 +202,9 @@
 /* Define to the version of this package. */
 #cmakedefine PACKAGE_VERSION 1
 
+/* The size of `int', as computed by sizeof. */
+#cmakedefine SIZEOF_INT 1
+
 /* The size of `long', as computed by sizeof. */
 #cmakedefine SIZEOF_LONG 1
 
@@ -188,6 +219,12 @@
 
 /* Define to 1 if you have the ANSI C header files. */
 #cmakedefine STDC_HEADERS 1
+
+/* alias for HAVE_LIBSZ */
+#cmakedefine SZIP_HAS_ENCODER 1
+
+/* alias for HAVE_LIBSZ */
+#cmakedefine USE_COMP_SZIP 1
 
 /* Version number of package */
 #cmakedefine VERSION 1
@@ -208,9 +245,6 @@
 #ifndef __CHAR_UNSIGNED__
 # undef __CHAR_UNSIGNED__
 #endif
-
-/* Define to empty if `const' does not conform to ANSI C. */
-#cmakedefine const 1
 
 /* Define to `long int' if <sys/types.h> does not define. */
 #cmakedefine off_t 1

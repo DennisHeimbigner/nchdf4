@@ -153,10 +153,15 @@ typedef intn (*hdf_termfunc_t)(void);   /* termination function typedef */
 #include "hbitio.h"
 #include "hcomp.h"
 #include "herr.h"
-#include "hproto.h"
-#include "hdatainfo.h"  /* Add the data info header */
 #include "vg.h"         /* Add the Vgroup/Vdata header so the users don't have to */
 #include "mfgr.h"       /* Add the GR header so the users don't have to */
+#ifdef hdf4_EXPORTS
+#include "hshared.h" /* Only include when compiling libdf code */
+#include "hinternal.h" /* Only include when compiling libdf code */
+#else
+#include "hproto.h" /* Only include when not compiling libdf code */
+#endif
+#include "hdatainfo.h"  /* Add the data info header */
 
 /* these may eventaully evolve into real-life functions but not yet */
 #define HDFopen(f,a,d)      Hopen((f), (a), (d))

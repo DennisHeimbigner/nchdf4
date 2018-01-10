@@ -75,6 +75,9 @@ MODIFICATION HISTORY
 
 /* General HDF includes */
 #define COMPRESS_MASTER
+#define hcomp_EXPORTS
+
+#include "H4api_adpt.h"
 #include "hdf.h"
 
 #ifdef HAVE_LIBSZ
@@ -83,6 +86,9 @@ MODIFICATION HISTORY
 
 /* HDF compression includes */
 #include "hcompi.h"     /* Internal definitions for compression */
+
+#include "hchunks.h"
+
 
 /* Local defines */
 #define COMP_HEADER_VERSION 0
@@ -93,6 +99,7 @@ MODIFICATION HISTORY
 #endif /* OLD_WAY */
 
 /* declaration of the functions provided in this module */
+
 PRIVATE int32 HCIstaccess
             (accrec_t * access_rec, int16 acc_mode);
 

@@ -10,9 +10,10 @@
 #ifndef HDIFF_H__
 #define HDIFF_H__
 
-
+#include "h4config.h"
 #include "hdf.h"
 #include "mfhdf.h"
+#include "mfnetcdf.h"
 #include "hdiff_table.h"
 
 #define  Printf  (void) printf
@@ -108,8 +109,8 @@ typedef struct {   /* selection for comparison  */
 extern "C" {
 #endif
 
-HDFTOOLSAPI uint32  hdiff(const char *fname1, const char *fname2, diff_opt_t *opt);
-HDFTOOLSAPI void    make_vars(char *optarg, diff_opt_t *opt, int option);
+HDFLIBAPI uint32  hdiff(const char *fname1, const char *fname2, diff_opt_t *opt);
+HDFLIBAPI void    make_vars(char *optarg, diff_opt_t *opt, int option);
 
 #ifdef __cplusplus
 }

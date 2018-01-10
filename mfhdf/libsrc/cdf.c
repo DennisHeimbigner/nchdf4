@@ -18,10 +18,10 @@
 
 #include	"local_nc.h"
 #include	"alloc.h"
+#include        "hfile.h"
+#include        "mfnetcdf.h"
 
-#include    "hfile.h"
-extern intn  hdf_xdr_cdf
-   PROTO((XDR *xdrs, NC**handlep));
+extern intn  hdf_xdr_cdf(XDR *xdrs, NC**handlep);
 
 /* A couple of local prototypes to HDF section*/
 intn hdf_cdf_clobber(NC *handle);
@@ -220,7 +220,6 @@ const char *filename;
     else 
         ret_value = FALSE;
 
-done:
     if (ret_value == FALSE)
       { /* Failure cleanup */
       }
@@ -381,17 +380,17 @@ int mode ;
      */
     switch(mode) 
       {
-      case NC_CLOBBER   :
+      case NC_OVERWRITE  :
           hdf_mode = DFACC_CLOBBER; break;
-      case NC_NOCLOBBER :
+      case NC_NOOVERWRITE :
           /* will handle below */
           break;
-      case NC_WRITE     :
+      case NC_RDWR     :
           hdf_mode = DFACC_RDWR;    break;
       case NC_NOWRITE   :
           hdf_mode = DFACC_RDONLY;  break;
       default:
-          hdf_mode = DFACC_RDWR;
+          hdf_mode = DFACC_RDONLY;
       }
         
     /*
@@ -402,7 +401,7 @@ int mode ;
       case HDF_FILE:  /* HDF stuff */
 
           /* see if the file exists */
-          if(mode == NC_NOCLOBBER) 
+          if(mode == NC_NOOVERWRITE) 
             {
                 if((int) Hishdf(name))
                   { /* Need to free allocated structures.

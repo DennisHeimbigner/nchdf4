@@ -50,6 +50,8 @@ Output;
 /*----------------------------------------------------------------------------*/
 /*                           Function Prototypes                              */
 
+#ifndef dfufp2i_EXPORTS
+
 #if defined c_plusplus || defined __cplusplus
 extern      "C"
 {
@@ -87,5 +89,7 @@ extern      "C"
 #if defined c_plusplus || defined __cplusplus
 }
 #endif                          /* c_plusplus || __cplusplus */
+
+#endif /*dfufp2i_EXPORTS*/
 
 #endif                          /* DFUFP2IM_H */

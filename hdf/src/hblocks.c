@@ -121,6 +121,8 @@ LOCAL ROUTINES
    HLInewlink  -- write out some data to a linked block
 */
 
+#define hblocks_EXPORTS
+
 #include "hdf.h"
 #include "hfile.h"
 

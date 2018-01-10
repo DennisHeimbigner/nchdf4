@@ -92,6 +92,8 @@ MODIFICATION HISTORY
    12/20/95  - Starting writing specs & coding prototype
 */
 
+#define hfiledd_EXPORTS
+
 #include "hdf.h"
 #include "hfile.h"
 
@@ -1449,7 +1451,7 @@ intn HTPdump_dds(int32 file_id, FILE *fout)
     {
         VOIDP      *t;
 
-        if (NULL != (t = (VOIDP *) tbbtfirst((TBBT_NODE *) * (file_rec->tag_tree))))
+        if (NULL != (t = (VOIDP *) tbbtfirst((TBBT_NODE *) (file_rec->tag_tree))))
           {   /* found at least one node in the tree */
             tag_info *tinfo_ptr;  /* pointer to the info for a tag */
 

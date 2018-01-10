@@ -19,6 +19,7 @@
 #include	<string.h>
 #include	"local_nc.h"
 #include	"alloc.h"
+#include        "mfnetcdf.h"
 
 #ifdef NO_MEM_FUNCTS
 /*
@@ -61,11 +62,12 @@ nc_type	type ;
 		return(4) ;
 	case NC_DOUBLE : 
 		return(8) ;
-/* private types */
-	case NC_UNSPECIFIED :
-		return(0) ;
 	case NC_STRING :
 		return(NC_xlen_string((NC_string *)NULL)) ;
+/* private types */
+	case NC_UNSPECIFIED :
+	case NC_NAT :
+		return(0) ;
 	case NC_DIMENSION :
 		return(NC_xlen_dim((NC_dim **)&nada)) ;
 	case NC_VARIABLE :
@@ -343,6 +345,7 @@ NC_array *array ;
                 switch(array->type)
                   {
                   case NC_UNSPECIFIED :
+		  case NC_NAT :
                   case NC_BYTE :
                   case NC_CHAR :
                   case NC_SHORT :
@@ -617,6 +620,7 @@ xdr_NC_array(xdrs, app)
 
 	switch(*typep){
 	case NC_UNSPECIFIED :
+	case NC_NAT :
 	case NC_BYTE :
 	case NC_CHAR :
 		xdr_NC_fnct = xdr_opaque ;
@@ -637,10 +641,10 @@ xdr_NC_array(xdrs, app)
 	case NC_DOUBLE : 
 		xdr_NC_fnct = xdr_double ;
 		goto loop ;
-/* private types */
 	case NC_STRING :
 		xdr_NC_fnct = xdr_NC_string ;
 		goto loop ;
+/* private types */
 	case NC_DIMENSION :
 		xdr_NC_fnct = xdr_NC_dim ;
 		goto loop ;

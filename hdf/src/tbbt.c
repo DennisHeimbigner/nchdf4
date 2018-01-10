@@ -17,6 +17,8 @@
 /* Extended from (added threads to) Knuth 6.2.3, Algorithm A (AVL trees) */
 /* Basic tree structure by Adel'son-Vel'skii and Landis */
 
+#define tbbt_EXPORTS
+
 #include <stdio.h>  /* NULL */
 #include "hdf.h"
 #define TBBT_INTERNALS

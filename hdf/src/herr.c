@@ -31,6 +31,9 @@ EXPORTED ROUTINES
 
 #define _H_ERR_MASTER_
 
+#define herr_EXPORTS
+
+#include "h4config.h"
 #include "hdf.h"
 
 /*
@@ -53,6 +56,8 @@ typedef struct error_t
   }
 error_t;
 
+/* always points to the next available slot; the last error record is in slot (top-1) */
+HDFPUBLICDATA int32       error_top = 0;
 
 /* pointer to the structure to hold error messages */
 PRIVATE error_t *error_stack = NULL;

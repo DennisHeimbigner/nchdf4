@@ -23,6 +23,8 @@
  * Remarks: DFCIrle() and DFCIunrle() compress and decompress RLE encoded info
  *---------------------------------------------------------------------------*/
 
+#define dfrle_EXPORTS
+
 #include "hdf.h"
 
 /*-----------------------------------------------------------------------------

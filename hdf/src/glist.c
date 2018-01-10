@@ -20,6 +20,8 @@
   1996/06/04 - George V. 
  ************************************************************************/
 
+#define glist_EXPORTS
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "glist.h"

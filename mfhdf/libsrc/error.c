@@ -42,6 +42,8 @@
 extern int errno;
 #endif
 
+#include "mfnetcdf.h"
+
 #ifndef NO_STRERROR
 #include <string.h> /* contains prototype for ansi libc function strerror() */
 #else
